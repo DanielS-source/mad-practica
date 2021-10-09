@@ -1,0 +1,15 @@
+C:\Software\mad-practica\Model\bin\Debug\Model.exe.config
+C:\Software\mad-practica\Model\bin\Debug\Model.exe
+C:\Software\mad-practica\Model\bin\Debug\Model.pdb
+C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Software\mad-practica\Model\bin\Debug\ModelUtil.dll
+C:\Software\mad-practica\Model\bin\Debug\Ninject.dll
+C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+C:\Software\mad-practica\Model\bin\Debug\Ninject.xml
+C:\Software\mad-practica\Model\obj\Debug\Model.csproj.AssemblyReference.cache
+C:\Software\mad-practica\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Software\mad-practica\Model\obj\Debug\Model.csproj.CopyComplete
+C:\Software\mad-practica\Model\obj\Debug\Model.exe
+C:\Software\mad-practica\Model\obj\Debug\Model.pdb
