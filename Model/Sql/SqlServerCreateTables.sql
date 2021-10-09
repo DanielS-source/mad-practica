@@ -18,7 +18,7 @@
  * not be done).                                                            
  */
 
-USE minibank
+USE photogram
 
 /* Drop Table Comments if already exists */
 
@@ -92,7 +92,7 @@ CREATE TABLE Image(
     likes bigint NOT NULL,
 
     CONSTRAINT [PK_Image] PRIMARY KEY (imgId),
-    CONSTRAINT [FK_User] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId)
+    CONSTRAINT [FK_User_Img] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId)
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByImageId] 
@@ -111,8 +111,8 @@ CREATE TABLE Comments(
     message varchar(150) NOT NULL,
 
     CONSTRAINT [PK_Comments] PRIMARY KEY (comId),
-    CONSTRAINT [FK_User] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
-    CONSTRAINT [FK_Image] FOREIGN KEY (imgId) REFERENCES Image(imgId)
+    CONSTRAINT [FK_User_Comm] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
+    CONSTRAINT [FK_Image_Comm] FOREIGN KEY (imgId) REFERENCES Image(imgId)
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByCommentsId] 
@@ -130,8 +130,8 @@ CREATE TABLE Likes(
     usrId bigint NOT NULL,
 
     CONSTRAINT [PK_Likes] PRIMARY KEY (likeId),
-    CONSTRAINT [FK_User] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
-    CONSTRAINT [FK_Image] FOREIGN KEY (imgId) REFERENCES Image(imgId)
+    CONSTRAINT [FK_User_Like] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
+    CONSTRAINT [FK_Image_Like] FOREIGN KEY (imgId) REFERENCES Image(imgId)
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByLikesId] 
@@ -149,8 +149,8 @@ CREATE TABLE Follow(
     followerId bigint NOT NULL,
 
     CONSTRAINT [PK_Follow] PRIMARY KEY (folwId),
-    CONSTRAINT [FK_User_1] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
-    CONSTRAINT [FK_User_2] FOREIGN KEY (followerId) REFERENCES UserProfile(usrId),
+    CONSTRAINT [FK_User_Foll] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
+    CONSTRAINT [FK_User_Foll_2] FOREIGN KEY (followerId) REFERENCES UserProfile(usrId),
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByFollowId] 
