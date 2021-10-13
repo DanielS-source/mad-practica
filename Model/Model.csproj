@@ -75,6 +75,9 @@
     </Compile>
     <Compile Include="ImageDao\ImageDaoEntityFramework.cs" />
     <Compile Include="ImageDao\IImageDao.cs" />
+    <Compile Include="ImageService\ImageService.cs" />
+    <Compile Include="ImageService\ImageBlock.cs" />
+    <Compile Include="ImageService\IImageService.cs" />
     <Compile Include="LikeDao\LikeDaoEntityFramework.cs" />
     <Compile Include="LikeDao\ILikeDao.cs" />
     <Compile Include="Likes.cs">
