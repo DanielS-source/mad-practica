@@ -193,6 +193,7 @@
           <Property Name="message" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Image" Relationship="Self.FK_Image_Comm" FromRole="Comments" ToRole="Image" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Comm" FromRole="Comments" ToRole="UserProfile" />
+          <Property Name="PostDate" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="Follow">
           <Key>

@@ -18,6 +18,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public long imgId { get; set; }
         public long usrId { get; set; }
         public string message { get; set; }
+        public System.DateTime PostDate { get; set; }
     
         public virtual Image Image { get; set; }
         public virtual UserProfile UserProfile { get; set; }
