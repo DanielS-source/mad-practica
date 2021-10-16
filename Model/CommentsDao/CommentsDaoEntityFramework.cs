@@ -9,9 +9,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
     class CommentsDaoEntityFramework :
         GenericDaoEntityFramework<Comments, Int64>, ICommentsDao
     {
-        public void AddComment(long imgId, long usrId)
+        public void AddComment(Comments comment)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                Context.Set<Comments>().Add(comment);
+                Context.SaveChanges();
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine(e); //Probar a lanzar InstaceNotFoundException
+            }
+
         }
 
         public void DeleteComment(long comId)
@@ -33,7 +43,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
             return result;
         }
 
-        public void ModifyComment(long usrId, string comment)
+        public void ModifyComment(long comId, string comment)
         {
             throw new NotImplementedException();
         }

@@ -10,14 +10,14 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
         /// </summary>
         /// <param name="imgId">the image identifier</param>
         /// <param name="usrId">the user identifier</param>
-        void AddComment(long imgId, long usrId);
+        void AddComment(Comments comment);
 
         /// <summary>
         /// Modify a selected comment.
         /// </summary>
         /// <param name="usrId">the user identifier</param>
         /// <param name="comment">the edited comment</param>
-        void ModifyComment(long usrId, String comment);
+        void ModifyComment(long comId, String comment);
 
         /// <summary>
         /// Delete a selected comment
