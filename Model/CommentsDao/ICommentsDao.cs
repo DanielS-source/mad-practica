@@ -23,7 +23,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
         /// Delete a selected comment
         /// </summary>
         /// <param name="comId">the comment identifier</param>
-        /// <returns>the list of accounts</returns>
         void DeleteComment(long comId);
+
+        /// <summary>
+        /// Finds all the comments related to a given image 
+        /// </summary>
+        /// <param name="imgId">the image identifier</param>
+        /// <returns>the list of comments related to the given image</returns>
+        List<Comments> findByImage(long imgId);
     }
 }
