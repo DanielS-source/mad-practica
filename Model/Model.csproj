@@ -75,6 +75,11 @@
     <Compile Include="Image.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserProfile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfileDao\IUserProfileDao.cs" />
+    <Compile Include="UserProfileDao\UserProfileDaoEntityFramework.cs" />
     <Compile Include="ImageDao\ImageDaoEntityFramework.cs" />
     <Compile Include="ImageDao\IImageDao.cs" />
     <Compile Include="Likes.cs">
