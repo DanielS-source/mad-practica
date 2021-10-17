@@ -20,8 +20,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
 
         public string Language { get; private set; }
 
-        public string Country { get; private set; }
-
         #endregion
 
         /// <summary>
@@ -32,15 +30,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <param name="lastName">The user's last name.</param>
         /// <param name="email">The user's email.</param>
         /// <param name="language">The language.</param>
-        /// <param name="country">The country.</param>
         public UserProfileDetails(String firstName, String lastName,
-            String email, String language, String country)
+            String email, String language)
         {
             this.FirstName = firstName;
             this.Lastname = lastName;
             this.Email = email;
             this.Language = language;
-            this.Country = country;
         }
 
         public override bool Equals(object obj)
@@ -51,8 +47,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             return (this.FirstName == target.FirstName)
                   && (this.Lastname == target.Lastname)
                   && (this.Email == target.Email)
-                  && (this.Language == target.Language)
-                  && (this.Country == target.Country);
+                  && (this.Language == target.Language);
         }
 
         // The GetHashCode method is used in hashing algorithms and data 
@@ -79,8 +74,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 "[ firstName = " + FirstName + " | " +
                 "lastName = " + Lastname + " | " +
                 "email = " + Email + " | " +
-                "language = " + Language + " | " +
-                "country = " + Country + " ]";
+                "language = " + Language + " ]";
 
 
             return strUserProfileDetails;

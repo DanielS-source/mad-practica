@@ -15,24 +15,16 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <param name="firstName">Users's first name.</param>
         /// <param name="encryptedPassword">The encrypted password.</param>
         /// <param name="language">The language.</param>
-        /// <param name="country">The country.</param>
         public LoginResult(long userProfileId, String firstName,
-            String encryptedPassword, String language, String country)
+            String encryptedPassword, String language)
         {
             this.UserProfileId = userProfileId;
             this.FirstName = firstName;
             this.EncryptedPassword = encryptedPassword;
             this.Language = language;
-            this.Country = country;
         }
 
         #region Properties Region
-
-        /// <summary>
-        /// Gets the country code.
-        /// </summary>
-        /// <value>The country code.</value>
-        public string Country { get; private set; }
 
         /// <summary>
         /// Gets the encrypted password.
@@ -67,8 +59,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             return (this.UserProfileId == target.UserProfileId)
                    && (this.FirstName == target.FirstName)
                    && (this.EncryptedPassword == target.EncryptedPassword)
-                   && (this.Language == target.Language)
-                   && (this.Country == target.Country);
+                   && (this.Language == target.Language);
         }
 
         // The GetHashCode method is used in hashing algorithms and data
@@ -95,8 +86,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 "[ userProfileId = " + UserProfileId + " | " +
                 "firstName = " + FirstName + " | " +
                 "encryptedPassword = " + EncryptedPassword + " | " +
-                "language = " + Language + " | " +
-                "country = " + Country + " ]";
+                "language = " + Language + " ]";
 
             return strLoginResult;
         }
