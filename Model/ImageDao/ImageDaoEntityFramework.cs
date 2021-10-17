@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
@@ -10,15 +11,22 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
     public class ImageDaoEntityFramework :
         GenericDaoEntityFramework<Image, Int64>, IImageDao
     {
-        public List<Image> FindByKeywordsAndCategory(string keywords, string category)
+        public List<Image> FindByKeywordsAndCategory(string keywords, string category, 
+            int startIndex, int count)
         {
-            throw new NotImplementedException();
+
+            DbSet<Image> images = Context.Set<Image>();
+
+            var result =
+                (from i in images
+                 where SqlMethods.Like(i.title,keywords) | SqlMethods.Like(i.description, keywords)
+                 orderby i.imgId
+                 select i).Skip(startIndex).Take(count).ToList();
+
+            return result;
+
         }
 
-        List<Image> IImageDao.FindByImageId(long imgId, int startIndex, int count)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }

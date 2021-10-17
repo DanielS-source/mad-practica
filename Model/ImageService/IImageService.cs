@@ -14,7 +14,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         Image postImage(Image image);
 
         [Transactional]
-        ImageBlock searchImages(string keywords, string category);
+        ImageBlock searchImages(string keywords, string category, int startIndex, int count);
 
 
 

@@ -8,9 +8,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
     public interface IImageDao : IGenericDao<Image, Int64>
     {
 
-        List<Image> FindByImageId(long imgId, int startIndex, int count);
-
-        List<Image> FindByKeywordsAndCategory(string keywords, string category);
+        List<Image> FindByKeywordsAndCategory(string keywords, string category, int startIndex, int count);
 
     }
 

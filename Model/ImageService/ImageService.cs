@@ -27,11 +27,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         }
 
         [Transactional]
-        public ImageBlock searchImages(string keywords, string category)
+        public ImageBlock searchImages(string keywords, string category, int startIndex, int count)
         {
 
-            List<Image> images = ImageDao.FindByKeywordsAndCategory(keywords, category);
-            bool existMoreImages = false;
+            List<Image> images = ImageDao.FindByKeywordsAndCategory(keywords, category, startIndex, count);
+
+            bool existMoreImages = (images.Count == count + 1);
 
             return new ImageBlock(images, existMoreImages);
         }
