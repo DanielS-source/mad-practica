@@ -2609,12 +2609,6 @@
             <param name="filter">The filter.</param>
             <returns>All assembly names of the assemblies in the given files that match the filter.</returns>
         </member>
-        <member name="M:Ninject.Modules.AssemblyNameRetriever.CreateTemporaryAppDomain">
-            <summary>
-            Creates a temporary app domain.
-            </summary>
-            <returns>The created app domain.</returns>
-        </member>
         <member name="T:Ninject.Modules.AssemblyNameRetriever.AssemblyChecker">
             <summary>
             This class is loaded into the temporary appdomain to load and check if the assemblies match the filter.

@@ -1,22 +1,21 @@
+C:\Software\mad-practica\Model\obj\Debug\Model.csproj.AssemblyReference.cache
+C:\Software\mad-practica\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 C:\Software\mad-practica\Model\bin\Debug\Model.exe.config
 C:\Software\mad-practica\Model\bin\Debug\Model.exe
 C:\Software\mad-practica\Model\bin\Debug\Model.pdb
+C:\Software\mad-practica\Model\bin\Debug\EntityFramework.dll
+C:\Software\mad-practica\Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
 C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
 C:\Software\mad-practica\Model\bin\Debug\ModelUtil.dll
 C:\Software\mad-practica\Model\bin\Debug\Ninject.dll
+C:\Software\mad-practica\Model\bin\Debug\Ninject.Extensions.Interception.dll
+C:\Software\mad-practica\Model\bin\Debug\EntityFramework.xml
+C:\Software\mad-practica\Model\bin\Debug\EntityFramework.SqlServer.xml
 C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 C:\Software\mad-practica\Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
 C:\Software\mad-practica\Model\bin\Debug\Ninject.xml
-C:\Software\mad-practica\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Software\mad-practica\Model\bin\Debug\Ninject.Extensions.Interception.xml
 C:\Software\mad-practica\Model\obj\Debug\Model.csproj.CopyComplete
 C:\Software\mad-practica\Model\obj\Debug\Model.exe
 C:\Software\mad-practica\Model\obj\Debug\Model.pdb
-C:\Software\mad-practica\Model\bin\Debug\EntityFramework.dll
-C:\Software\mad-practica\Model\bin\Debug\EntityFramework.SqlServer.dll
-C:\Software\mad-practica\Model\bin\Debug\EntityFramework.xml
-C:\Software\mad-practica\Model\bin\Debug\EntityFramework.SqlServer.xml
-<<<<<<< HEAD
-=======
-C:\Software\mad-practica\Model\obj\Debug\Model.csprojAssemblyReference.cache
->>>>>>> a62d104c7c2aff9e4c00a3af24de7f2e7053b443
