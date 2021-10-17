@@ -16,4 +16,7 @@ C:\Software\mad-practica\Model\bin\Debug\EntityFramework.dll
 C:\Software\mad-practica\Model\bin\Debug\EntityFramework.SqlServer.dll
 C:\Software\mad-practica\Model\bin\Debug\EntityFramework.xml
 C:\Software\mad-practica\Model\bin\Debug\EntityFramework.SqlServer.xml
+<<<<<<< HEAD
+=======
 C:\Software\mad-practica\Model\obj\Debug\Model.csprojAssemblyReference.cache
+>>>>>>> a62d104c7c2aff9e4c00a3af24de7f2e7053b443
