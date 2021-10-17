@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="CommentsDao\CommentsDaoEntityFramework.cs" />
     <Compile Include="CommentsDao\ICommentsDao.cs" />
+    <Compile Include="CommentsService\CommentsService.cs" />
     <Compile Include="Follow.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

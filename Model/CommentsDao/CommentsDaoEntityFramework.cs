@@ -26,7 +26,28 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
 
         public void DeleteComment(long comId)
         {
-            throw new NotImplementedException();
+            Comments commentToRemove = default(Comments);
+            try
+            {
+                commentToRemove = this.find(comId);
+                Context.Set<Comments>().Remove(commentToRemove);
+                Context.SaveChanges();
+            }
+            catch(InvalidOperationException)
+            { 
+                    
+            }
+        }
+
+        public Comments find(long comId) 
+        {
+            Comments result = Context.Set<Comments>().Find(comId);
+
+            if (result == null)
+                return null;
+            //devolver excepcion InstanceNotFound
+            else
+                return result;
         }
 
         public List<Comments> findByImage(long imgId)
