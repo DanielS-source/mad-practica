@@ -58,7 +58,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
             var result =
                 (from c in comments
                  where c.imgId == imgId
-                 orderby c.PostDate
+                 orderby c.postDate
                  select c).ToList();
 
             return result;

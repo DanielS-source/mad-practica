@@ -12,15 +12,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Comments
+    public partial class Category
     {
-        public long comId { get; set; }
-        public long imgId { get; set; }
-        public long usrId { get; set; }
-        public string message { get; set; }
-        public System.DateTime postDate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            this.Image = new HashSet<Image>();
+        }
     
-        public virtual Image Image { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
+        public long catId { get; set; }
+        public string name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Image { get; set; }
     }
 }

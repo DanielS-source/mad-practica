@@ -30,5 +30,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Likes> Likes { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
     }
 }

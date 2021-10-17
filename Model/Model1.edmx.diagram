@@ -17,6 +17,8 @@
         <AssociationConnector Association="photogramModel.FK_Image_Like" ManuallyRouted="false" />
         <AssociationConnector Association="photogramModel.FK_User_Img" ManuallyRouted="false" />
         <AssociationConnector Association="photogramModel.FK_User_Like" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="photogramModel.Category" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="photogramModel.FK_User_Cat" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

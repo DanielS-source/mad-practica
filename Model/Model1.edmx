@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="photogramModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="photogramModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="comId" />
@@ -12,7 +19,8 @@
           <Property Name="comId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="imgId" Type="bigint" Nullable="false" />
           <Property Name="usrId" Type="bigint" Nullable="false" />
-          <Property Name="message" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="postDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Follow">
           <Key>
@@ -28,15 +36,15 @@
           </Key>
           <Property Name="imgId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usrId" Type="bigint" Nullable="false" />
-          <Property Name="pathImg" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="dateImg" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="category" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="f" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="t" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="ISO" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="wb" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="pathImg" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="dateImg" Type="date" Nullable="false" />
+          <Property Name="catId" Type="bigint" Nullable="false" />
+          <Property Name="f" Type="varchar" MaxLength="150" />
+          <Property Name="t" Type="varchar" MaxLength="150" />
+          <Property Name="ISO" Type="varchar" MaxLength="150" />
+          <Property Name="wb" Type="varchar" MaxLength="150" />
           <Property Name="likes" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Likes">
@@ -80,6 +88,18 @@
             </Principal>
             <Dependent Role="Likes">
               <PropertyRef Name="imgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Cat">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="catId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -144,6 +164,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="photogramModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Follow" EntityType="Self.Follow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
@@ -156,6 +177,10 @@
           <AssociationSet Name="FK_Image_Like" Association="Self.FK_Image_Like">
             <End Role="Image" EntitySet="Image" />
             <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Cat" Association="Self.FK_User_Cat">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Image" EntitySet="Image" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Comm" Association="Self.FK_User_Comm">
             <End Role="UserProfile" EntitySet="UserProfile" />
@@ -178,8 +203,7 @@
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="photogramModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -190,10 +214,10 @@
           <Property Name="comId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="imgId" Type="Int64" Nullable="false" />
           <Property Name="usrId" Type="Int64" Nullable="false" />
-          <Property Name="message" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Image" Relationship="Self.FK_Image_Comm" FromRole="Comments" ToRole="Image" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Comm" FromRole="Comments" ToRole="UserProfile" />
-          <Property Name="PostDate" Type="DateTime" Nullable="false" />
+          <Property Name="postDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Follow">
           <Key>
@@ -211,19 +235,20 @@
           </Key>
           <Property Name="imgId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usrId" Type="Int64" Nullable="false" />
-          <Property Name="pathImg" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dateImg" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="category" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="f" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="t" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ISO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="wb" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pathImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateImg" Type="DateTime" Nullable="false" />
+          <Property Name="f" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="t" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ISO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="wb" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="likes" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Image_Comm" FromRole="Image" ToRole="Comments" />
           <NavigationProperty Name="Likes1" Relationship="Self.FK_Image_Like" FromRole="Image" ToRole="Likes" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Img" FromRole="Image" ToRole="UserProfile" />
+          <Property Name="catId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="photogramModel.FK_User_Cat" FromRole="Image" ToRole="Category" />
         </EntityType>
         <EntityType Name="Likes">
           <Key>
@@ -370,7 +395,32 @@
             <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
+          <EntitySet Name="Category" EntityType="photogramModel.Category" />
+          <AssociationSet Name="FK_User_Cat" Association="photogramModel.FK_User_Cat">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Image" Relationship="photogramModel.FK_User_Cat" FromRole="Category" ToRole="Image" />
+        </EntityType>
+        <Association Name="FK_User_Cat">
+          <End Type="photogramModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="photogramModel.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="catId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -380,6 +430,7 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="photogramModel.Comments">
               <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="postDate" ColumnName="postDate" />
                 <ScalarProperty Name="comId" ColumnName="comId" />
                 <ScalarProperty Name="imgId" ColumnName="imgId" />
                 <ScalarProperty Name="usrId" ColumnName="usrId" />
@@ -399,13 +450,13 @@
           <EntitySetMapping Name="Image">
             <EntityTypeMapping TypeName="photogramModel.Image">
               <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="catId" ColumnName="catId" />
                 <ScalarProperty Name="imgId" ColumnName="imgId" />
                 <ScalarProperty Name="usrId" ColumnName="usrId" />
                 <ScalarProperty Name="pathImg" ColumnName="pathImg" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="dateImg" ColumnName="dateImg" />
-                <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="f" ColumnName="f" />
                 <ScalarProperty Name="t" ColumnName="t" />
                 <ScalarProperty Name="ISO" ColumnName="ISO" />
@@ -436,6 +487,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="photogramModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="catId" ColumnName="catId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -450,7 +509,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

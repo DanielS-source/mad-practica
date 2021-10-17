@@ -50,6 +50,12 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[UserProfile]
 AND type in ('U')) DROP TABLE [UserProfile]
 GO
 
+/* Drop Table Category if already exists */
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[Category]') 
+AND type in ('U')) DROP TABLE Category
+GO
+
 /*  UserProfile */
 
 CREATE TABLE UserProfile (
@@ -72,7 +78,20 @@ ON [UserProfile] ([loginName] ASC)
 PRINT N'Table UserProfile created.'
 GO
 
-PRINT N'Table User created.'
+/* Category */
+
+CREATE TABLE Category(
+    catId bigint IDENTITY(1,1) NOT NULL,
+    name varchar(25) NOT NULL,
+
+    CONSTRAINT [PK_Category] PRIMARY KEY (catId),
+) 
+
+CREATE NONCLUSTERED INDEX [IX_AccountIndexByCatId] 
+ON Category (catId)
+
+
+PRINT N'Table Category created.'
 GO
 
 /* Image */
@@ -80,19 +99,20 @@ GO
 CREATE TABLE Image(
     imgId bigint IDENTITY(1,1) NOT NULL,
     usrId bigint NOT NULL,
-    pathImg varchar(150) NOT NULL,
-    title varchar(150) NOT NULL,
-    description varchar(150) NOT NULL,
-    dateImg varchar(150) NOT NULL,
-    category varchar(150) NOT NULL,
-    f varchar(150) NOT NULL,
-    t varchar(150) NOT NULL,
-    ISO varchar(150) NOT NULL,
-    wb varchar(150) NOT NULL,
+    pathImg varchar(255) NOT NULL,
+    title varchar(25) NOT NULL,
+    description varchar(255) NOT NULL,
+    dateImg date NOT NULL,
+    catId bigint NOT NULL,
+    f varchar(150),
+    t varchar(150),
+    ISO varchar(150),
+    wb varchar(150),
     likes bigint NOT NULL,
 
     CONSTRAINT [PK_Image] PRIMARY KEY (imgId),
-    CONSTRAINT [FK_User_Img] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId)
+    CONSTRAINT [FK_User_Img] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
+    CONSTRAINT [FK_User_Cat] FOREIGN KEY (catId) REFERENCES Category(catId)
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByImageId] 
@@ -108,7 +128,8 @@ CREATE TABLE Comments(
     comId bigint IDENTITY(1,1) NOT NULL,
     imgId bigint NOT NULL,
     usrId bigint NOT NULL,
-    message varchar(150) NOT NULL,
+    message varchar(255) NOT NULL,
+    postDate date NOT NULL,
 
     CONSTRAINT [PK_Comments] PRIMARY KEY (comId),
     CONSTRAINT [FK_User_Comm] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
