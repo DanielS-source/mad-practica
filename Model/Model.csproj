@@ -123,6 +123,9 @@
     <Compile Include="UserService\UserProfileDetails.cs" />
     <Compile Include="UserService\UserService.cs" />
     <Compile Include="UserService\Util\PasswordEncrypter.cs" />
+    <Compile Include="UserRelatedService\IUserRelatedService.cs" />
+    <Compile Include="UserRelatedService\UserRelatedService.cs" />
+    
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
