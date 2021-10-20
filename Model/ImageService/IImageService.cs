@@ -11,11 +11,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         IImageDao ImageDao { set; }
 
         [Transactional]
-        Image postImage(Image image);
+        Image PostImage(Image image);
 
         [Transactional]
-        ImageBlock searchImages(string keywords, string category, int startIndex, int count);
+        ImageBlock SearchImages(string keywords, string category, int startIndex, int count);
 
+        [Transactional]
+        ImageBlock SearchFollowedImages(long usrId, int startIndex, int count);
 
 
     }

@@ -10,6 +10,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 
         List<Image> FindByKeywordsAndCategory(string keywords, string category, int startIndex, int count);
 
+        List<Image> FindByFollowed(long usrId, int startIndex, int count);
+
     }
 
 }
