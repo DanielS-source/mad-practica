@@ -9,5 +9,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.FollowDao
 {
     interface IFollowDao : IGenericDao<Follow, Int64>
     {
+
+
+
     }
 }

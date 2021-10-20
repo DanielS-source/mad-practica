@@ -1,8 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Class1
+namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 {
-	public Class1()
-	{
-	}
+    class UserRelatedService : IUserRelatedService
+    {
+        public void FollowUser(long usrId, long follow)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
