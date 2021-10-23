@@ -27,6 +27,20 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 
         }
 
+        public List<Image> FindByDate(long userProfileId, int startIndex, int count)
+        {
+            //Option 1: Using Linq.
+
+            DbSet<Image> images = Context.Set<Image>();
+
+            List<Image> result =
+                (from image in images
+                 where image.usrId == userProfileId
+                 orderby image.dateImg
+                 select image).Skip(startIndex).Take(count).ToList();
+
+            return result;
+        }
     }
 
 }

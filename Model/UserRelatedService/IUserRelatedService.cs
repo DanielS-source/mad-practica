@@ -1,8 +1,10 @@
 ﻿using System;
 
-public class Class1
+public class IUserRelatedService
 {
-	public Class1()
+	public IUserRelatedService()
 	{
-	}
+      
+
+    }
 }
