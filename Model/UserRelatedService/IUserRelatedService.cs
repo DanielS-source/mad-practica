@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Es.Udc.DotNet.ModelUtil.Transactions;
+using System;
+using System.Collections.Generic;
 
-public class IUserRelatedService
+namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 {
-	public IUserRelatedService()
-	{
-      
+    interface IUserRelatedService
+    {
+
+        void FollowUser(long usrId, long follow);
 
     }
 }
