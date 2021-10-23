@@ -11,9 +11,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.FollowDao
     public class FollowDaoEntityFramework :
     GenericDaoEntityFramework<Follow, Int64>, IFollowDao
     {
-        //Follow
-        //UserProfile
-        public List<Follow> GetFollowers(long userProfileId, int startIndex, int count)
+        public List<Follow> GetFollowers(long userProfileId)
         {
             DbSet<UserProfile> followers = Context.Set<UserProfile>();
 
@@ -25,7 +23,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.FollowDao
             return result;
         }
 
-        public List<UserProfile> GetFollows(long userProfileId, int startIndex, int count)
+        public List<UserProfile> GetFollows(long userProfileId)
         {
             DbSet<Follow> follow = Context.Set<Follow>();
 
