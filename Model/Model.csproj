@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="FollowDao\FollowDao.cs" />
     <Compile Include="FollowDao\IFollowDao.cs" />
+    <Compile Include="FollowDao\FollowDaoEntityFramework.cs" />
     <Compile Include="Image.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -119,7 +120,6 @@
     </Compile>
     <Compile Include="UserProfileDao\IUserProfileDao.cs" />
     <Compile Include="UserProfileDao\UserProfileDaoEntityFramework.cs" />
-    <Compile Include="UserRelatedService\UserRelatedService.cs" />
     <Compile Include="UserService\Exceptions\IncorrectPasswordException.cs" />
     <Compile Include="UserService\IUserService.cs" />
     <Compile Include="UserService\LoginResult.cs" />
@@ -127,6 +127,7 @@
     <Compile Include="UserService\UserService.cs" />
     <Compile Include="UserService\Util\PasswordEncrypter.cs" />
     <Compile Include="UserRelatedService\IUserRelatedService.cs" />
+    <Compile Include="UserRelatedService\UserRelatedService.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
