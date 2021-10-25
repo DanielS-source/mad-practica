@@ -99,7 +99,6 @@
     <Compile Include="Follow.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="FollowDao\FollowDao.cs" />
     <Compile Include="FollowDao\IFollowDao.cs" />
     <Compile Include="FollowDao\FollowDaoEntityFramework.cs" />
     <Compile Include="Image.cs">
