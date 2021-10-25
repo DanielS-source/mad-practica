@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Es.Udc.DotNet.ModelUtil.Transactions;
+using Es.Udc.DotNet.PracticaMaD.Model.FollowDao;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +11,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 {
     class UserRelatedService : IUserRelatedService
     {
-        public void FollowUser(long usrId, long follow)
+        public UserRelatedService() { }
+
+        [Inject]
+        public IFollowDao FollowDao { private get; set; }
+
+        [Transactional]
+        public void FollowUser(long usrId, long follower)
         {
-            throw new NotImplementedException();
+            Follow follow = new Follow();
+            follow.usrId = follower;
+            follow.followerId = usrId;
+
+            FollowDao.Create(follow);
         }
     }
 }
