@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 {
-    interface IUserRelatedService
+    public interface IUserRelatedService
     {
 
         void FollowUser(long usrId, long follow);

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
 {
-    class CommentsDaoEntityFramework :
+    public class CommentsDaoEntityFramework :
         GenericDaoEntityFramework<Comments, Int64>, ICommentsDao
     {
         public void AddComment(Comments comment)

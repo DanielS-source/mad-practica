@@ -13,7 +13,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 {
-    class UserRelatedService : IUserRelatedService
+    public class UserRelatedService : IUserRelatedService
     {
         public UserRelatedService() { }
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
-    interface IImageService
+    public interface IImageService
     {
 
         IImageDao ImageDao { set; }

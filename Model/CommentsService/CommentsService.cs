@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsService
 {
-    class CommentsService
+    public class CommentsService
     {
     }
 }
