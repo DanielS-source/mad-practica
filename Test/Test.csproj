@@ -45,9 +45,6 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.2.1.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="ModelUtil">
-      <HintPath>..\Lib\ModelUtil.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -62,10 +59,10 @@
     <Content Include="Sql\SqlServerCreateTables.Test.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{1a981da6-0dda-44f6-a6f9-a9d2c797ebad}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
+    <Folder Include="CommentDao\" />
+    <Folder Include="ImageDao\" />
+    <Folder Include="ImageService\" />
+    <Folder Include="LikeDao\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
