@@ -10,7 +10,7 @@ using Ninject;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
-    class ImageService : IImageService
+    public class ImageService : IImageService
     {
         public ImageService()
         {
