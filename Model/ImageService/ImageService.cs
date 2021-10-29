@@ -10,7 +10,7 @@ using Ninject;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
-    class ImageService : IImageService
+    public class ImageService : IImageService
     {
         public ImageService()
         {
@@ -20,21 +20,31 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public IImageDao ImageDao { private get; set; }
 
         [Transactional]
-        public Image postImage(Image image)
+        public Image PostImage(Image image)
         {
             ImageDao.Create(image);
             return image;
         }
 
         [Transactional]
-        public ImageBlock searchImages(string keywords, string category, int startIndex, int count)
+        public ImageBlock SearchImages(string keywords, string category, int startIndex, int count)
         {
 
             List<Image> images = ImageDao.FindByKeywordsAndCategory(keywords, category, startIndex, count);
 
-            bool existMoreImages = (images.Count == count + 1);
+            bool existMoreImages = (images.Count == count);
 
             return new ImageBlock(images, existMoreImages);
         }
+
+        public ImageBlock SearchFollowedImages(long usrId, int startIndex, int count)
+        {
+            List<Image> images = ImageDao.FindByFollowed(usrId, startIndex, count);
+
+            bool existMoreImages = (images.Count == count);
+
+            return new ImageBlock(images, existMoreImages);
+        }
+
     }
 }

@@ -11,6 +11,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
     public class ImageDaoEntityFramework :
         GenericDaoEntityFramework<Image, Int64>, IImageDao
     {
+
         public List<Image> FindByKeywordsAndCategory(string keywords, string category, 
             int startIndex, int count)
         {
@@ -25,6 +26,36 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 
             return result;
 
+        }
+
+        public List<Image> FindByDate(long userProfileId, int startIndex, int count)
+        {
+            //Option 1: Using Linq.
+
+            DbSet<Image> images = Context.Set<Image>();
+
+            List<Image> result =
+                (from image in images
+                 where image.usrId == userProfileId
+                 orderby image.dateImg
+                 select image).Skip(startIndex).Take(count).ToList();
+
+            return result;
+        }
+
+        public List<Image> FindByFollowed(long usrId, int startIndex, int count)
+        {
+            DbSet<Image> images = Context.Set<Image>();
+            DbSet<Follow> follows = Context.Set<Follow>();
+
+            var result =
+                (from i in images
+                 from f in follows
+                 where i.usrId == f.followerId
+                 orderby i.dateImg ascending
+                 select i).Skip(startIndex).Take(count).ToList();
+
+            return result;
         }
 
     }

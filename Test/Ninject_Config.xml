@@ -1,0 +1,32 @@
+﻿<module name="myXmlConfigurationModule">
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.UserService.IUserService, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.UserService.UserService, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao.IUserProfileDao, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao.UserProfileDaoEntityFramework, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.IUserRelatedService, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.UserRelatedService, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.LikeDao.ILikeDao, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.LikeDao.LikeDaoEntityFramework, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.ImageService.IImageService, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.ImageService.ImageService, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.ImageDao.IImageDao, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.ImageDao.ImageDaoEntityFramework, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.FollowDao.IFollowDao, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.FollowDao.FollowDaoEntityFramework, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.ICommentsDao, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.CommentsDaoEntityFramework, PracticaMaD.Model" />
+
+	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.IImageRelatedService, PracticaMaD.Model"
+		  to = "Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.ImageRelatedService, PracticaMaD.Model" />
+	
+	<bind service = "System.Data.Entity.DbContext, EntityFramework"
+		  to ="System.Data.Entity.DbContext, EntityFramework" />
+</module>

@@ -8,7 +8,7 @@ using System;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
 {
-    class CommentsDaoEntityFramework :
+    public class CommentsDaoEntityFramework :
         GenericDaoEntityFramework<Comments, Int64>, ICommentsDao
     {
         public List<Comments> findByImage(long imgId)
