@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.FollowDao
 {
-    interface IFollowDao : IGenericDao<Follow, Int64>
+    public interface IFollowDao : IGenericDao<Follow, Int64>
     {
         /// <summary>
         /// Returns a list of followers search by userId
