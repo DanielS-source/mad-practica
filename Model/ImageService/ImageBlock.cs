@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
-    class ImageBlock
+    public class ImageBlock
     {
         public List<Image> Images { get; private set; }
         public bool ExistMoreImages { get; private set; }
