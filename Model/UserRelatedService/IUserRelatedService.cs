@@ -22,17 +22,5 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 
         List<UserProfile> GetUserFollows(long userProfileId);
         #endregion
-
-        #region Comments
-        [Transactional]
-        Comments AddComment(Comments comment);
-
-        [Transactional]
-        void EditComment(long comId, String text);
-
-        [Transactional]
-        List<Comments> GetImageRelatedComments(long imgId);
-
-        #endregion
     }
 }
