@@ -122,8 +122,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 
             foundComments = commentsDao.findByImage(Image2.imgId);
             Assert.AreEqual(0, foundComments.Count);
-
-            Assert.Fail();
         }
     }
 }
