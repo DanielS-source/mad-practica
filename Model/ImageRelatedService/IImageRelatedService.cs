@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService
 {
-    interface IImageRelatedService
+    public interface IImageRelatedService
     {
 
         IImageDao ImageDao { set; }

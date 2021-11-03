@@ -26,7 +26,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 
         [Inject]
         public ICommentsDao CommentsDao { private get; set; }
-        
+
+        [Inject]
+        public ICommentsDao Comments { private get; set; }
+
         [Transactional]
         public void FollowUser(long usrId, long follower)
         {
