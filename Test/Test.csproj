@@ -58,6 +58,9 @@
     <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.Extensions.Interception, Version=3.3.5.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Interception.3.3.5\lib\net45\Ninject.Extensions.Interception.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -90,7 +93,7 @@
     <Compile Include="CommentsDao\CommentsDaoEntityFrameworkTests.cs" />
     <Compile Include="FollowDao\FollowDaoEntityFrameworkTests.cs" />
     <Compile Include="ImageDao\ImageDaoEntityFrameworkTests.cs" />
-    <Compile Include="ImageService\ImageServiceTests.cs" />
+    <Compile Include="ImageService\IImageServiceTests.cs" />
     <Compile Include="TestManager.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
