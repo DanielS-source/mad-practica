@@ -9,6 +9,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
+using Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 {
@@ -27,12 +28,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         private static IKernel kernel;
         private static IImageService ImageService;
         private static IUserService userService;
+        private static IUserRelatedService userRelatedService;
         private static IImageDao ImageDao;
         private static ICategoryDao catogoryDao;
 
         // Variables used in several tests are initialized here
-        private const long userId = 123456;
-        private const long userId2 = 777777;
         private const long NON_EXISTENT_USER_ID = -1;
 
         private TransactionScope transactionScope;
@@ -45,6 +45,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         {
             kernel = TestManager.ConfigureNInjectKernel();
             ImageService = kernel.Get<IImageService>();
+            userRelatedService = kernel.Get<IUserRelatedService>();
             ImageDao = kernel.Get<IImageDao>();
             userService = kernel.Get<IUserService>();
             catogoryDao = kernel.Get<ICategoryDao>();
@@ -141,23 +142,22 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
                 Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
-                _ = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
+                _ = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category2.catId);
 
-                List<Image> images = new List<Image>(2)
+                List<Image> imageList = new List<Image>(2)
                 {
                     Image1,
                     Image2
                 };
 
                 Boolean existMoreImages = false;
-                int count = 10;
                 int startIndex = 0;
-
-                ImageBlock expectedImages = new ImageBlock(images, existMoreImages);
+                int count = 10;
+                ImageBlock expectedImages = new ImageBlock(imageList, existMoreImages);
 
                 ImageBlock foundImages = ImageService.SearchImages("Pokemon", null, startIndex, count);
 
-                Assert.AreEqual(expectedImages, foundImages);
+                Assert.AreEqual(expectedImages.Images, foundImages.Images);
             }
         }
 
@@ -168,6 +168,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
                     new UserProfileDetails(firstName, lastName, email, language));
+
+                var userId2 = userService.RegisterUser("loginName", clearPassword,
+                    new UserProfileDetails(firstName, lastName, email + "e", language));
+
+                userRelatedService.FollowUser(userId2, userId);
 
                 catogoryDao.Create(category);
                 catogoryDao.Create(category2);
@@ -189,7 +194,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 ImageBlock foundImages = ImageService.SearchFollowedImages(userId2, startIndex, count);
 
-                Assert.AreEqual(expectedImages, foundImages);
+                Assert.AreEqual(expectedImages.Images, foundImages.Images);
             }
         }
     }
