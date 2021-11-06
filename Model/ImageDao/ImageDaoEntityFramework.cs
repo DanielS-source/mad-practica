@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Data.Linq.SqlClient;
 using System.Linq;
 
@@ -16,15 +18,42 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             int startIndex, int count)
         {
 
+            //String query = "SELECT VALUE a FROM PhotgramEntitiesContainer.Image AS i "
+            //    + "WHERE i.title = @keywords OR i.description = @keywords"
+            //    + "ORDER BY i.dateImg";
+
+            //ObjectParameter param = new ObjectParameter("keywords", keywords);
+
+            //List<Image> result =
+            //    this.Context.CreateQuery<Image>(query, param).Skip(startIndex).
+            //            Take(count).ToList();
+            //ObjectQuery<Image> adQuery = ((IObjectContextAdapter)Context).ObjectContext.CreateQuery<Image>(query, param) );
+            //return result;
+
             DbSet<Image> images = Context.Set<Image>();
+            if (category == null)
+            {
+                var result =
+                    (from i in images
+                     where i.title.Contains(keywords) | i.description.Contains(keywords)
+                     orderby i.imgId
+                     select i).Skip(startIndex).Take(count).ToList();
+                return result;
+            }
+            else
+            {
 
-            var result =
-                (from i in images
-                 where SqlMethods.Like(i.title,keywords) | SqlMethods.Like(i.description, keywords)
-                 orderby i.imgId
-                 select i).Skip(startIndex).Take(count).ToList();
+                DbSet<Category> categories = Context.Set<Category>();
 
-            return result;
+                var result =
+                    (from i in images
+                     where (
+                        i.catId == (from c in categories where c.name == category select c.catId).FirstOrDefault())
+                        &(i.title.Contains(keywords) | i.description.Contains(keywords))
+                     orderby i.imgId
+                     select i).Skip(startIndex).Take(count).ToList();
+                return result;
+            }
 
         }
 

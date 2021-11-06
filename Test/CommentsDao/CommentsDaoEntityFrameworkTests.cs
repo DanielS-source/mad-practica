@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using Ninject;
+using Es.Udc.DotNet.PracticaMaD.Test;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 {
@@ -12,12 +16,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
     public class CommentsDaoEntityFrameworkTests
     {/*
         private const long userId = 123456;
+        private const long category_id = 1;
+        private const long category_id_2 = 2;
 
         private TransactionScope transactionScope;
         private TestContext testContextInstance;
 
         private static IKernel kernel;
         private static ICommentsDao commentsDao;
+        private static IImageDao imageDao;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -43,6 +50,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
         public static void MyClassInitialize(TestContext testContext)
         {
             kernel = TestManager.ConfigureNInjectKernel();
+            commentsDao = kernel.Get<ICommentsDao>();
             imageDao = kernel.Get<IImageDao>();
         }
 
@@ -88,7 +96,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 
         private Comments CreateComment(long imgId, long userId, String text, DateTime postDate) 
         {
-            CommentsDao comment = new Comments
+            Comments comment = new Comments
             {
                 imgId = imgId,
                 usrId = userId,
@@ -96,7 +104,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
                 postDate = postDate
             };
 
-            commentsDao.create(comment);
+            commentsDao.Create(comment);
             return comment;
         }
 
@@ -111,7 +119,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
             Comments Comment1 = CreateComment(Image1.imgId, userId, "Que chulo!", DateTime.Now);
             Comments Comment2 = CreateComment(Image1.imgId, userId, "No me gusta!", DateTime.Now);
 
-            List<Comments> expectedComments = new List<Comments>(2);
+            List<Comments> expectedComments = new List<Comments>(2)
             { 
                 Comment1,
                 Comment2
