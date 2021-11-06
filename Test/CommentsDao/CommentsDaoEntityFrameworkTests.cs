@@ -14,7 +14,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 {
     [TestClass()]
     public class CommentsDaoEntityFrameworkTests
-    {/*
+    {
         private const long userId = 123456;
         private const long category_id = 1;
         private const long category_id_2 = 2;
@@ -130,6 +130,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 
             foundComments = commentsDao.findByImage(Image2.imgId);
             Assert.AreEqual(0, foundComments.Count);
-        }*/
+        }
     }
 }
