@@ -79,10 +79,14 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 
             var result =
                 (from i in images
-                 from f in follows
-                 where i.usrId == f.followerId
+                 where
+                    (from f in follows 
+                     where f.followerId == usrId 
+                     select f.usrId).ToList().
+                     Contains(i.usrId)
                  orderby i.dateImg ascending
                  select i).Skip(startIndex).Take(count).ToList();
+
 
             return result;
         }
