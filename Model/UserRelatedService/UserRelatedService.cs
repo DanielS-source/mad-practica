@@ -11,12 +11,16 @@ using Es.Udc.DotNet.PracticaMaD.Model.FollowDao;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
+using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 {
     public class UserRelatedService : IUserRelatedService
     {
         public UserRelatedService() { }
+
+        [Inject]
+        public IUserProfileDao UserProfileDao { private get; set; }
 
         [Inject]
         public IFollowDao FollowDao { private get; set; }
@@ -61,7 +65,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 
         public List<Follow> GetUserFollowers(long userProfileId)
         {
-            if (!FollowDao.Exists(userProfileId))
+            if (!UserProfileDao.Exists(userProfileId))
             {
                 throw new InstanceNotFoundException(userProfileId,
                     typeof(UserProfile).FullName);
@@ -74,7 +78,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService
 
         public List<UserProfile> GetUserFollows(long userProfileId)
         {
-            if (!FollowDao.Exists(userProfileId))
+            if (!UserProfileDao.Exists(userProfileId))
             {
                 throw new InstanceNotFoundException(userProfileId,
                     typeof(UserProfile).FullName);

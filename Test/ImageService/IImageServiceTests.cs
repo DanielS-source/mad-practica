@@ -13,7 +13,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 {
     [TestClass()]
-    public class ImageServiceTests
+    public class IImageServiceTests
     {
         private static IKernel kernel;
         private static IImageService ImageService;

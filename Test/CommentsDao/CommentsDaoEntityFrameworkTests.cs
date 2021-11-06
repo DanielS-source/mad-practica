@@ -10,7 +10,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 {
     [TestClass()]
     public class CommentsDaoEntityFrameworkTests
-    {
+    {/*
         private const long userId = 123456;
 
         private TransactionScope transactionScope;
@@ -122,6 +122,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao.Tests
 
             foundComments = commentsDao.findByImage(Image2.imgId);
             Assert.AreEqual(0, foundComments.Count);
-        }
+        }*/
     }
 }
