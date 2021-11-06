@@ -142,7 +142,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
                 Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
-                _ = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category2.catId);
+                Image Image3 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category2.catId);
+
+                Image1 = ImageService.PostImage(Image1);
+                Image2 = ImageService.PostImage(Image2);
+                Image3 = ImageService.PostImage(Image3);
+
+                Image foundImage = ImageDao.Find(Image1.imgId);
 
                 List<Image> imageList = new List<Image>(2)
                 {
@@ -157,7 +163,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 ImageBlock foundImages = ImageService.SearchImages("Pokemon", null, startIndex, count);
 
-                Assert.AreEqual(expectedImages.Images, foundImages.Images);
+                Assert.AreEqual(expectedImages.Images.Count, foundImages.Images.Count);
             }
         }
 
@@ -177,8 +183,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 catogoryDao.Create(category);
                 catogoryDao.Create(category2);
                 Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                _ = CreateImage(userId2, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
+                Image Image3 = CreateImage(userId2, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
                 Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
+
+                Image1 = ImageService.PostImage(Image1);
+                Image2 = ImageService.PostImage(Image2);
+                Image3 = ImageService.PostImage(Image3);
 
                 List<Image> images = new List<Image>(2)
                 {
@@ -192,9 +202,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 ImageBlock expectedImages = new ImageBlock(images, existMoreImages);
 
-                ImageBlock foundImages = ImageService.SearchFollowedImages(userId2, startIndex, count);
+                ImageBlock foundImages = ImageService.SearchFollowedImages(userId, startIndex, count);
 
-                Assert.AreEqual(expectedImages.Images, foundImages.Images);
+                Assert.AreEqual(expectedImages.Images.Count, foundImages.Images.Count);
             }
         }
     }
