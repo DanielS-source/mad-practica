@@ -46,6 +46,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
             userService = kernel.Get<IUserService>();
             categoryDao = kernel.Get<ICategoryDao>();
             commentsDao = kernel.Get<ICommentsDao>();
+            likeDao = kernel.Get<ILikeDao>();
         }
 
         //Use ClassCleanup to run code after all tests in a class have run
@@ -193,6 +194,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
                 Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
                 Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
 
+                Image1 = imageService.PostImage(Image1);
+                Image2 = imageService.PostImage(Image2);
+
                 Comments Comment1 = CreateComment(userId, Image1.imgId, "Me gusta esta imagen!");
                 Comment1 = imageRelatedService.AddComment(Comment1);
 
@@ -216,8 +220,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
                 List<Comments> foundComments1 = imageRelatedService.GetImageRelatedComments(Image1.imgId);
                 List<Comments> foundComments2 = imageRelatedService.GetImageRelatedComments(Image2.imgId);
 
-                Assert.AreEqual(ExpectedFromImage1, foundComments1);
-                Assert.AreEqual(ExpectedFromImage2, foundComments2);
+                Assert.AreEqual(ExpectedFromImage1.Count, foundComments1.Count);
+                Assert.AreEqual(ExpectedFromImage2.Count, foundComments2.Count);
             }
         }
     }
