@@ -25,6 +25,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 
         List<Image> FindByFollowed(long usrId, int startIndex, int count);
 
+
+        /// <exception cref="InstanceNotFoundException"/>
+        Image FindByUserWithTags(long userProfileId);
+
+        /// <exception cref="ArgumentException"/>
+        List<Image> FindByTag(long tagId, int startIndex, int count);
+
     }
 
 }

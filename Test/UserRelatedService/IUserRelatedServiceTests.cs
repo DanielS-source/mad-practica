@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Es.Udc.DotNet.PracticaMaD.Test;
 using System.Transactions;
-using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
 using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
+using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
 {
@@ -26,6 +26,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
         private static IUserRelatedService userRelatedService;
         private static IImageService imageService;
         private static ICategoryDao categoryDao;
+        private static ITagDao TagDao;
 
         private TransactionScope transaction;
 
@@ -44,6 +45,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
             userRelatedService = kernel.Get<IUserRelatedService>();
             imageService = kernel.Get<IImageService>();
             categoryDao = kernel.Get<ICategoryDao>();
+            TagDao = kernel.Get<ITagDao>();
         }
 
         /// <summary>
@@ -71,7 +73,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
         public void TestCleanup()
         {
             transaction.Dispose();
-            CacheManager.Dispose();
         }
 
         #endregion Test Configuration
@@ -83,6 +84,25 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
         private const string lastName = "lastName";
         private const string email = "user@udc.es";
         private const string language = "es";
+
+        private Tag tag1 = new Tag()
+        {
+            name = "A Coruña",
+            uses = 0
+        };
+
+        private Tag tag2 = new Tag()
+        {
+            name = "BM&W",
+            uses = 0
+        };
+
+        private Tag tag3 = new Tag()
+        {
+            name = "Pokemon",
+            uses = 0
+        };
+
         #endregion
 
         #region Auxiliary Methods
@@ -178,9 +198,20 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
             Image image_2 = CreateImage(userId, "C:/Software/DataBase/Images/MetalGreyMon", "Digimon", "Otro", DateTime.Now, category.catId);
             Image image_3 = CreateImage(userId, "C:/Software/DataBase/Images/WarGreyMon", "Digimon", "Otro", DateTime.Now, category.catId);
 
-            imageService.PostImage(image_1);
-            imageService.PostImage(image_2);
-            imageService.PostImage(image_3);
+            TagDao.Create(tag1);
+            TagDao.Create(tag2);
+            TagDao.Create(tag3);
+
+            IList<long> tagsId = new List<long>
+                {
+                    tag1.tagId,
+                    tag2.tagId,
+                    tag3.tagId
+                };
+
+            imageService.PostImage(image_1, tagsId);
+            imageService.PostImage(image_2, tagsId);
+            imageService.PostImage(image_3, tagsId);
 
             /* Get the images in blocks of "count" size */
             do

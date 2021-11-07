@@ -10,6 +10,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 using Es.Udc.DotNet.PracticaMaD.Model.LikeDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
 using System.Collections.Generic;
+using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
 {
@@ -32,6 +33,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
         private static ICommentsDao commentsDao;
         private static IUserService userService;
         private static ICategoryDao categoryDao;
+        private static ITagDao TagDao;
 
         private TransactionScope transactionScope;
 
@@ -47,6 +49,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
             categoryDao = kernel.Get<ICategoryDao>();
             commentsDao = kernel.Get<ICommentsDao>();
             likeDao = kernel.Get<ILikeDao>();
+            TagDao = kernel.Get<ITagDao>();
         }
 
         //Use ClassCleanup to run code after all tests in a class have run
@@ -107,6 +110,24 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
             name = "Otro"
         };
 
+        private Tag tag1 = new Tag()
+        {
+            name = "A Coruña",
+            uses = 0
+        };
+
+        private Tag tag2 = new Tag()
+        {
+            name = "BM&W",
+            uses = 0
+        };
+
+        private Tag tag3 = new Tag()
+        {
+            name = "Pokemon",
+            uses = 0
+        };
+
         #endregion Auxiliary Methods
 
         [TestMethod()]
@@ -121,7 +142,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
 
                 Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
-                Image = imageService.PostImage(Image);
+
+                TagDao.Create(tag1);
+                TagDao.Create(tag2);
+                TagDao.Create(tag3);
+
+                IList<long> tagsId = new List<long>
+                {
+                    tag1.tagId,
+                    tag2.tagId,
+                    tag3.tagId
+                };
+
+                Image = imageService.PostImage(Image, tagsId);
 
                 Likes Like = new Likes
                 {
@@ -150,7 +183,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
 
                 Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
-                Image = imageService.PostImage(Image);
+                TagDao.Create(tag1);
+                TagDao.Create(tag2);
+                TagDao.Create(tag3);
+
+                IList<long> tagsId = new List<long>
+                {
+                    tag1.tagId,
+                    tag2.tagId,
+                    tag3.tagId
+                };
+
+                Image = imageService.PostImage(Image, tagsId);
 
                 Comments Comment = CreateComment(userId, Image.imgId, "Me gusta esta imagen!");
 
@@ -171,7 +215,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
                              new UserProfileDetails(firstName, lastName, email, language));
                 categoryDao.Create(category);
                 Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image = imageService.PostImage(Image);
+                TagDao.Create(tag1);
+                TagDao.Create(tag2);
+                TagDao.Create(tag3);
+
+                IList<long> tagsId = new List<long>
+                {
+                    tag1.tagId,
+                    tag2.tagId,
+                    tag3.tagId
+                };
+
+                Image = imageService.PostImage(Image, tagsId);
+
                 Comments Comment = CreateComment(userId, Image.imgId, "Me gusta esta imagen!");
 
                 Comment = imageRelatedService.AddComment(Comment);
@@ -194,8 +250,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService.Tests
                 Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
                 Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
 
-                Image1 = imageService.PostImage(Image1);
-                Image2 = imageService.PostImage(Image2);
+                TagDao.Create(tag1);
+                TagDao.Create(tag2);
+                TagDao.Create(tag3);
+
+                IList<long> tagsId = new List<long>
+                {
+                    tag1.tagId,
+                    tag2.tagId,
+                    tag3.tagId
+                };
+
+                Image1 = imageService.PostImage(Image1, tagsId);
+                Image2 = imageService.PostImage(Image2, tagsId);
 
                 Comments Comment1 = CreateComment(userId, Image1.imgId, "Me gusta esta imagen!");
                 Comment1 = imageRelatedService.AddComment(Comment1);

@@ -12,16 +12,17 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Tag
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Tag()
         {
             this.Image = new HashSet<Image>();
         }
     
-        public long catId { get; set; }
+        public long tagId { get; set; }
         public string name { get; set; }
+        public long uses { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Image { get; set; }

@@ -9,6 +9,7 @@ using System.Transactions;
 using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Test;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
+using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 {
@@ -18,6 +19,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         private static IKernel kernel;
         private static IImageService ImageService;
         private static IImageDao ImageDao;
+        private static ITagDao TagDao;
 
         // Variables used in several tests are initialized here
         private const long userId = 123456;
@@ -52,8 +54,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         public static void MyClassInitialize(TestContext testContext)
         {
             kernel = TestManager.ConfigureNInjectKernel();
-            ImageService = kernel.Get<IImageService>();
             ImageDao = kernel.Get<IImageDao>();
+            TagDao = kernel.Get<ITagDao>();
+            ImageService = kernel.Get<IImageService>();
         }
 
         //Use ClassCleanup to run code after all tests in a class have run
@@ -77,6 +80,23 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             transactionScope.Dispose();
         }
 
+        private Tag tag1 = new Tag()
+        {
+            name = "A Coruña",
+            uses = 0L
+        };
+
+        private Tag tag2 = new Tag()
+        {
+            name = "BM&W",
+            uses = 0L
+        };
+
+        private Tag tag3 = new Tag()
+        {
+            name = "Pokemon",
+            uses = 0L
+        };
         #endregion Additional test attributes
 
         #region Auxiliary Methods
@@ -102,11 +122,23 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         {
             Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category_id);
 
-            Image = ImageService.PostImage(Image);
+            TagDao.Create(tag1);
+            TagDao.Create(tag2);
+            TagDao.Create(tag3);
+
+            IList<long> tagsId = new List<long>
+            {
+                tag1.tagId,
+                tag2.tagId,
+                tag3.tagId
+            };
+
+            Image = ImageService.PostImage(Image, tagsId);
 
             Image FoundImage = ImageDao.Find(Image.imgId);
 
             Assert.AreEqual(Image, FoundImage);
+            Assert.AreEqual(3, Image.Tag.Count);
         }
 
         [TestMethod()]

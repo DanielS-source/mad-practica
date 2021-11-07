@@ -12,6 +12,9 @@
 	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.LikeDao.ILikeDao, PracticaMaD.Model"
 		  to = "Es.Udc.DotNet.PracticaMaD.Model.LikeDao.LikeDaoEntityFramework, PracticaMaD.Model" />
 
+  <bind service = "Es.Udc.DotNet.PracticaMaD.Model.TagDao.ITagDao, PracticaMaD.Model"
+    to = "Es.Udc.DotNet.PracticaMaD.Model.TagDao.TagDaoEntityFramework, PracticaMaD.Model" />
+  
 	<bind service = "Es.Udc.DotNet.PracticaMaD.Model.ImageService.IImageService, PracticaMaD.Model"
 		  to = "Es.Udc.DotNet.PracticaMaD.Model.ImageService.ImageService, PracticaMaD.Model" />
 

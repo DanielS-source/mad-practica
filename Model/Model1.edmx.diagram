@@ -4,21 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="61826d2e5fde4af0b02d5a64c04b8201" Name="Diagram1" ZoomLevel="98">
-        <EntityTypeShape EntityType="photogramModel.Comments" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="photogramModel.Follow" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="photogramModel.Image" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="photogramModel.Likes" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="photogramModel.UserProfile" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <AssociationConnector Association="photogramModel.FK_Image_Comm" ManuallyRouted="false" />
-        <AssociationConnector Association="photogramModel.FK_User_Comm" ManuallyRouted="false" />
-        <AssociationConnector Association="photogramModel.FK_User_Foll" ManuallyRouted="false" />
-        <AssociationConnector Association="photogramModel.FK_User_Foll_2" ManuallyRouted="false" />
-        <AssociationConnector Association="photogramModel.FK_Image_Like" ManuallyRouted="false" />
-        <AssociationConnector Association="photogramModel.FK_User_Img" ManuallyRouted="false" ></AssociationConnector>
-        <AssociationConnector Association="photogramModel.FK_User_Like" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="photogramModel.Category" Width="1.5" PointX="0.5" PointY="9.875" />
-        <AssociationConnector Association="photogramModel.FK_User_Cat" />
+      <Diagram DiagramId="ff767b40f67d451eae044e16c09f9bd1" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.Category" Width="1.5" PointX="3.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.Comments" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.Follow" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.Image" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.Likes" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.Tag" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Es.Udc.DotNet.PracticaMaD.Model.UserProfile" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_User_Cat" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_Image_Comm" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_User_Comm" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_User_Foll" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_User_Foll_2" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_Image_Like" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_User_Img" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.FK_User_Like" ManuallyRouted="false" />
+        <AssociationConnector Association="Es.Udc.DotNet.PracticaMaD.Model.Image_Tag" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

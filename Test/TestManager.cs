@@ -11,6 +11,7 @@ using Ninject;
 using System.Configuration;
 using System.Data.Entity;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
+using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Test
 {
@@ -32,6 +33,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Test
             kernel.Bind<ILikeDao>().To<LikeDaoEntityFramework>();
             kernel.Bind<IUserProfileDao>().To<UserProfileDaoEntityFramework>();
             kernel.Bind<ICategoryDao>().To<CategoryDaoEntityFramework>();
+            kernel.Bind<ITagDao>().To<TagDaoEntityFramework>();
 
             kernel.Bind<IImageRelatedService>().To<ImageRelatedService>().InSingletonScope();
             kernel.Bind<IImageService>().To<ImageService>().InSingletonScope();

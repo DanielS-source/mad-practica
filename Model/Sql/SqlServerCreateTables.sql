@@ -20,6 +20,16 @@
 
 USE photogram
 
+/* Drop Table Label if already exists */
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[Image_Tag]') 
+AND type in ('U')) DROP TABLE Image_Tag
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[Tag]') 
+AND type in ('U')) DROP TABLE Tag
+GO
+
 /* Drop Table Comments if already exists */
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[Comments]') 
@@ -94,6 +104,16 @@ ON Category (catId)
 PRINT N'Table Category created.'
 GO
 
+/* Tag */
+CREATE TABLE Tag(
+	tagId	bigint IDENTITY(1,1) NOT NULL,
+	name	varchar(12)	NOT NULL,
+	uses	bigint NOT NULL,
+	CONSTRAINT [PK_Tag]		PRIMARY KEY (tagId),
+	CONSTRAINT [UK_Tag_Name]	UNIQUE		(name)
+);
+PRINT N'Table Tag created.'
+
 /* Image */
 
 CREATE TABLE Image(
@@ -121,6 +141,17 @@ ON Image (imgId ASC, usrId ASC)
 
 PRINT N'Table Image created.'
 GO
+
+/* Image_Tag */
+CREATE TABLE Image_Tag (
+	imgId	BIGINT	NOT NULL,
+	tagId	BIGINT	NOT NULL,
+
+	CONSTRAINT [PK_Image_Tag]			PRIMARY KEY (imgId, tagId),
+	CONSTRAINT [FK_Image_Tag_imgId]	FOREIGN KEY (imgId)	REFERENCES Image(imgId),
+	CONSTRAINT [FK_Image_Tag_tagId]	FOREIGN KEY (tagId)		REFERENCES Tag(tagId)
+);
+PRINT N'Table Image_Tag created.'
 
 /* Comments */
 

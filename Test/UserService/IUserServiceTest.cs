@@ -8,7 +8,6 @@ using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Util;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Test;
-using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserService.Tests
 {
@@ -75,7 +74,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService.Tests
         public void TestCleanup()
         {
             transaction.Dispose();
-            CacheManager.Dispose();
         }
 
         #endregion Test Configuration

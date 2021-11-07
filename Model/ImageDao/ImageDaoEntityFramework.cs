@@ -1,4 +1,5 @@
 ﻿using Es.Udc.DotNet.ModelUtil.Dao;
+using Es.Udc.DotNet.ModelUtil.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,7 +15,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
         GenericDaoEntityFramework<Image, Int64>, IImageDao
     {
 
-        public List<Image> FindByKeywordsAndCategory(string keywords, string category, 
+        public List<Image> FindByKeywordsAndCategory(string keywords, string category,
             int startIndex, int count)
         {
 
@@ -49,7 +50,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
                     (from i in images
                      where (
                         i.catId == (from c in categories where c.name == category select c.catId).FirstOrDefault())
-                        &(i.title.Contains(keywords) | i.description.Contains(keywords))
+                        & (i.title.Contains(keywords) | i.description.Contains(keywords))
                      orderby i.imgId
                      select i).Skip(startIndex).Take(count).ToList();
                 return result;
@@ -87,6 +88,48 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             return result;
         }
 
-    }
+        /// <exception cref="InstanceNotFoundException"/>
+        public Image FindByUserWithTags(long userProfileId)
+        {
+            DbSet<Image> imageContext = Context.Set<Image>();
 
+            Image image = imageContext.Include("Tag").SingleOrDefault(c => c.usrId.Equals(userProfileId));
+
+            if (image is null)
+            {
+                throw new InstanceNotFoundException(userProfileId, typeof(Image).FullName);
+            }
+
+            return image;
+        }
+
+        /// <exception cref="ArgumentException"/>
+        public List<Image> FindByTag(long tagId, int startIndex, int count)
+        {
+
+            if (count <= 0)
+            {
+                throw new ArgumentException("Page size must be greater than zero");
+            }
+
+            DbSet<Image> imageContext = Context.Set<Image>();
+
+            if (startIndex < 0)
+            {
+                throw new ArgumentException("Page out of range" + startIndex);
+            }
+
+
+            List<Image> images = imageContext.Include("Tag").Where(c => c.Tag.Any(t => t.tagId.Equals(tagId))).OrderByDescending(c => c.dateImg).Skip(count * startIndex).Take(count).ToList();
+
+            if (startIndex > 0 && images.Count().Equals(0))
+            {
+                throw new ArgumentException("Page out of range" + startIndex);
+            }
+
+            return images;
+
+        }
+
+    }
 }
