@@ -19,6 +19,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         ImageBlock SearchFollowedImages(long usrId, int startIndex, int count);
 
+        [Transactional]
+        void DeleteImage(long imageId);
 
     }
 }

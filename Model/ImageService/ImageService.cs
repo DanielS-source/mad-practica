@@ -68,5 +68,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return new ImageBlock(images, existMoreImages);
         }
 
+        public void DeleteImage(long imageId)
+        {
+            ImageDao.Remove(imageId);
+        }
     }
 }
