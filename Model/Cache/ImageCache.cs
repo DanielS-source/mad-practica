@@ -49,6 +49,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.Cache
             cache.Remove(cacheKey);
             keys.Remove(cacheKey);
         }
+        public static void Dispose()
+        {
+            cache.Dispose();
+            keys.Clear();
+        }
 
     }
 

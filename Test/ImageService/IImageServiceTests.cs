@@ -70,7 +70,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         public void MyTestCleanup()
         {
             transactionScope.Dispose();
-            CacheManager.Dispose();
+            ImageCache.Dispose();
         }
 
         #endregion Additional test attributes
@@ -207,5 +207,29 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 Assert.AreEqual(expectedImages.Images.Count, foundImages.Images.Count);
             }
         }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InstanceNotFoundException))]
+        public void DeleteImageTest()
+        {
+            using (var scope = new TransactionScope())
+            {
+                var userId = userService.RegisterUser(loginName, clearPassword,
+                    new UserProfileDetails(firstName, lastName, email, language));
+
+                catogoryDao.Create(category);
+
+                Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+
+                Image = ImageService.PostImage(Image);
+
+                ImageService.DeleteImage(Image.imgId);
+
+                ImageDao.Find(Image.imgId);
+
+            }
+        }
+
     }
+
 }

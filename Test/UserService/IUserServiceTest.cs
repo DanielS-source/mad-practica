@@ -75,7 +75,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService.Tests
         public void TestCleanup()
         {
             transaction.Dispose();
-            CacheManager.Dispose();
+            ImageCache.Dispose();
         }
 
         #endregion Test Configuration
