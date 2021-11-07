@@ -8,11 +8,15 @@ using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Transactions;
 using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
+using System.Runtime.Caching;
+using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
     public class ImageService : IImageService
     {
+        private List<string> keys = new List<string>();
+
         public ImageService()
         {
         }
@@ -44,8 +48,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         public ImageBlock SearchImages(string keywords, string category, int startIndex, int count)
         {
+            List<Image> images = new List<Image>();
 
-            List<Image> images = ImageDao.FindByKeywordsAndCategory(keywords, category, startIndex, count);
+            //Checks if its in the cache
+            if (ImageCache.Exists(keywords + category)) {
+                images = ImageCache.Get<List<Image>>(keywords + category);
+            }
+            else
+            {
+                images = ImageDao.FindByKeywordsAndCategory(keywords, category, startIndex, count);
+
+                //Adds the results to the cache
+                ImageCache.Add(keywords + category, images);
+            }
 
             bool existMoreImages = (images.Count == count);
 
@@ -54,13 +69,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         public ImageBlock SearchFollowedImages(long usrId, int startIndex, int count)
         {
+
             List<Image> images = ImageDao.FindByFollowed(usrId, startIndex, count);
 
             bool existMoreImages = (images.Count == count);
 
             return new ImageBlock(images, existMoreImages);
         }
-
 
         /// <exception cref="ArgumentException"/>
         public ImageBlock FindImagesByTag(long tagId, int startIndex, int count)
@@ -148,6 +163,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             TagDao.GetAllElementsPageable(count, startIndex + 1);
 
             return new TagBlock(tags, !startIndex.Equals(0), true);
+
+        public void DeleteImage(long imageId)
+        {
+            ImageDao.Remove(imageId);
         }
     }
 }

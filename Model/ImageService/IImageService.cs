@@ -20,9 +20,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         ImageBlock SearchFollowedImages(long usrId, int startIndex, int count);
 
-        /// <exception cref="ArgumentException" />
+
         [Transactional]
         ImageBlock FindImagesByTag(long tagId, int startIndex, int count);
+
+        [Transactional]
+        void DeleteImage(long imageId);
 
         /// <exception cref="InstanceNotFoundException"/>
         [Transactional]

@@ -34,9 +34,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             DbSet<Image> images = Context.Set<Image>();
             if (category == null)
             {
+                string[] searchTerms = keywords.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                
                 var result =
                     (from i in images
-                     where i.title.Contains(keywords) | i.description.Contains(keywords)
+                     where searchTerms.All(s => i.title.Contains(s)) | searchTerms.All(s => i.description.Contains(s))
                      orderby i.imgId
                      select i).Skip(startIndex).Take(count).ToList();
                 return result;
@@ -45,12 +47,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             {
 
                 DbSet<Category> categories = Context.Set<Category>();
+                string[] searchTerms = keywords.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 var result =
                     (from i in images
                      where (
                         i.catId == (from c in categories where c.name == category select c.catId).FirstOrDefault())
-                        & (i.title.Contains(keywords) | i.description.Contains(keywords))
+                        & (searchTerms.All(s => i.title.Contains(s)) | searchTerms.All(s => i.description.Contains(s)))
                      orderby i.imgId
                      select i).Skip(startIndex).Take(count).ToList();
                 return result;
@@ -80,10 +83,14 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 
             var result =
                 (from i in images
-                 from f in follows
-                 where i.usrId == f.followerId
+                 where
+                    (from f in follows 
+                     where f.followerId == usrId 
+                     select f.usrId).ToList().
+                     Contains(i.usrId)
                  orderby i.dateImg ascending
                  select i).Skip(startIndex).Take(count).ToList();
+
 
             return result;
         }

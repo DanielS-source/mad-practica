@@ -12,6 +12,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.UserService;
 using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
+using Es.Udc.DotNet.PracticaMaD.Model.FollowDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
 {
@@ -73,6 +74,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
         public void TestCleanup()
         {
             transaction.Dispose();
+            ImageCache.Dispose();
         }
 
         #endregion Test Configuration
@@ -158,19 +160,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
         /// current test run.
         /// </summary>
         public TestContext TestContext { get; set; }
-
-        [TestMethod()]
-        public void UserRelatedServiceTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void FollowUserTest()
-        {
-            Assert.Fail();
-        }
-
 
         #region ViewUser
         /// <summary>
