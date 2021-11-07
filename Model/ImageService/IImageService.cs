@@ -31,10 +31,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         void UpdateImage(long usrId, long imgId, IList<long> tagsId);
 
-        /// <exception cref="InstanceNotFoundException" />
-        [Transactional]
-        void RemoveImage(long imgId);
-
         /// <exception cref="InputValidationException"/>
         /// <exception cref="DuplicateInstanceException"/>
         [Transactional]
@@ -44,4 +40,5 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         TagBlock FindTags(int startIndex, int count);
     }
+
 }

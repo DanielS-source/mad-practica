@@ -58,7 +58,7 @@ GO
  * not be done).                                                            
  */
 
-USE photogram
+USE photogram_test
 
 /* Drop Table Label if already exists */
 

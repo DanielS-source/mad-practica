@@ -13,6 +13,7 @@ using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 using Es.Udc.DotNet.PracticaMaD.Model.FollowDao;
+using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService.Tests
 {

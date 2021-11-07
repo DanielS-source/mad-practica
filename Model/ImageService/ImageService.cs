@@ -112,15 +112,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             ImageDao.Update(image);
         }
 
-        /// <exception cref="InstanceNotFoundException"/>
-        [Transactional]
-        public void RemoveImage(long imgId)
-        {
-            Image image = ImageDao.FindByUserWithTags(imgId);
-
-            ImageDao.Remove(image.imgId);
-        }
-
         /// <exception cref="InputValidationException"/>
         /// <exception cref="DuplicateInstanceException"/>
         [Transactional]
@@ -163,6 +154,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             TagDao.GetAllElementsPageable(count, startIndex + 1);
 
             return new TagBlock(tags, !startIndex.Equals(0), true);
+
+        }
 
         public void DeleteImage(long imageId)
         {
