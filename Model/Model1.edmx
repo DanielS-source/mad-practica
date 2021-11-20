@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Es.Udc.DotNet.PracticaMaD.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Es.Udc.DotNet.PracticaMaD.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="catId" />
@@ -24,9 +24,9 @@
         </EntityType>
         <EntityType Name="Follow">
           <Key>
-            <PropertyRef Name="folwId" />
+            <PropertyRef Name="usrId" />
+            <PropertyRef Name="followerId" />
           </Key>
-          <Property Name="folwId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usrId" Type="bigint" Nullable="false" />
           <Property Name="followerId" Type="bigint" Nullable="false" />
         </EntityType>
@@ -57,9 +57,9 @@
         </EntityType>
         <EntityType Name="Likes">
           <Key>
-            <PropertyRef Name="likeId" />
+            <PropertyRef Name="imgId" />
+            <PropertyRef Name="usrId" />
           </Key>
-          <Property Name="likeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="imgId" Type="bigint" Nullable="false" />
           <Property Name="usrId" Type="bigint" Nullable="false" />
         </EntityType>
@@ -253,8 +253,7 @@
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Es.Udc.DotNet.PracticaMaD.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -278,16 +277,6 @@
           <NavigationProperty Name="Image" Relationship="Self.FK_Image_Comm" FromRole="Comments" ToRole="Image" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Comm" FromRole="Comments" ToRole="UserProfile" />
         </EntityType>
-        <EntityType Name="Follow">
-          <Key>
-            <PropertyRef Name="folwId" />
-          </Key>
-          <Property Name="folwId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="usrId" Type="Int64" Nullable="false" />
-          <Property Name="followerId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Foll" FromRole="Follow" ToRole="UserProfile" />
-          <NavigationProperty Name="UserProfile1" Relationship="Self.FK_User_Foll_2" FromRole="Follow" ToRole="UserProfile" />
-        </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="imgId" />
@@ -306,19 +295,9 @@
           <Property Name="likes" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_User_Cat" FromRole="Image" ToRole="Category" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Image_Comm" FromRole="Image" ToRole="Comments" />
-          <NavigationProperty Name="Likes1" Relationship="Self.FK_Image_Like" FromRole="Image" ToRole="Likes" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Img" FromRole="Image" ToRole="UserProfile" />
           <NavigationProperty Name="Tag" Relationship="Self.Image_Tag" FromRole="Image" ToRole="Tag" />
-        </EntityType>
-        <EntityType Name="Likes">
-          <Key>
-            <PropertyRef Name="likeId" />
-          </Key>
-          <Property Name="likeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="imgId" Type="Int64" Nullable="false" />
-          <Property Name="usrId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Image" Relationship="Self.FK_Image_Like" FromRole="Likes" ToRole="Image" />
-          <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Like" FromRole="Likes" ToRole="UserProfile" />
+          <NavigationProperty Name="UserProfile1" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="Image" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -341,10 +320,10 @@
           <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_User_Comm" FromRole="UserProfile" ToRole="Comments" />
-          <NavigationProperty Name="Follow" Relationship="Self.FK_User_Foll" FromRole="UserProfile" ToRole="Follow" />
-          <NavigationProperty Name="Follow1" Relationship="Self.FK_User_Foll_2" FromRole="UserProfile" ToRole="Follow" />
           <NavigationProperty Name="Image" Relationship="Self.FK_User_Img" FromRole="UserProfile" ToRole="Image" />
-          <NavigationProperty Name="Likes" Relationship="Self.FK_User_Like" FromRole="UserProfile" ToRole="Likes" />
+          <NavigationProperty Name="UserProfile1" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile" ToRole="UserProfile1" />
+          <NavigationProperty Name="UserProfile2" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile1" ToRole="UserProfile" />
+          <NavigationProperty Name="Image1" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="UserProfile" ToRole="Image" />
         </EntityType>
         <Association Name="FK_User_Cat">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -382,42 +361,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Foll">
-          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
-          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="usrId" />
-            </Principal>
-            <Dependent Role="Follow">
-              <PropertyRef Name="usrId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Foll_2">
-          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
-          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="usrId" />
-            </Principal>
-            <Dependent Role="Follow">
-              <PropertyRef Name="followerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Image_Like">
-          <End Role="Image" Type="Self.Image" Multiplicity="1" />
-          <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Image">
-              <PropertyRef Name="imgId" />
-            </Principal>
-            <Dependent Role="Likes">
-              <PropertyRef Name="imgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_Img">
           <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
           <End Role="Image" Type="Self.Image" Multiplicity="*" />
@@ -430,18 +373,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Like">
-          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
-          <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="usrId" />
-            </Principal>
-            <Dependent Role="Likes">
-              <PropertyRef Name="usrId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Image_Tag">
           <End Role="Image" Type="Self.Image" Multiplicity="*" />
           <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
@@ -449,9 +380,7 @@
         <EntityContainer Name="photogramEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Comments" EntityType="Self.Comments" />
-          <EntitySet Name="Follow" EntityType="Self.Follow" />
           <EntitySet Name="Image" EntityType="Self.Image" />
-          <EntitySet Name="Likes" EntityType="Self.Likes" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
           <AssociationSet Name="FK_User_Cat" Association="Self.FK_User_Cat">
@@ -466,31 +395,31 @@
             <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Foll" Association="Self.FK_User_Foll">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="Follow" EntitySet="Follow" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Foll_2" Association="Self.FK_User_Foll_2">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="Follow" EntitySet="Follow" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Image_Like" Association="Self.FK_Image_Like">
-            <End Role="Image" EntitySet="Image" />
-            <End Role="Likes" EntitySet="Likes" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_Img" Association="Self.FK_User_Img">
             <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="Image" EntitySet="Image" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Like" Association="Self.FK_User_Like">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
           <AssociationSet Name="Image_Tag" Association="Self.Image_Tag">
             <End Role="Image" EntitySet="Image" />
             <End Role="Tag" EntitySet="Tag" />
           </AssociationSet>
+          <AssociationSet Name="Follow" Association="Es.Udc.DotNet.PracticaMaD.Model.Follow">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserProfile1" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="Likes" Association="Es.Udc.DotNet.PracticaMaD.Model.Likes">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="Follow">
+          <End Type="Es.Udc.DotNet.PracticaMaD.Model.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <End Type="Es.Udc.DotNet.PracticaMaD.Model.UserProfile" Role="UserProfile1" Multiplicity="*" />
+        </Association>
+        <Association Name="Likes">
+          <End Type="Es.Udc.DotNet.PracticaMaD.Model.Image" Role="Image" Multiplicity="*" />
+          <End Type="Es.Udc.DotNet.PracticaMaD.Model.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -516,15 +445,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Follow">
-            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Model.Follow">
-              <MappingFragment StoreEntitySet="Follow">
-                <ScalarProperty Name="folwId" ColumnName="folwId" />
-                <ScalarProperty Name="usrId" ColumnName="usrId" />
-                <ScalarProperty Name="followerId" ColumnName="followerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Image">
             <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Model.Image">
               <MappingFragment StoreEntitySet="Image">
@@ -540,15 +460,6 @@
                 <ScalarProperty Name="ISO" ColumnName="ISO" />
                 <ScalarProperty Name="wb" ColumnName="wb" />
                 <ScalarProperty Name="likes" ColumnName="likes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Likes">
-            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Model.Likes">
-              <MappingFragment StoreEntitySet="Likes">
-                <ScalarProperty Name="likeId" ColumnName="likeId" />
-                <ScalarProperty Name="imgId" ColumnName="imgId" />
-                <ScalarProperty Name="usrId" ColumnName="usrId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -580,6 +491,22 @@
             </EndProperty>
             <EndProperty Name="Tag">
               <ScalarProperty Name="tagId" ColumnName="tagId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Follow" TypeName="Es.Udc.DotNet.PracticaMaD.Model.Follow" StoreEntitySet="Follow">
+            <EndProperty Name="UserProfile1">
+              <ScalarProperty Name="usrId" ColumnName="followerId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="usrId" ColumnName="usrId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Likes" TypeName="Es.Udc.DotNet.PracticaMaD.Model.Likes" StoreEntitySet="Likes">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="usrId" ColumnName="usrId" />
+            </EndProperty>
+            <EndProperty Name="Image">
+              <ScalarProperty Name="imgId" ColumnName="imgId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
