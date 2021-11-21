@@ -3,6 +3,7 @@ using Es.Udc.DotNet.ModelUtil.Transactions;
 using System;
 using System.Collections.Generic;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
+using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -10,6 +11,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
     {
         IImageDao ImageDao { set; }
         ITagDao TagDao { set; }
+
+        ICommentsDao CommentsDao { set; }
 
         [Transactional]
         Image PostImage(Image image, IList<long> tagsIds);
@@ -39,6 +42,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         /// <exception cref="ArgumentException" />
         [Transactional]
         TagBlock FindTags(int startIndex, int count);
+
+        [Transactional]
+        long AddComment(long userId, long imgId, string message);
+
+        [Transactional]
+        void EditComment(long comId, String text);
+
+        [Transactional]
+        CommentsBlock GetImageRelatedComments(long imgId, int startIndex, int count);
     }
 
 }

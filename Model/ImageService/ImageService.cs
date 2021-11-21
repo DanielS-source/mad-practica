@@ -10,6 +10,7 @@ using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 using System.Runtime.Caching;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
+using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -27,6 +28,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
        [Inject]
         public ITagDao TagDao { private get; set; }
 
+        [Inject]
+        public ICommentsDao CommentsDao { private get; set; }
 
 
         [Transactional]
@@ -160,6 +163,36 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public void DeleteImage(long imageId)
         {
             ImageDao.Remove(imageId);
+        }
+
+        public long AddComment(long userId, long imgId, string message) 
+        {
+            Comments comment = new Comments()
+            {
+                imgId = imgId,
+                usrId = userId,
+                message = message,
+                postDate = DateTime.Now
+            };
+
+            CommentsDao.Create(comment);
+
+            return comment.comId;
+        }
+
+        public void EditComment(long comId, String text)
+        {
+            Comments comment = CommentsDao.Find(comId);
+
+            if (comment != null)
+            {
+                comment.message = text;
+            }
+        }
+
+        public CommentsBlock GetImageRelatedComments(long imgId, int startIndex, int count)
+        {
+            return CommentsDao.findByImage(imgId);
         }
     }
 }

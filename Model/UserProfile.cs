@@ -18,10 +18,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public UserProfile()
         {
             this.Comments = new HashSet<Comments>();
-            this.Image = new HashSet<Image>();
-            this.UserProfile1 = new HashSet<UserProfile>();
-            this.UserProfile2 = new HashSet<UserProfile>();
-            this.Image1 = new HashSet<Image>();
+            this.Uploads = new HashSet<Image>();
+            this.Followers = new HashSet<UserProfile>();
+            this.Follows = new HashSet<UserProfile>();
+            this.Like = new HashSet<Image>();
         }
     
         public long usrId { get; set; }
@@ -35,12 +35,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Image { get; set; }
+        public virtual ICollection<Image> Uploads { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfile> UserProfile1 { get; set; }
+        public virtual ICollection<UserProfile> Followers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfile> UserProfile2 { get; set; }
+        public virtual ICollection<UserProfile> Follows { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Image1 { get; set; }
+        public virtual ICollection<Image> Like { get; set; }
     }
 }

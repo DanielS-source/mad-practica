@@ -3,6 +3,8 @@ using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Transactions;
 using Ninject;
 using System;
+using System.Collections.Generic;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
 {
@@ -71,5 +73,14 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <param name="loginName"> User loginName. </param>
         /// <returns> Boolean to indicate if the loginName exists </returns>
         bool UserExists(string loginName);
+
+        [Transactional]
+        UserBlock GetFollowers(long userId, int startIndex, int count);
+
+        [Transactional]
+        UserBlock GetFollowed(long userId, int startIndex, int count);
+
+        [Transactional]
+        ImageBlock GetUserImages(long userProfileId, int startIndex, int count);
     }
 }

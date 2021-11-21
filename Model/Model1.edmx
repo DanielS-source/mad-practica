@@ -320,10 +320,10 @@
           <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_User_Comm" FromRole="UserProfile" ToRole="Comments" />
-          <NavigationProperty Name="Image" Relationship="Self.FK_User_Img" FromRole="UserProfile" ToRole="Image" />
-          <NavigationProperty Name="UserProfile1" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile" ToRole="UserProfile1" />
-          <NavigationProperty Name="UserProfile2" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile1" ToRole="UserProfile" />
-          <NavigationProperty Name="Image1" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="UserProfile" ToRole="Image" />
+          <NavigationProperty Name="Uploads" Relationship="Self.FK_User_Img" FromRole="UserProfile" ToRole="Image" />
+          <NavigationProperty Name="Followers" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile" ToRole="UserProfile1" />
+          <NavigationProperty Name="Follows" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile1" ToRole="UserProfile" />
+          <NavigationProperty Name="Like" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="UserProfile" ToRole="Image" />
         </EntityType>
         <Association Name="FK_User_Cat">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />

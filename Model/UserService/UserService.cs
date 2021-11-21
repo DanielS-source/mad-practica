@@ -1,9 +1,12 @@
 ﻿using Es.Udc.DotNet.ModelUtil.Exceptions;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Util;
 using Ninject;
 using System;
+using System.Collections.Generic;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
 {
@@ -11,6 +14,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
     {
         [Inject]
         public IUserProfileDao UserProfileDao { private get; set; }
+
+        [Inject]
+        public IImageDao ImageDao { private get; set; }
 
         // void ChangePassword(long userProfileId, String oldClearPassword, String newClearPassword);
         public void ChangePassword(long userProfileId, string oldClearPassword, string newClearPassword)
@@ -131,6 +137,75 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             }
 
             return true;
+        }
+
+        public UserBlock GetFollowers(long userId, int startIndex, int count)
+        {
+            if (!UserProfileDao.Exists(userId))
+            {
+                throw new InstanceNotFoundException(userId,
+                    typeof(UserProfile).FullName);
+            }
+
+            List<UserProfile> followersFromDb = UserProfileDao.GetFollowers(userId, startIndex, count);
+            List<UserProfileDetails> followers = new List<UserProfileDetails>();
+
+            foreach (UserProfile u in followersFromDb) 
+            {
+                UserProfileDetails userProfileDetails =
+                new UserProfileDetails(u.firstName,
+                    u.lastName, u.email,
+                    u.language);
+
+                followers.Add(userProfileDetails);
+            }
+
+            bool existMore = followers.Count == count;
+
+            return new UserBlock(followers, existMore);
+        }
+
+        public UserBlock GetFollowed(long userId, int startIndex, int count)
+        {
+            if (!UserProfileDao.Exists(userId))
+            {
+                throw new InstanceNotFoundException(userId,
+                    typeof(UserProfile).FullName);
+            }
+
+            List<UserProfile> followedFromDb = UserProfileDao.GetFollowed(userId, startIndex, count);
+            List<UserProfileDetails> followed = new List<UserProfileDetails>();
+
+            foreach (UserProfile u in followedFromDb)
+            {
+                UserProfileDetails userProfileDetails =
+                new UserProfileDetails(u.firstName,
+                    u.lastName, u.email,
+                    u.language);
+
+                followed.Add(userProfileDetails);
+            }
+
+            bool existMore = followed.Count == count;
+
+            return new UserBlock(followed, existMore);
+        }
+
+        public ImageBlock GetUserImages(long userProfileId, int startIndex, int count)
+        {
+            /*
+           * Find count+1 accounts to determine if there exist more accounts above
+           * the specified range.
+           */
+            List<Image> images =
+                ImageDao.FindByDate(userProfileId, startIndex, count + 1);
+
+            bool existMoreImages = (images.Count == count + 1);
+
+            if (existMoreImages)
+                images.RemoveAt(count);
+
+            return new ImageBlock(images, existMoreImages);
         }
     }
 }
