@@ -12,6 +12,7 @@ using System.Runtime.Caching;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
+using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -35,10 +36,26 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Inject]
         public IUserProfileDao UserProfileDao{ private get; set; }
 
+        [Inject]
+        public ICategoryDao CategoryDao{ private get; set; }
 
         [Transactional]
-        public Image PostImage(Image image, IList<long> tagsIds)
+        public Image PostImage(long usrId, string pathImg, string title, string description, 
+            DateTime dateImg, long catId, string f, string t, string ISO, string wb, 
+            IList<long> tagsIds)
         {
+
+            Image image = new Image();
+            image.usrId = usrId;
+            image.pathImg = pathImg;
+            image.title = title;
+            image.description = description;
+            image.dateImg = dateImg;
+            image.catId = catId;
+            image.f = f;
+            image.t = t;
+            image.ISO = ISO;
+            image.wb = wb;
 
             foreach (long tagId in tagsIds)
             {
@@ -213,5 +230,22 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         private void deleteImageFromPath(String path) {
 
         }
+
+        private ImageDTO toImageDTO(Image image)
+        {
+            return new ImageDTO(image, CategoryDao.Find(image.catId).name);
+        }
+
+        private List<ImageDTO> toImageDTOs(List<Image> images)
+        {
+            List<ImageDTO> imageDTOs = new List<ImageDTO>();
+            foreach(Image image in images)
+            {
+                imageDTOs.Add(toImageDTO(image));
+            }
+
+            return imageDTOs;
+        }
+
     }
 }
