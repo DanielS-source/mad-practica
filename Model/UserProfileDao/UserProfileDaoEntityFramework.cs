@@ -47,12 +47,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 throw new ArgumentException("Page size must be greater than zero");
             }
 
-            DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
-
             if (startIndex < 0)
             {
                 throw new ArgumentException("Page out of range" + startIndex);
             }
+
+            DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
 
             List<UserProfile> followers = userProfileContext.Include("Followers").
                 Where(u => u.Followers.Any(f => f.usrId.Equals(userId))).
@@ -77,12 +77,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 throw new ArgumentException("Page size must be greater than zero");
             }
 
-            DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
-
             if (startIndex < 0)
             {
                 throw new ArgumentException("Page out of range" + startIndex);
             }
+
+            DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
 
             List<UserProfile> followed = userProfileContext.Include("Follows").
                 Where(u => u.Followers.Any(f => f.usrId.Equals(userId))).

@@ -5,24 +5,42 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
+using Ninject;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
 {
     public class CommentsDaoEntityFramework :
         GenericDaoEntityFramework<Comments, Int64>, ICommentsDao
     {
-        public List<Comments> findByImage(long imgId)
+        [Inject]
+        public IImageDao ImageDao { private get; set; }
+
+        public List<Comments> findByImage(long imgId, int startIndex, int count)
         {
+            if (count <= 0)
+            {
+                throw new ArgumentException("Page size must be greater than zero");
+            }
+
+            if (startIndex < 0)
+            {
+                throw new ArgumentException("Page out of range" + startIndex);
+            }
+
 
             DbSet<Comments> comments = Context.Set<Comments>();
-            DbSet<UserProfile> userProfiles = Context.Set<UserProfile>();
 
-            var result =
-                (from c in comments
-                 from u in userProfiles
-                 where c.usrId == u.usrId && c.imgId == imgId
-                 orderby c.postDate
-                 select c).ToList();
+            var result =comments.Where(c => c.imgId == imgId)
+                        .Include(c => c.UserProfile)
+                        .Skip(startIndex)
+                        .Take(count)
+                        .ToList();
+           
+            if (startIndex > 0 && comments.Count().Equals(0))
+            {
+                throw new ArgumentException("Page out of range" + startIndex);
+            }
 
             return result;
         }

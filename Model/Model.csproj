@@ -109,6 +109,7 @@
     <Compile Include="ImageRelatedService\IImageRelatedService.cs" />
     <Compile Include="ImageRelatedService\ImageRelatedService.cs" />
     <Compile Include="ImageService\ImageDTO.cs" />
+    <Compile Include="ImageService\CommentsWithUsernameDto.cs" />
     <Compile Include="ImageService\CommentsBlock.cs" />
     <Compile Include="ImageService\IImageService.cs" />
     <Compile Include="ImageService\ImageBlock.cs" />

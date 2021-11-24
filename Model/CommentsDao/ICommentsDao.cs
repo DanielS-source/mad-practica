@@ -11,6 +11,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
         /// </summary>
         /// <param name="imgId">the image identifier</param>
         /// <returns>the list of comments related to the given image</returns>
-        List<Comments> findByImage(long imgId);
+        List<Comments> findByImage(long imgId, int startIndex, int count);
     }
 }
