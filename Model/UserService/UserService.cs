@@ -139,6 +139,14 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             return true;
         }
 
+        public void FollowUser(long usrId, long followedUsrId) 
+        {
+            UserProfile user = UserProfileDao.Find(usrId);
+            UserProfile followedUser = UserProfileDao.Find(followedUsrId);
+            user.Follows.Add(followedUser);
+            return;
+        }
+
         public UserBlock GetFollowers(long userId, int startIndex, int count)
         {
             if (!UserProfileDao.Exists(userId))
