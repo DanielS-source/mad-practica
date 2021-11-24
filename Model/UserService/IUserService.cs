@@ -74,13 +74,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <returns> Boolean to indicate if the loginName exists </returns>
         bool UserExists(string loginName);
 
-        [Transactional]
         UserBlock GetFollowers(long userId, int startIndex, int count);
 
-        [Transactional]
         UserBlock GetFollowed(long userId, int startIndex, int count);
 
-        [Transactional]
         ImageBlock GetUserImages(long userProfileId, int startIndex, int count);
     }
 }

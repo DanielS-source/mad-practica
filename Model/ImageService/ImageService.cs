@@ -192,7 +192,22 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         public CommentsBlock GetImageRelatedComments(long imgId, int startIndex, int count)
         {
-            return CommentsDao.findByImage(imgId);
+            List<CommentsWithUsernameDto> commentsWithUsername = new List<CommentsWithUsernameDto>();
+            foreach(Comments c in CommentsDao.findByImage(imgId, startIndex, count))
+            {
+                commentsWithUsername.Add(new CommentsWithUsernameDto(
+                        c.comId,
+                        c.imgId,
+                        c.usrId,
+                        c.message,
+                        c.postDate,
+                        c.UserProfile.loginName
+                    ));
+            }
+
+            bool existMore = commentsWithUsername.Count == count;
+
+            return new CommentsBlock(commentsWithUsername, existMore);
         }
     }
 }
