@@ -297,7 +297,7 @@
           <NavigationProperty Name="Comments" Relationship="Self.FK_Image_Comm" FromRole="Image" ToRole="Comments" />
           <NavigationProperty Name="UserProfile" Relationship="Self.FK_User_Img" FromRole="Image" ToRole="UserProfile" />
           <NavigationProperty Name="Tag" Relationship="Self.Image_Tag" FromRole="Image" ToRole="Tag" />
-          <NavigationProperty Name="UserProfile1" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="Image" ToRole="UserProfile" />
+          <NavigationProperty Name="LikedBy" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="Image" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>

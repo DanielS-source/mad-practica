@@ -19,7 +19,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         {
             this.Comments = new HashSet<Comments>();
             this.Tag = new HashSet<Tag>();
-            this.UserProfile1 = new HashSet<UserProfile>();
+            this.LikedBy = new HashSet<UserProfile>();
         }
     
         public long imgId { get; set; }
@@ -42,6 +42,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfile> UserProfile1 { get; set; }
+        public virtual ICollection<UserProfile> LikedBy { get; set; }
     }
 }

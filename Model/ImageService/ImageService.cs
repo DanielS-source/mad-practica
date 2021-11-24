@@ -11,6 +11,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 using System.Runtime.Caching;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
+using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -30,6 +31,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         [Inject]
         public ICommentsDao CommentsDao { private get; set; }
+
+        [Inject]
+        public IUserProfileDao UserProfileDao{ private get; set; }
 
 
         [Transactional]
@@ -162,7 +166,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         public void DeleteImage(long imageId)
         {
+            Image image = ImageDao.Find(imageId);
+            deleteImageFromPath(image.pathImg);
             ImageDao.Remove(imageId);
+        }
+
+        [Transactional]
+        public void LikeImage(long userId, long imgId)
+        {
+            Image image = ImageDao.Find(imgId);
+            UserProfile user = UserProfileDao.Find(userId);
+            image.LikedBy.Add(user);
+            return;
         }
 
         public long AddComment(long userId, long imgId, string message) 
@@ -208,6 +223,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             bool existMore = commentsWithUsername.Count == count;
 
             return new CommentsBlock(commentsWithUsername, existMore);
+        }
+
+        private void deleteImageFromPath(String path) {
+
         }
     }
 }
