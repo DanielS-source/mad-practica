@@ -533,6 +533,47 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         }
 
         [TestMethod]
+        public void AddTagsToImage()
+        {
+            int startIndex = 0;
+            int count = 2;
+
+            var userId = userService.RegisterUser(loginName, clearPassword,
+                    new UserProfileDetails(firstName, lastName, email, language));
+
+            catogoryDao.Create(category);
+
+            Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+            Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
+
+            TagDao.Create(tag1);
+            TagDao.Create(tag2);
+            TagDao.Create(tag3);
+
+            IList<long> tagsId = new List<long>
+            {
+                    tag1.tagId,
+                    tag2.tagId,
+                    tag3.tagId
+            };
+
+            IList<long> emptyTags = new List<long> { };
+
+            Image1 = ImageService.PostImage(Image1, emptyTags);
+            Image2 = ImageService.PostImage(Image2,emptyTags);
+
+            ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
+            Assert.AreEqual(0, FoundImages.Images.Count);
+
+            ImageService.AddTagsToImage(Image1.imgId, tagsId);
+
+            FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
+            Assert.AreEqual(1, FoundImages.Images.Count);
+
+        }
+
+
+        [TestMethod]
         [ExpectedException(typeof(DuplicateInstanceException))]
         public void AddTagDuplicateInstance()
         {
