@@ -39,6 +39,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         long AddTag(string name);
 
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="DuplicateInstanceException"/>
+        [Transactional]
+        void AddTagsToImage(long imgId, IList<long> tagsId);
+
         /// <exception cref="ArgumentException" />
         [Transactional]
         TagBlock FindTags(int startIndex, int count);
