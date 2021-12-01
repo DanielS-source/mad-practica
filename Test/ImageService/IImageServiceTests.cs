@@ -98,7 +98,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
         #region Auxiliary Methods
 
-        private Image CreateImage(long user, string path, string title, string description, DateTime date, long category)
+        private ImageDTO CreateImage(long user, string path, string title, string description, DateTime date, long category)
         {
             Image image = new Image
             {
@@ -109,7 +109,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 dateImg = date,
                 catId = category
             };
-            return image;
+            return new ImageDTO(image, null);
         }
 
         private Category category = new Category()
@@ -140,7 +140,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -153,7 +153,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
                 };
 
-                Image = ImageService.PostImage(Image, tagsId);
+                Image Image = ImageService.PostImage(ImageDTO, tagsId);
                 Image FoundImage = ImageDao.Find(Image.imgId);
 
                 Assert.AreEqual(Image, FoundImage);
@@ -174,7 +174,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -187,7 +187,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
                 };
 
-                Image = ImageService.PostImage(Image, new List<long>());
+                Image Image = ImageService.PostImage(ImageDTO, new List<long>());
                 Image FoundImage = ImageDao.Find(Image.imgId);
 
                 Assert.AreEqual(Image, FoundImage);
@@ -206,9 +206,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 catogoryDao.Create(category);
                 catogoryDao.Create(category2);
 
-                Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
-                Image Image3 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category2.catId);
+                ImageDTO ImageDTO1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
+                ImageDTO ImageDTO3 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category2.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -221,9 +221,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
                 };
 
-                Image1 = ImageService.PostImage(Image1, tagsId);
-                Image2 = ImageService.PostImage(Image2, tagsId);
-                Image3 = ImageService.PostImage(Image3, tagsId);
+                Image Image1 = ImageService.PostImage(ImageDTO1, tagsId);
+                Image Image2 = ImageService.PostImage(ImageDTO2, tagsId);
+                Image Image3 = ImageService.PostImage(ImageDTO3, tagsId);
 
                 Image foundImage = ImageDao.Find(Image1.imgId);
 
@@ -259,9 +259,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
                 catogoryDao.Create(category2);
-                Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
-                Image Image3 = CreateImage(userId2, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
+                ImageDTO ImageDTO1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO3 = CreateImage(userId2, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
 
 
                 TagDao.Create(tag1);
@@ -275,9 +275,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
                 };
 
-                Image1 = ImageService.PostImage(Image1, tagsId);
-                Image2 = ImageService.PostImage(Image2, tagsId);
-                Image3 = ImageService.PostImage(Image3, tagsId);
+                Image Image1 = ImageService.PostImage(ImageDTO1, tagsId);
+                Image Image2 = ImageService.PostImage(ImageDTO2, tagsId);
+                Image Image3 = ImageService.PostImage(ImageDTO3, tagsId);
 
                 /*Image1 = ImageService.PostImage(Image1);
                 Image2 = ImageService.PostImage(Image2);
@@ -312,7 +312,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
 
                 TagDao.Create(tag1);
@@ -326,7 +326,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
                 };
 
-                Image = ImageService.PostImage(Image, tagsId);
+                Image Image = ImageService.PostImage(ImageDTO, tagsId);
 
                 ImageService.DeleteImage(Image.imgId);
 
@@ -346,7 +346,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -359,7 +359,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
                 };
 
-                Image = ImageService.PostImage(Image, tagsId);
+                Image Image = ImageService.PostImage(ImageDTO, tagsId);
                 Image FoundImage = ImageDao.FindByUserWithTags(userId);
 
                 Assert.AreEqual(tagsId[0], FoundImage.Tag.ToList()[0].tagId);
@@ -381,9 +381,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image Image3 = CreateImage(userId, "C:/Software/DataBase/Images/Charmander", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDao1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDao2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDao3 = CreateImage(userId, "C:/Software/DataBase/Images/Charmander", "Pokemon", "Otro", DateTime.Now, category.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -406,9 +406,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag1.tagId
                 };
 
-                Image1 = ImageService.PostImage(Image1, tagsId);
-                Image2 = ImageService.PostImage(Image2, tagsId2);
-                Image3 = ImageService.PostImage(Image3, tagsId3);
+                Image Image1 = ImageService.PostImage(ImageDao1, tagsId);
+                Image Image2 = ImageService.PostImage(ImageDao2, tagsId2);
+                Image Image3 = ImageService.PostImage(ImageDao3, tagsId3);
 
                 List<Image> FoundImage = ImageDao.FindByTag(tag1.tagId, startIndex, count);
                 Assert.AreEqual(Image1.pathImg, FoundImage[0].pathImg);
@@ -435,9 +435,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
-                Image Image3 = CreateImage(userId, "C:/Software/DataBase/Images/Charmeleon", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO3 = CreateImage(userId, "C:/Software/DataBase/Images/Charmeleon", "Pokemon", "Otro", DateTime.Now, category.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -463,9 +463,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 };
 
 
-                Image1 = ImageService.PostImage(Image1, tagsId1);
-                Image2 = ImageService.PostImage(Image2, tagsId2);
-                Image3 = ImageService.PostImage(Image3, tagsId3);
+                Image Image1 = ImageService.PostImage(ImageDTO1, tagsId1);
+                Image Image2 = ImageService.PostImage(ImageDTO2, tagsId2);
+                Image Image3 = ImageService.PostImage(ImageDTO3, tagsId3);
 
                 ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
                 Assert.AreEqual(2, FoundImages.Images.Count);
@@ -492,7 +492,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 catogoryDao.Create(category);
 
-                Image Image = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+                ImageDTO ImageDTO = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
 
                 TagDao.Create(tag1);
                 TagDao.Create(tag2);
@@ -507,7 +507,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
                 IList<long> updated_tagsId = new List<long>();
 
-                Image = ImageService.PostImage(Image, tagsId);
+                Image Image = ImageService.PostImage(ImageDTO, tagsId);
                 Image FoundImage = ImageDao.Find(Image.imgId);
 
                 Assert.AreEqual(Image, FoundImage);
@@ -541,8 +541,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
             catogoryDao.Create(category);
 
-            Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-            Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
+            ImageDTO ImageDTO1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+            ImageDTO ImageDTO2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
 
             TagDao.Create(tag1);
             TagDao.Create(tag2);
@@ -557,8 +557,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
             IList<long> emptyTags = new List<long> { };
 
-            Image1 = ImageService.PostImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId, null, null, null, null, emptyTags);
-            Image2 = ImageService.PostImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId, null, null, null, null, emptyTags);
+            Image Image1 = ImageService.PostImage(ImageDTO1, emptyTags);
+            Image Image2 = ImageService.PostImage(ImageDTO2,emptyTags);
 
             ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
             Assert.AreEqual(0, FoundImages.Images.Count);
@@ -591,8 +591,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
             catogoryDao.Create(category);
 
-            Image Image1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-            Image Image2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
+            ImageDTO ImageDTO1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
+            ImageDTO ImageDTO2 = CreateImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId);
 
             TagDao.Create(tag1);
             TagDao.Create(tag2);
@@ -605,8 +605,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     tag3.tagId
             };
 
-            Image1 = ImageService.PostImage(Image1, tagsId);
-            Image2 = ImageService.PostImage(Image2, tagsId);
+            Image Image1 = ImageService.PostImage(ImageDTO1, tagsId);
+            Image Image2 = ImageService.PostImage(ImageDTO2, tagsId);
 
             TagBlock tags = ImageService.FindTags(startIndex, count);
             Assert.AreEqual(2, tags.TagsBlock.Count);
