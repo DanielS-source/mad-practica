@@ -15,8 +15,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         ICommentsDao CommentsDao { set; }
 
         [Transactional]
-        Image PostImage(long usrId, string pathImg, string title, string description,
-            DateTime dateImg, long catId, string f, string t, string ISO, string wb,
+        Image PostImage(ImageDTO imageDTO,
             IList<long> tagsIds);
 
         [Transactional]

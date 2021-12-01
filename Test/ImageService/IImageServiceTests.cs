@@ -30,7 +30,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         private static IKernel kernel;
         private static IImageService ImageService;
         private static IUserService userService;
-        private static IUserRelatedService userRelatedService;
         private static IImageDao ImageDao;
         private static ITagDao TagDao;
         private static ICategoryDao catogoryDao;
@@ -50,7 +49,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             kernel = TestManager.ConfigureNInjectKernel();
 
             ImageService = kernel.Get<IImageService>();
-            userRelatedService = kernel.Get<IUserRelatedService>();
             ImageDao = kernel.Get<IImageDao>();
             userService = kernel.Get<IUserService>();
             catogoryDao = kernel.Get<ICategoryDao>();
@@ -257,7 +255,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 var userId2 = userService.RegisterUser("loginName", clearPassword,
                     new UserProfileDetails(firstName, lastName, email + "e", language));
 
-                userRelatedService.FollowUser(userId2, userId);
+                userService.FollowUser(userId2, userId);
 
                 catogoryDao.Create(category);
                 catogoryDao.Create(category2);
@@ -559,8 +557,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
 
             IList<long> emptyTags = new List<long> { };
 
-            Image1 = ImageService.PostImage(Image1, emptyTags);
-            Image2 = ImageService.PostImage(Image2,emptyTags);
+            Image1 = ImageService.PostImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId, null, null, null, null, emptyTags);
+            Image2 = ImageService.PostImage(userId, "C:/Software/DataBase/Images/Pikachu", "Pokemon", "Otro", DateTime.Now, category.catId, null, null, null, null, emptyTags);
 
             ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
             Assert.AreEqual(0, FoundImages.Images.Count);
