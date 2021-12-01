@@ -15,7 +15,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         ICommentsDao CommentsDao { set; }
 
         [Transactional]
-        Image PostImage(Image image, IList<long> tagsIds);
+        Image PostImage(long usrId, string pathImg, string title, string description,
+            DateTime dateImg, long catId, string f, string t, string ISO, string wb,
+            IList<long> tagsIds);
 
         [Transactional]
         ImageBlock SearchImages(string keywords, string category, int startIndex, int count);
@@ -51,6 +53,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         [Transactional]
         CommentsBlock GetImageRelatedComments(long imgId, int startIndex, int count);
+
+        [Transactional]
+        void LikeImage(long usrId, long imgId);
     }
 
 }
