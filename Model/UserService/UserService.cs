@@ -133,7 +133,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             }
             catch (InstanceNotFoundException e)
             {
-                return false;
+                throw e;
             }
 
             return true;

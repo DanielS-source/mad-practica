@@ -80,16 +80,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return new ImageBlock(images, existMoreImages);
         }
 
-        public ImageBlock SearchFollowedImages(long usrId, int startIndex, int count)
-        {
-
-            List<Image> images = ImageDao.FindByFollowed(usrId, startIndex, count);
-
-            bool existMoreImages = (images.Count == count);
-
-            return new ImageBlock(images, existMoreImages);
-        }
-
         /// <exception cref="ArgumentException"/>
         public ImageBlock FindImagesByTag(long tagId, int startIndex, int count)
         {
