@@ -1,12 +1,8 @@
 ﻿using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
-using Es.Udc.DotNet.PracticaMaD.Model.FollowDao;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
-using Es.Udc.DotNet.PracticaMaD.Model.LikeDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
-using Es.Udc.DotNet.PracticaMaD.Model.ImageRelatedService;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
-using Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService;
 using Ninject;
 using System.Configuration;
 using System.Data.Entity;
@@ -28,16 +24,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Test
             IKernel kernel = new StandardKernel();
 
             kernel.Bind<ICommentsDao>().To<CommentsDaoEntityFramework>();
-            kernel.Bind<IFollowDao>().To<FollowDaoEntityFramework>();
             kernel.Bind<IImageDao>().To<ImageDaoEntityFramework>();
-            kernel.Bind<ILikeDao>().To<LikeDaoEntityFramework>();
             kernel.Bind<IUserProfileDao>().To<UserProfileDaoEntityFramework>();
             kernel.Bind<ICategoryDao>().To<CategoryDaoEntityFramework>();
             kernel.Bind<ITagDao>().To<TagDaoEntityFramework>();
 
-            kernel.Bind<IImageRelatedService>().To<ImageRelatedService>().InSingletonScope();
             kernel.Bind<IImageService>().To<ImageService>().InSingletonScope();
-            kernel.Bind<IUserRelatedService>().To<UserRelatedService>().InSingletonScope();
             kernel.Bind<IUserService>().To<UserService>().InSingletonScope();
 
             string connectionString = ConfigurationManager.ConnectionStrings["photogramEntities"].ConnectionString;

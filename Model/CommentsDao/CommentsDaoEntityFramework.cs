@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
 using Ninject;
 

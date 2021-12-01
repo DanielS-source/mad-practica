@@ -43,5 +43,16 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                     && this.loginName == target.loginName);
         }
 
+        public override int GetHashCode()
+        {
+            int hashCode = 512769504;
+            hashCode = hashCode * -1521134295 + comId.GetHashCode();
+            hashCode = hashCode * -1521134295 + imgId.GetHashCode();
+            hashCode = hashCode * -1521134295 + usrId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(message);
+            hashCode = hashCode * -1521134295 + postDate.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(loginName);
+            return hashCode;
+        }
     }
 }

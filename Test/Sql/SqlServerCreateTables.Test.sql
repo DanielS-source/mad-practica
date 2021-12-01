@@ -227,7 +227,7 @@ CREATE TABLE Likes(
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByLikesId] 
-ON Likes (likeId ASC, usrId ASC)
+ON Likes (imgId ASC, usrId ASC)
 
 
 PRINT N'Table Likes created.'
@@ -236,17 +236,16 @@ GO
 /* Follow */
 
 CREATE TABLE Follow(
-    folwId bigint IDENTITY(1,1) NOT NULL,
     usrId bigint NOT NULL,
     followerId bigint NOT NULL,
 
-    CONSTRAINT [PK_Follow] PRIMARY KEY (folwId),
+    CONSTRAINT [PK_Follow] PRIMARY KEY (usrId, followerId),
     CONSTRAINT [FK_User_Foll] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
     CONSTRAINT [FK_User_Foll_2] FOREIGN KEY (followerId) REFERENCES UserProfile(usrId),
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByFollowId] 
-ON Follow (folwId ASC, usrId ASC)
+ON Follow (usrId ASC, followerId)
 
 
 PRINT N'Table Follow created.'

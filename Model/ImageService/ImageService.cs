@@ -40,22 +40,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public ICategoryDao CategoryDao{ private get; set; }
 
         [Transactional]
-        public Image PostImage(long usrId, string pathImg, string title, string description, 
-            DateTime dateImg, long catId, string f, string t, string ISO, string wb, 
+        public Image PostImage(ImageDTO imageDTO, 
             IList<long> tagsIds)
         {
 
-            Image image = new Image();
-            image.usrId = usrId;
-            image.pathImg = pathImg;
-            image.title = title;
-            image.description = description;
-            image.dateImg = dateImg;
-            image.catId = catId;
-            image.f = f;
-            image.t = t;
-            image.ISO = ISO;
-            image.wb = wb;
+            Image image = adaptToImage(imageDTO);
 
             foreach (long tagId in tagsIds)
             {
@@ -85,16 +74,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                 //Adds the results to the cache
                 ImageCache.Add(keywords + category, images);
             }
-
-            bool existMoreImages = (images.Count == count);
-
-            return new ImageBlock(images, existMoreImages);
-        }
-
-        public ImageBlock SearchFollowedImages(long usrId, int startIndex, int count)
-        {
-
-            List<Image> images = ImageDao.FindByFollowed(usrId, startIndex, count);
 
             bool existMoreImages = (images.Count == count);
 
@@ -291,5 +270,22 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         {
             throw new NotImplementedException();
         }
+
+        private Image adaptToImage(ImageDTO imageDTO)
+        {
+            Image image = new Image();
+            image.usrId = imageDTO.usrId;
+            image.pathImg = imageDTO.pathImg;
+            image.title = imageDTO.title;
+            image.description = imageDTO.description;
+            image.dateImg = imageDTO.dateImg;
+            image.catId = imageDTO.catId;
+            image.f = imageDTO.f;
+            image.t = imageDTO.t;
+            image.ISO = imageDTO.ISO;
+            image.wb = imageDTO.wb;
+            return image;
+        }
+
     }
 }

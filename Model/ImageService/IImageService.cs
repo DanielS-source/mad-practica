@@ -15,16 +15,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         ICommentsDao CommentsDao { set; }
 
         [Transactional]
-        Image PostImage(long usrId, string pathImg, string title, string description,
-            DateTime dateImg, long catId, string f, string t, string ISO, string wb,
-            IList<long> tagsIds);
+        Image PostImage(ImageDTO imageDTO, IList<long> tagsIds);
 
         [Transactional]
         ImageBlock SearchImages(string keywords, string category, int startIndex, int count);
-
-        [Transactional]
-        ImageBlock SearchFollowedImages(long usrId, int startIndex, int count);
-
 
         [Transactional]
         ImageBlock FindImagesByTag(long tagId, int startIndex, int count);

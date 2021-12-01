@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
-    class ImageDTO
+    public class ImageDTO
     {
         public ImageDTO(Image image, String categoryName)
         {
@@ -19,6 +19,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             t = image.t;
             ISO = image.ISO;
             wb = image.wb;
+            catId = image.catId;
             category = categoryName;
         }
 
@@ -31,6 +32,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public string t { get; private set; }
         public string ISO { get; private set; }
         public string wb { get; private set; }
+        public long catId { get; private set; }
         public string category { get; private set; }
 
 
