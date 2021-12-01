@@ -10,7 +10,6 @@ using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
-using Es.Udc.DotNet.PracticaMaD.Model.UserRelatedService;
 using System.Linq;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
@@ -239,63 +238,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 ImageBlock expectedImages = new ImageBlock(imageList, existMoreImages);
 
                 ImageBlock foundImages = ImageService.SearchImages("Pokemon", null, startIndex, count);
-
-                Assert.AreEqual(expectedImages.Images.Count, foundImages.Images.Count);
-            }
-        }
-
-        [TestMethod()]
-        public void SearchFollowedImagesTest()
-        {
-            using (var scope = new TransactionScope())
-            {
-                var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
-
-                var userId2 = userService.RegisterUser("loginName", clearPassword,
-                    new UserProfileDetails(firstName, lastName, email + "e", language));
-
-                userService.FollowUser(userId2, userId);
-
-                catogoryDao.Create(category);
-                catogoryDao.Create(category2);
-                ImageDTO ImageDTO1 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Pokemon", "Otro", DateTime.Now, category.catId);
-                ImageDTO ImageDTO2 = CreateImage(userId, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Otro", DateTime.Now, category.catId);
-                ImageDTO ImageDTO3 = CreateImage(userId2, "C:/Software/DataBase/Images/Bulbasaur", "Otro", "Pokemon", DateTime.Now, category2.catId);
-
-
-                TagDao.Create(tag1);
-                TagDao.Create(tag2);
-                TagDao.Create(tag3);
-
-                IList<long> tagsId = new List<long>
-                {
-                    tag1.tagId,
-                    tag2.tagId,
-                    tag3.tagId
-                };
-
-                Image Image1 = ImageService.PostImage(ImageDTO1, tagsId);
-                Image Image2 = ImageService.PostImage(ImageDTO2, tagsId);
-                Image Image3 = ImageService.PostImage(ImageDTO3, tagsId);
-
-                /*Image1 = ImageService.PostImage(Image1);
-                Image2 = ImageService.PostImage(Image2);
-                Image3 = ImageService.PostImage(Image3);*/
-
-                List<Image> images = new List<Image>(2)
-                {
-                    Image1,
-                    Image2
-                };
-
-                Boolean existMoreImages = false;
-                int count = 10;
-                int startIndex = 0;
-
-                ImageBlock expectedImages = new ImageBlock(images, existMoreImages);
-
-                ImageBlock foundImages = ImageService.SearchFollowedImages(userId2, startIndex, count);
 
                 Assert.AreEqual(expectedImages.Images.Count, foundImages.Images.Count);
             }
