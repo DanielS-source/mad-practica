@@ -162,6 +162,31 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             }
         }
 
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="DuplicateInstanceException"/>
+        [Transactional]
+        public void AddTagsToImage(long imgId, IList<long> tagsId)
+        {
+            Image image = ImageDao.Find(imgId);
+
+            IList<Tag> tags = new List<Tag>();
+
+            foreach (long tagId in tagsId)
+            {
+                Tag tag = TagDao.Find(tagId);
+                tags.Add(tag);
+            }
+
+            image.Tag.Clear();
+
+            foreach (Tag tag in tags)
+            {
+                image.Tag.Add(tag);
+            }
+
+            ImageDao.Update(image);
+        }
+
         /// <exception cref="ArgumentException"/>
         public TagBlock FindTags(int startIndex, int count)
         {
@@ -262,5 +287,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return imageDTOs;
         }
 
+        public Image PostImage(Image image, IList<long> tagsIds)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
