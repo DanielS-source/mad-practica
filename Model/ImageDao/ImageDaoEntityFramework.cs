@@ -76,34 +76,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             return result;
         }
 
-        public List<Image> FindByFollowed(long usrId, int startIndex, int count)
-        {
-            DbSet<Image> images = Context.Set<Image>();
-            DbSet<UserProfile> userProfile = Context.Set<UserProfile>();
-
-
-            var result = images.Include(i => i.UserProfile)
-                .Where(i => userProfile.Where(u => u.usrId == usrId) //El perfil del usuario que busca las fotos
-                                            .Include(u => u.Follows //Los perfiles que sigue dicho usuario
-                                            .Select(f => f.usrId))
-                                            .ToList()               //Lista de las ids de los perfiles que sigue el usuario?
-                                            .Contains(i.usrId)
-                       ).ToList();
-
-            //var result =
-            //    (from i in images
-            //     where
-            //        (from f in follows
-            //         where f.followerid == usrid
-            //         select f.usrid).tolist().
-            //         contains(i.usrid)
-            //     orderby i.dateimg ascending
-            //     select i).skip(startindex).take(count).tolist();
-
-
-            return result;
-        }
-
         /// <exception cref="InstanceNotFoundException"/>
         public Image FindByUserWithTags(long userProfileId)
         {

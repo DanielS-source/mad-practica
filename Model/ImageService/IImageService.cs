@@ -23,10 +23,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         ImageBlock SearchImages(string keywords, string category, int startIndex, int count);
 
         [Transactional]
-        ImageBlock SearchFollowedImages(long usrId, int startIndex, int count);
-
-
-        [Transactional]
         ImageBlock FindImagesByTag(long tagId, int startIndex, int count);
 
         [Transactional]

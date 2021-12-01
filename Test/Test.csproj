@@ -102,11 +102,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageRelatedService\ImageRelatedServiceTests.cs" />
     <Compile Include="ImageService\IImageServiceTests.cs" />
     <Compile Include="TestManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRelatedService\IUserRelatedServiceTests.cs" />
     <Compile Include="UserService\IUserServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
