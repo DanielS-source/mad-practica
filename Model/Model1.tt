@@ -103,6 +103,10 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
 <#
             }
 #>
+	/// <summary>
+    /// Relationship Name (Foreign Key in ER-Model): 
+	<#=code.Escape(navigationProperty.RelationshipType.Name)#>
+    /// </summary>
     <#=codeStringGenerator.NavigationProperty(navigationProperty)#>
 <#
         }
@@ -426,8 +430,9 @@ public class CodeStringGenerator
             ? string.Format(
                 CultureInfo.InvariantCulture,
                 "{0}using System;{1}" +
-                "{2}",
+                "{2}"+"{3}",
                 inHeader ? Environment.NewLine : "",
+				includeCollections ? (Environment.NewLine + "using System.Text;") : "",
                 includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
                 inHeader ? "" : Environment.NewLine)
             : "";
