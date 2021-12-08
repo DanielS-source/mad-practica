@@ -7,47 +7,65 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Web
+namespace Web.Pages
 {
 
 
-    public partial class Site1
+    public partial class WebForm1
     {
 
         /// <summary>
-        /// Control lnkLogin.
+        /// Control filterImagesForm.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkLogin;
+        protected global::System.Web.UI.HtmlControls.HtmlForm filterImagesForm;
 
         /// <summary>
-        /// Control lnkUploadImage.
+        /// Control keywordsSpan.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkUploadImage;
+        protected global::System.Web.UI.WebControls.Localize keywordsSpan;
 
         /// <summary>
-        /// Control HyperLink2.
+        /// Control keywordsInput.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        protected global::System.Web.UI.WebControls.TextBox keywordsInput;
 
         /// <summary>
-        /// Control ContentPlaceHolder.
+        /// Control notEmptyKeywords.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator notEmptyKeywords;
+
+        /// <summary>
+        /// Control Localize1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize1;
+
+        /// <summary>
+        /// Control categoryDropDown.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList categoryDropDown;
     }
 }

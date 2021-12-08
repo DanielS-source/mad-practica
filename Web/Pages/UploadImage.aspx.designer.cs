@@ -11,7 +11,7 @@ namespace Web.Pages
 {
 
 
-    public partial class WebForm1
+    public partial class WebForm3
     {
     }
 }

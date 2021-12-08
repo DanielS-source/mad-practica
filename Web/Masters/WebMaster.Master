@@ -14,59 +14,61 @@
     <link href="../Css/StyleSheet.css" rel="stylesheet" />        
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div class ="d-flex toggled" id="wrapper">
-            <div class="bg-light border-light" id="sidebar-wrapper">
-                <div class="sidebar-heading">Menu</div>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light"> HOME </a>
+
+    <div class ="d-flex toggled" id="wrapper">
+        <div class="bg-light border-light" id="sidebar-wrapper">
+            <div class="sidebar-heading">Menu</div>
+            <ul class="list-group list-group-flush">
+                <div class="list-group-item list-group-item-action bg-light">
+                    <asp:HyperLink ID ="lnkLogin" runat="server" Text="Iniciar sesión" meta:resourcekey="lnkLogin" NavigateUrl="../Pages/Login.aspx"/>
                 </div>
-            </div>
-            <div id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom d-flex flex-row justify-content-between">
-                    <button type="button" id="menu-toggle" class="btn btn-primary">
-                        <i class="icon-reorder"></i>
-                        <span class="sr-only">Toggle Menu</span>
+                <div class="list-group-item list-group-item-action bg-light">
+                    <asp:HyperLink ID ="lnkUploadImage" runat="server" Text="Subir imagen" meta:resourcekey="lnkUploadImage" NavigateUrl="../Pages/UploadImage.aspx"/>
+                </div>
+                <div class="list-group-item list-group-item-action bg-light">
+                    <asp:HyperLink ID ="HyperLink2" runat="server" Text="Iniciar sesión" meta:resourcekey="lnkLogin" NavigateUrl="../Pages/Login.aspx"/>
+                </div>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom d-flex flex-row justify-content-between">
+                <button type="button" id="menu-toggle" class="btn btn-primary">
+                    <i class="icon-reorder"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+                <div class=" align-self-stretch">
+                    <h1>Photobomb</h1>
+                </div>
+                <div class="px-4">
+                    <button type="button" id="profile-redirect" class="btn btn-secondary btn-lg rounded-circle">
+                        <i class="icon-user"></i>
+                        <span class="sr-only">Visit profile</span>
                     </button>
-                    <div class=" align-self-stretch">
-                        <h1>Photobomb</h1>
-                    </div>
-                    <div class="px-4">
-                        <button type="button" id="profile-redirect" class="btn btn-secondary btn-lg rounded-circle">
-                            <i class="icon-user"></i>
-                            <span class="sr-only">Visit profile</span>
-                        </button>
-                    </div>
-                </nav>
-
-                <div class="container body-content">
-                    <h3 class=" text-center">Sitio para reemplazar contenido con los webforms</h3>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
-                    </asp:ContentPlaceHolder>
                 </div>
+            </nav>
 
+            <div class="container body-content">
+                <h3 class=" text-center">Sitio para reemplazar contenido con los webforms</h3>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
-        </div>
 
-        <script>
-            $("#menu-toggle").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-        </script>
-
-        <div class="container body-content">
-        <hr />
-            <footer>
-                <p>&copy;  <%: DateTime.Now.Year %> - Photobomb by Daniel Silva, Yago Iglesias & Alejandro Viñán</p>
-            </footer>
         </div>
-    </form>
+    </div>
+
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    <div class="container body-content">
+    <hr />
+        <footer>
+            <p>&copy;  <%: DateTime.Now.Year %> - Photobomb by Daniel Silva, Yago Iglesias & Alejandro Viñán</p>
+        </footer>
+    </div>
+  
 </body>
 </html>
