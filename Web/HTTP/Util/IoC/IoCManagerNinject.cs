@@ -22,11 +22,15 @@ namespace Es.Udc.DotNet.MiniBank.HTTP.Util.IoC
             settings = new NinjectSettings() { LoadExtensions = true };
             kernel = new StandardKernel(settings);
 
+            /*** SERVICES ***/
+
             /*** UserService ***/
             kernel.Bind<IUserService>().To<UserService>();
 
             /*** ImageService ***/
             kernel.Bind<IImageService>().To<ImageService>();
+
+            /*** DAOS ***/
 
             /*** UserProfileDao ***/
             kernel.Bind<IUserProfileDao>().To<UserProfileDaoEntityFramework>();
