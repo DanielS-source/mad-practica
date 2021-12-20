@@ -20,15 +20,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public long usrId { get; set; }
         public string message { get; set; }
         public System.DateTime postDate { get; set; }
-    
-    	/// <summary>
+
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// FK_Image_Comm
+        /// FK_Image_Comm
         /// </summary>
         public virtual Image Image { get; set; }
-    	/// <summary>
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// FK_User_Comm
+        /// FK_User_Comm
         /// </summary>
         public virtual UserProfile UserProfile { get; set; }
     

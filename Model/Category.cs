@@ -25,9 +25,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    	/// <summary>
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	///FK_User_Cat
+        /// FK_User_Cat
         /// </summary>
         public virtual ICollection<Image> Image { get; set; }
     

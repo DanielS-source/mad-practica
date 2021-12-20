@@ -15,13 +15,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <param name="firstName">Users's first name.</param>
         /// <param name="encryptedPassword">The encrypted password.</param>
         /// <param name="language">The language.</param>
+        /// <param name="country">The country.</param>
         public LoginResult(long userProfileId, String firstName,
-            String encryptedPassword, String language)
+            String encryptedPassword, String language, String country)
         {
             this.UserProfileId = userProfileId;
             this.FirstName = firstName;
             this.EncryptedPassword = encryptedPassword;
             this.Language = language;
+            this.Country = country;
         }
 
         #region Properties Region
@@ -45,6 +47,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         public string Language { get; private set; }
 
         /// <summary>
+        /// Gets the country code.
+        /// </summary>
+        /// <value>The country code.</value>
+        public string Country { get; private set; }
+
+        /// <summary>
         /// Gets the user profile id.
         /// </summary>
         /// <value>The user profile id.</value>
@@ -59,8 +67,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             return (this.UserProfileId == target.UserProfileId)
                    && (this.FirstName == target.FirstName)
                    && (this.EncryptedPassword == target.EncryptedPassword)
-                   && (this.Language == target.Language);
+                   && (this.Language == target.Language)
+                   && (this.Country == target.Country);
         }
+        
 
         // The GetHashCode method is used in hashing algorithms and data
         // structures such as a hash table. In order to ensure that it works
@@ -86,7 +96,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 "[ userProfileId = " + UserProfileId + " | " +
                 "firstName = " + FirstName + " | " +
                 "encryptedPassword = " + EncryptedPassword + " | " +
-                "language = " + Language + " ]";
+                "language = " + Language + " | country = " + Country + " ]";
 
             return strLoginResult;
         }

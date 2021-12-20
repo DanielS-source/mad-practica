@@ -81,7 +81,8 @@
           <Property Name="firstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="lastName" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="language" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="2" />
+          <Property Name="country" Type="varchar" MaxLength="2" />
         </EntityType>
         <Association Name="FK_Image_Comm">
           <End Role="Image" Type="Self.Image" Multiplicity="1" />
@@ -318,12 +319,13 @@
           <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_User_Comm" FromRole="UserProfile" ToRole="Comments" />
           <NavigationProperty Name="Uploads" Relationship="Self.FK_User_Img" FromRole="UserProfile" ToRole="Image" />
           <NavigationProperty Name="Followers" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile" ToRole="UserProfile1" />
           <NavigationProperty Name="Follows" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Follow" FromRole="UserProfile1" ToRole="UserProfile" />
           <NavigationProperty Name="Like" Relationship="Es.Udc.DotNet.PracticaMaD.Model.Likes" FromRole="UserProfile" ToRole="Image" />
+          <Property Name="country" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_User_Cat">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -475,6 +477,7 @@
           <EntitySetMapping Name="UserProfile">
             <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Model.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="usrId" ColumnName="usrId" />
                 <ScalarProperty Name="loginName" ColumnName="loginName" />
                 <ScalarProperty Name="enPassword" ColumnName="enPassword" />

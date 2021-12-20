@@ -32,32 +32,33 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public string lastName { get; set; }
         public string email { get; set; }
         public string language { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    	/// <summary>
+        public string country { get; set; }
+
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// FK_User_Comm
+        /// FK_User_Comm
         /// </summary>
         public virtual ICollection<Comments> Comments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     	/// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	///FK_User_Img
+    	/// FK_User_Img
         /// </summary>
         public virtual ICollection<Image> Uploads { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     	/// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
     	/// Follow
         /// </summary>
         public virtual ICollection<UserProfile> Followers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     	/// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
     	/// Follow
         /// </summary>
         public virtual ICollection<UserProfile> Follows { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     	/// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
     	/// Likes
@@ -86,6 +87,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
     			hash = hash * multiplier + (lastName == null ? 0 : lastName.GetHashCode());
     			hash = hash * multiplier + (email == null ? 0 : email.GetHashCode());
     			hash = hash * multiplier + (language == null ? 0 : language.GetHashCode());
+    			hash = hash * multiplier + (country == null ? 0 : country.GetHashCode());
     
     			return hash;
     	    }
@@ -113,6 +115,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
                &&  (this.lastName == target.lastName )       
                &&  (this.email == target.email )       
                &&  (this.language == target.language )       
+               &&  (this.country == target.country )       
                ;
     
         }
@@ -154,6 +157,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
            strUserProfile.Append(" lastName = " + lastName + " | " );       
            strUserProfile.Append(" email = " + email + " | " );       
            strUserProfile.Append(" language = " + language + " | " );       
+           strUserProfile.Append(" country = " + country + " | " );       
             strUserProfile.Append("] ");    
     
     		return strUserProfile.ToString();

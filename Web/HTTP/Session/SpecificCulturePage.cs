@@ -1,5 +1,6 @@
-using Es.Udc.DotNet.MiniBank.Web.HTTP.View.ApplicationObjects;
 using Es.Udc.DotNet.ModelUtil.Log;
+using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
+using Es.Udc.DotNet.PracticaMaD.Web.Http.View;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -27,8 +28,8 @@ namespace Es.Udc.DotNet.MiniBank.Web.HTTP.Session
              * not do anything and the framework will behave based on
              * configuration on Web.config or page level
              */
-            if (SessionManager.IsLocaleDefined(Context))
-            {
+            //if (SessionManager.IsLocaleDefined(Context))
+            //{
                 Locale locale = SessionManager.GetLocale(Context);
 
                 String culture = locale.Language + "-" + locale.Country;
@@ -59,7 +60,7 @@ namespace Es.Udc.DotNet.MiniBank.Web.HTTP.Session
                 }
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;
-            }
+            //}
         }
     }
 }

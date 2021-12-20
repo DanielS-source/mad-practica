@@ -25,6 +25,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         private const string lastName = "lastName";
         private const string email = "user@udc.es";
         private const string language = "es";
+        private const string country = "ES";
 
         private static IKernel kernel;
         private static IImageService ImageService;
@@ -135,7 +136,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -169,7 +170,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -200,7 +201,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
                 catogoryDao.Create(category2);
@@ -250,7 +251,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -284,7 +285,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -319,7 +320,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -373,7 +374,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -430,7 +431,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             using (var scope = new TransactionScope())
             {
                 var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
                 catogoryDao.Create(category);
 
@@ -479,7 +480,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             int count = 2;
 
             var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
             catogoryDao.Create(category);
 
@@ -500,7 +501,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             IList<long> emptyTags = new List<long> { };
 
             Image Image1 = ImageService.PostImage(ImageDTO1, emptyTags);
-            Image Image2 = ImageService.PostImage(ImageDTO2,emptyTags);
+            Image Image2 = ImageService.PostImage(ImageDTO2, emptyTags);
 
             ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
             Assert.AreEqual(0, FoundImages.Images.Count);
@@ -529,7 +530,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             int count = 2;
 
             var userId = userService.RegisterUser(loginName, clearPassword,
-                    new UserProfileDetails(firstName, lastName, email, language));
+                    new UserProfileDetails(firstName, lastName, email, language, country));
 
             catogoryDao.Create(category);
 

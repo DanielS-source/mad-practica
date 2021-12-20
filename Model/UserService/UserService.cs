@@ -45,7 +45,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             UserProfileDetails userProfileDetails =
                 new UserProfileDetails(userProfile.firstName,
                     userProfile.lastName, userProfile.email,
-                    userProfile.language);
+                    userProfile.language, userProfile.country);
 
             return userProfileDetails;
 
@@ -76,12 +76,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             }
 
             return new LoginResult(userProfile.usrId, userProfile.firstName,
-                storedPassword, userProfile.language);
+                storedPassword, userProfile.language, userProfile.country);
 
         }
 
         // long RegisterUser(String loginName, String clearPassword, UserProfileDetails userProfileDetails);
-        public long RegisterUser(string loginName, string clearPassword,UserProfileDetails userProfileDetails)
+        public long RegisterUser(string loginName, string clearPassword, UserProfileDetails userProfileDetails)
         {
             try
             {
@@ -102,6 +102,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 userProfile.lastName = userProfileDetails.Lastname;
                 userProfile.email = userProfileDetails.Email;
                 userProfile.language = userProfileDetails.Language;
+                userProfile.country = userProfileDetails.Country;
 
                 UserProfileDao.Create(userProfile);
 
@@ -120,6 +121,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             userProfile.lastName = userProfileDetails.Lastname;
             userProfile.email = userProfileDetails.Email;
             userProfile.language = userProfileDetails.Language;
+            userProfile.country = userProfileDetails.Country;
             UserProfileDao.Update(userProfile);
 
         }
@@ -164,7 +166,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 UserProfileDetails userProfileDetails =
                 new UserProfileDetails(u.firstName,
                     u.lastName, u.email,
-                    u.language);
+                    u.language, u.country);
 
                 followers.Add(userProfileDetails);
             }
@@ -190,7 +192,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 UserProfileDetails userProfileDetails =
                 new UserProfileDetails(u.firstName,
                     u.lastName, u.email,
-                    u.language);
+                    u.language, u.country);
 
                 followed.Add(userProfileDetails);
             }

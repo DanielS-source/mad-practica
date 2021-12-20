@@ -35,33 +35,33 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public string ISO { get; set; }
         public string wb { get; set; }
         public long likes { get; set; }
-    
-    	/// <summary>
+
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// FK_User_Cat
+        /// FK_User_Cat
         /// </summary>
         public virtual Category Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    	/// <summary>
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// FK_Image_Comm
+        /// FK_Image_Comm
         /// </summary>
         public virtual ICollection<Comments> Comments { get; set; }
-    	/// <summary>
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// FK_User_Img
+        /// FK_User_Img
         /// </summary>
         public virtual UserProfile UserProfile { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    	/// <summary>
+        /// System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// Image_Tag
+        /// Image_Tag
         /// </summary>
         public virtual ICollection<Tag> Tag { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    	/// <summary>
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// Likes
+        /// Likes
         /// </summary>
         public virtual ICollection<UserProfile> LikedBy { get; set; }
     

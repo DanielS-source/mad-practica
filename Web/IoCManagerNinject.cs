@@ -10,11 +10,11 @@ using Ninject;
 using System.Configuration;
 using System.Data.Entity;
 
-namespace Es.Udc.DotNet.MiniBank.HTTP.Util.IoC
+namespace Es.Udc.DotNet.PracticaMaD.Web
 {
     internal class IoCManagerNinject : IIoCManager
     {
-        private static IKernel kernel;
+        public static IKernel kernel;
         private static NinjectSettings settings;
 
         public void Configure()
@@ -22,15 +22,11 @@ namespace Es.Udc.DotNet.MiniBank.HTTP.Util.IoC
             settings = new NinjectSettings() { LoadExtensions = true };
             kernel = new StandardKernel(settings);
 
-            /*** SERVICES ***/
-
             /*** UserService ***/
             kernel.Bind<IUserService>().To<UserService>();
 
             /*** ImageService ***/
             kernel.Bind<IImageService>().To<ImageService>();
-
-            /*** DAOS ***/
 
             /*** UserProfileDao ***/
             kernel.Bind<IUserProfileDao>().To<UserProfileDaoEntityFramework>();
@@ -49,7 +45,7 @@ namespace Es.Udc.DotNet.MiniBank.HTTP.Util.IoC
 
             /*** DbContext ***/
             string connectionString =
-                ConfigurationManager.ConnectionStrings["MiniBankEntities"].ConnectionString;
+                ConfigurationManager.ConnectionStrings["photogramEntities"].ConnectionString;
 
             kernel.Bind<DbContext>().
                     ToSelf().

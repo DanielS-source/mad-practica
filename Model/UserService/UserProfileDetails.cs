@@ -12,6 +12,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
     {
         #region Properties Region
 
+        public String LoginName { get; private set; }
+
+        public String EnPassword { get; private set; }
+
         public String FirstName { get; private set; }
 
         public String Lastname { get; private set; }
@@ -19,6 +23,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         public String Email { get; private set; }
 
         public string Language { get; private set; }
+        public string Country { get; private set; }
+
 
         #endregion
 
@@ -30,13 +36,38 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <param name="lastName">The user's last name.</param>
         /// <param name="email">The user's email.</param>
         /// <param name="language">The language.</param>
+        /// <param name="country">The Country.</param>
         public UserProfileDetails(String firstName, String lastName,
-            String email, String language)
+            String email, String language, String country)
         {
             this.FirstName = firstName;
             this.Lastname = lastName;
             this.Email = email;
             this.Language = language;
+            this.Country = country;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserProfileDetails"/>
+        /// class.
+        /// </summary>
+        /// <param name="loginName">The user's user name.</param>
+        /// <param name="enPassword">The user's password.</param>
+        /// <param name="firstName">The user's first name.</param>
+        /// <param name="lastName">The user's last name.</param>
+        /// <param name="email">The user's email.</param>
+        /// <param name="language">The language.</param>
+        /// <param name="country">The Country.</param>
+        public UserProfileDetails(String loginName, String enPassword, String firstName, String lastName,
+            String email, String language, String country)
+        {
+            this.LoginName = loginName;
+            this.EnPassword = enPassword;
+            this.FirstName = firstName;
+            this.Lastname = lastName;
+            this.Email = email;
+            this.Language = language;
+            this.Country = country;
         }
 
         public override bool Equals(object obj)
@@ -47,7 +78,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             return (this.FirstName == target.FirstName)
                   && (this.Lastname == target.Lastname)
                   && (this.Email == target.Email)
-                  && (this.Language == target.Language);
+                  && (this.Language == target.Language)
+                  && (this.Country == target.Country);
         }
 
         // The GetHashCode method is used in hashing algorithms and data 
@@ -74,7 +106,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 "[ firstName = " + FirstName + " | " +
                 "lastName = " + Lastname + " | " +
                 "email = " + Email + " | " +
-                "language = " + Language + " ]";
+                "language = " + Language+ " | country = " + Country + " ]";
 
 
             return strUserProfileDetails;

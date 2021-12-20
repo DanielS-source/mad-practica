@@ -75,7 +75,8 @@ CREATE TABLE UserProfile (
 	firstName varchar(30) NOT NULL,
 	lastName varchar(40) NOT NULL,
 	email varchar(60) NOT NULL,
-	language varchar(2) NOT NULL,
+	language varchar(2) NULL,
+	country varchar(2) NULL,
 
 	CONSTRAINT [PK_UserProfile] PRIMARY KEY (usrId),
 	CONSTRAINT [UniqueKey_Login] UNIQUE (loginName)

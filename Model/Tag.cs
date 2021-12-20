@@ -24,11 +24,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model
         public long tagId { get; set; }
         public string name { get; set; }
         public long uses { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    	/// <summary>
+
+        /// [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        /// <summary>
         /// Relationship Name (Foreign Key in ER-Model): 
-    	/// Image_Tag
+        /// Image_Tag
         /// </summary>
         public virtual ICollection<Image> Image { get; set; }
     
