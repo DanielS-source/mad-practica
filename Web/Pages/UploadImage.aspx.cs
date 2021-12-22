@@ -5,6 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Es.Udc.DotNet.PracticaMaD.Model;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
+using Es.Udc.DotNet.ModelUtil.IoC;
+using Image = Es.Udc.DotNet.PracticaMaD.Model.Image;
+using Es.Udc.DotNet.ModelUtil.Log;
 
 namespace Web.Pages
 {
@@ -31,6 +36,33 @@ namespace Web.Pages
 
             //Display the Picture in Image control.
             Image1.ImageUrl = "~/Files/" + Path.GetFileName(FileUpload1.FileName);
+        }
+
+        protected void BtnCreateClick(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                /* Create an Account. */
+                long userIdentifier = Convert.ToInt32(txtUserId.Text);
+                double balance = Convert.ToDouble(txtBalance.Text);
+
+                Image img = new Image();
+                String category = "";
+                ImageDTO imageDTO = new ImageDTO(img, category);
+                IList<long> tags= new List<long>();
+
+                /* Get the Service */
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                Image createdImage = imageService.PostImage(imageDTO, tags);
+
+                Context.Items.Add("Created Image", createdImage);
+
+                LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
+
+                Server.Transfer(Response.ApplyAppPathModifier("./MainPage.aspx"));
+            }
         }
     }
 }
