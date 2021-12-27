@@ -145,6 +145,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Http.Session
         }
 
         #endregion UserService
+
+        public static long getUserId(HttpContext context)
+        {
+            return (long)context.Session[UserSession];
+        }
+
     }
 
 }

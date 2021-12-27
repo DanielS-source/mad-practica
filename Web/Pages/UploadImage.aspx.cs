@@ -8,6 +8,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.ModelUtil.IoC;
 using Image = Es.Udc.DotNet.PracticaMaD.Model.Image;
 using Es.Udc.DotNet.ModelUtil.Log;
+using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 
 namespace Web.Pages
 {
@@ -40,16 +41,17 @@ namespace Web.Pages
 
         protected void BtnCreateClick(object sender, EventArgs e)
         {
+
             if (Page.IsValid)
             {
-                /* Create an Image. */
-                Image img = new Image
-                {
+                /* Create the Image */
+                ImageDTO image = new ImageDTO {
                     /* GENERAL data */
-                    usrId = (long)Context.Session[UserSession],
+                    //usrId = SessionManager.getUserId(Context),
                     title = txtTitle.Text,
                     description = txtDescription.Text,
-                    dateImg = DateTime.Now,            
+                    dateImg = DateTime.Now,
+                    category = "SomeCategory",
                     /* EXIF data */
                     f = txtDiaphragmAperture.Text,
                     t = txtShutterSpeed.Text,
@@ -57,18 +59,15 @@ namespace Web.Pages
                     wb = txtWhiteBalance.Text,
                 };
 
+                /* Create the Tags */
                 IList<long> tags = new List<long>();
-                String category = "";
-
-                /* To DTO */
-                ImageDTO imageDTO = new ImageDTO(img, category);
 
                 /* Get the Service */
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
                 /* Post Image */
-                Image createdImage = imageService.PostImage(imageDTO, tags);
+                Image createdImage = imageService.PostImage(image, tags);
 
                 /* Log methods */
                 Context.Items.Add("Created Image", createdImage);

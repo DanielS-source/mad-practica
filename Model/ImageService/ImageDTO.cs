@@ -23,17 +23,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             category = categoryName;
         }
 
-        public long usrId { get; private set; }
-        public string pathImg { get; private set; }
-        public string title { get; private set; }
-        public string description { get; private set; }
-        public DateTime dateImg { get; private set; }
-        public string f { get; private set; }
-        public string t { get; private set; }
-        public string ISO { get; private set; }
-        public string wb { get; private set; }
-        public long catId { get; private set; }
-        public string category { get; private set; }
+        public ImageDTO() {}
+
+        public long usrId { get;  set; }
+        public string pathImg { get;  set; }
+        public string title { get;  set; }
+        public string description { get;  set; }
+        public DateTime dateImg { get;  set; }
+        public string f { get;  set; }
+        public string t { get;  set; }
+        public string ISO { get;  set; }
+        public string wb { get;  set; }
+        public long catId { get;  set; }
+        public string category { get;  set; }
 
 
 
