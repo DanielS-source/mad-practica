@@ -4,6 +4,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Util;
+using Es.Udc.DotNet.PracticaMaD.Model.UserService.Utils;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -81,14 +82,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         }
 
         // long RegisterUser(String loginName, String clearPassword, UserProfileDetails userProfileDetails);
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="DuplicateInstanceException"/>
         public long RegisterUser(string loginName, string clearPassword, UserProfileDetails userProfileDetails)
         {
+
+            ValidateUserProfile(userProfileDetails);
+
             try
             {
                 UserProfileDao.FindByLoginName(loginName);
 
-                throw new DuplicateInstanceException(loginName,
-                    typeof(UserProfile).FullName);
+                throw new DuplicateInstanceException(loginName, typeof(UserProfile).FullName);
             }
             catch (InstanceNotFoundException)
             {
@@ -96,13 +101,24 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
 
                 UserProfile userProfile = new UserProfile();
 
-                userProfile.loginName = loginName;
-                userProfile.enPassword = encryptedPassword;
-                userProfile.firstName = userProfileDetails.FirstName;
-                userProfile.lastName = userProfileDetails.Lastname;
-                userProfile.email = userProfileDetails.Email;
-                userProfile.language = userProfileDetails.Language;
-                userProfile.country = userProfileDetails.Country;
+                if (userProfileDetails.Language is null || userProfileDetails.Country is null)
+                {
+                    userProfile.loginName = loginName;
+                    userProfile.enPassword = encryptedPassword;
+                    userProfile.firstName = userProfileDetails.FirstName;
+                    userProfile.lastName = userProfileDetails.Lastname;
+                    userProfile.email = userProfileDetails.Email;
+                }
+                else
+                {
+                    userProfile.loginName = loginName;
+                    userProfile.enPassword = encryptedPassword;
+                    userProfile.firstName = userProfileDetails.FirstName;
+                    userProfile.lastName = userProfileDetails.Lastname;
+                    userProfile.email = userProfileDetails.Email;
+                    userProfile.language = userProfileDetails.Language;
+                    userProfile.country = userProfileDetails.Country;
+                }
 
                 UserProfileDao.Create(userProfile);
 
@@ -218,5 +234,36 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
 
             return new ImageBlock(images, existMoreImages);
         }
+
+        /// <exception cref="InputValidationException"/>
+        private void ValidateUserProfile(UserProfileDetails userProfileDetails)
+        {
+            if (!PropertyValidator.IsValidLogin(userProfileDetails.LoginName))
+            {
+                throw new InputValidationException("Invalid login, it must be between 4 and 24 characters (Login=" + userProfileDetails.LoginName + ")");
+            }
+            if (!PropertyValidator.IsValidPassword(userProfileDetails.EnPassword))
+            {
+                throw new InputValidationException("Invalid password, it must be between 8 and 24 characters and contain at least a number and one upper case letter (Password=" + userProfileDetails.EnPassword + ")");
+            }
+            if (!PropertyValidator.IsValidFirstName(userProfileDetails.FirstName))
+            {
+                throw new InputValidationException("Invalid first name, it must be between 1 and 40 characters (FirstName=" + userProfileDetails.FirstName + ")");
+            }
+            if (!PropertyValidator.IsValidLastName(userProfileDetails.Lastname))
+            {
+                throw new InputValidationException("Invalid last name, it must be between 1 and 40 characters (LastName=" + userProfileDetails.Lastname + ")");
+            }
+            if (!PropertyValidator.IsValidEmail(userProfileDetails.Email))
+            {
+                throw new InputValidationException("Invalid email, it must be between 1 and 40 characters and contain an '@' before a '.' (Email=" + userProfileDetails.Email + ")");
+            }
+            if (!(userProfileDetails.Language is null) && !(userProfileDetails.Country is null) && !PropertyValidator.IsValidCulture(userProfileDetails.Language, userProfileDetails.Country))
+            {
+                throw new InputValidationException("Invalid culture, it must follow the ISO-639 for the language code and the ISO-3166 for the country code (Culture=" + userProfileDetails.Language + "-" + userProfileDetails.Country + ")");
+            }
+        }
+
+
     }
 }

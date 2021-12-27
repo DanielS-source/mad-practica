@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="UserProfileDao\IUserProfileDao.cs" />
     <Compile Include="UserProfileDao\UserProfileDaoEntityFramework.cs" />
+    <Compile Include="UserService\Exceptions\InputValidationException.cs" />
     <Compile Include="UserService\UserBlock.cs" />
     <Compile Include="UserService\Exceptions\IncorrectPasswordException.cs" />
     <Compile Include="UserService\IUserService.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="UserService\Util\PasswordEncrypter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserService\Util\PropertyValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

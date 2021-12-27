@@ -127,7 +127,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Login\Login.aspx" />
     <Content Include="Pages\MainPage.aspx" />
+    <Content Include="Pages\Register\Register.aspx" />
     <Content Include="Pages\UploadImage.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -179,6 +181,10 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Pages\Login\App_LocalResources\Login.aspx.es.resx" />
+    <Content Include="Pages\Login\App_LocalResources\Login.aspx.resx" />
+    <Content Include="Pages\Register\App_LocalResources\Register.aspx.es.resx" />
+    <Content Include="Pages\Register\App_LocalResources\Register.aspx.resx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -312,12 +318,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WebMaster.Master.es.resx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\MainPage.aspx.designer.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Register\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Register\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UploadImage.aspx.cs">
       <DependentUpon>UploadImage.aspx</DependentUpon>

@@ -1,5 +1,7 @@
 using Es.Udc.DotNet.ModelUtil.IoC;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
+using Es.Udc.DotNet.PracticaMaD.Model.UserService.Exceptions;
+using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Cookies;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.View;

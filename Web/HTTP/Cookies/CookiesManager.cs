@@ -10,7 +10,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Http.Cookies
         private const string EncryptedPasswordNameCookie = "ENCRYPTED_PASSWORD_COOKIE";
         private const int ExpirationTime = 30 * 24 * 3600;
 
-        public static void LeaveCookies(HttpContext context, string login, string password)
+        public static void LeaveCookies(HttpContext context, String login, String password)
         {
             HttpCookie loginCookie = new HttpCookie(LoginNameCookie, login)
             {

@@ -1,5 +1,6 @@
 ﻿using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 using Es.Udc.DotNet.ModelUtil.Exceptions;
+using Es.Udc.DotNet.PracticaMaD.Model.UserService.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Transactions;
 using Ninject;
 using System;
@@ -52,6 +53,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         /// <param name="loginName"> Name of the login. </param>
         /// <param name="clearPassword"> The clear password. </param>
         /// <param name="userProfileDetails"> The user profile details. </param>
+        /// <exception cref="InputValidationException"/>
         /// <exception cref="DuplicateInstanceException"/>
         [Transactional]
         long RegisterUser(String loginName, String clearPassword,
