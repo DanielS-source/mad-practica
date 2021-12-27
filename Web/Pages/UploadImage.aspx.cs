@@ -4,12 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
+using Es.Udc.DotNet.ModelUtil.IoC;
+using Image = Es.Udc.DotNet.PracticaMaD.Model.Image;
+using Es.Udc.DotNet.ModelUtil.Log;
+using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 
 namespace Web.Pages
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
+
+        private const string UserSession = "USER_SESSION";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -31,6 +37,44 @@ namespace Web.Pages
 
             //Display the Picture in Image control.
             Image1.ImageUrl = "~/Files/" + Path.GetFileName(FileUpload1.FileName);
+        }
+
+        protected void BtnCreateClick(object sender, EventArgs e)
+        {
+
+            if (Page.IsValid)
+            {
+                /* Create the Image */
+                ImageDTO image = new ImageDTO {
+                    /* GENERAL data */
+                    //usrId = SessionManager.getUserId(Context),
+                    title = txtTitle.Text,
+                    description = txtDescription.Text,
+                    dateImg = DateTime.Now,
+                    category = "SomeCategory",
+                    /* EXIF data */
+                    f = txtDiaphragmAperture.Text,
+                    t = txtShutterSpeed.Text,
+                    ISO = txtISO.Text,
+                    wb = txtWhiteBalance.Text,
+                };
+
+                /* Create the Tags */
+                IList<long> tags = new List<long>();
+
+                /* Get the Service */
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                /* Post Image */
+                Image createdImage = imageService.PostImage(image, tags);
+
+                /* Log methods */
+                Context.Items.Add("Created Image", createdImage);
+                LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
+
+                Server.Transfer(Response.ApplyAppPathModifier("./MainPage.aspx"));
+            }
         }
     }
 }
