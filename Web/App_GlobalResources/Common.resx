@@ -120,10 +120,28 @@
   <data name="category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="diaphragmAperture" xml:space="preserve">
+    <value>Diaphragm Aperture</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
   <data name="keywords" xml:space="preserve">
     <value>Key words</value>
   </data>
   <data name="mandatoryField" xml:space="preserve">
     <value>Mandatory Field</value>
+  </data>
+  <data name="shutterSpeed" xml:space="preserve">
+    <value>Shutter Speed</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="whiteBalance" xml:space="preserve">
+    <value>White Balance</value>
   </data>
 </root>
