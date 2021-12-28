@@ -13,6 +13,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -79,6 +80,45 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
             return new ImageBlock(images, existMoreImages);
         }
+
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="PageableOutofRangeException"/>
+        public ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId)
+        {
+            IList<ImageWithTagsDto> imagesDTO = new List<ImageWithTagsDto>();
+
+            foreach (Image image in ImageDao.FindByTag(tagId, pageNumber, pageSize))
+            {
+                UserProfile userProfile = UserProfileDao.Find(image.usrId);
+
+                IList<TagDTO> tagsDTO = new List<TagDTO>();
+                foreach (Tag tag in image.Tag)
+                {
+                    tagsDTO.Add(new TagDTO(
+                        tag.tagId,
+                        tag.name
+                    ));
+                }
+
+                imagesDTO.Add(new ImageWithTagsDto(
+                    image,
+                    userProfile.loginName,
+                    tagsDTO
+                ));
+            }
+
+            try
+            {
+                ImageDao.FindByTag(tagId, pageNumber + 1, pageSize);
+
+                return new ImagePageable(imagesDTO, !pageNumber.Equals(0), true);
+            }
+            catch (PageableOutofRangeException)
+            {
+                return new ImagePageable(imagesDTO, !pageNumber.Equals(0), false);
+            }
+        }
+
 
         /// <exception cref="ArgumentException"/>
         public ImageBlock FindImagesByTag(long tagId, int startIndex, int count)
@@ -184,6 +224,23 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return new TagBlock(tags, !startIndex.Equals(0), true);
 
         }
+
+        public IList<TagDTO> FindTagsOnImages(int n)
+        {
+            IList<TagDTO> tagDto = new List<TagDTO>();
+            foreach (Tag tag in TagDao.FindAllPosibleTagsinImages(n))
+            {
+                tagDto.Add(new TagDTO(
+                    tag.tagId,
+                    tag.name,
+                    tag.Image.Count()
+                ));
+            }
+
+            return tagDto;
+
+        }
+
 
         public void DeleteImage(long imageId)
         {

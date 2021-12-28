@@ -51,5 +51,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.TagDao
                 return tags;
         }
 
+        public IList<Tag> FindAllPosibleTagsinImages(int n)
+        {
+                DbSet<Tag> tagContext = Context.Set<Tag>();
+
+                return tagContext.Include("Image").OrderByDescending(t => t.Image.Count()).Take(n).ToList();
+        }
+
     }
 }

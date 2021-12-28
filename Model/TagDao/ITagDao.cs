@@ -14,5 +14,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.TagDao
 
         // <exception cref="ArgumentException"/>
         IList<Tag> GetAllElementsPageable(int pageSize, int pageNumber);
+
+        IList<Tag> FindAllPosibleTagsinImages(int n);
     }
 }

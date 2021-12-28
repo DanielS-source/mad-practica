@@ -20,6 +20,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         ImageBlock SearchImages(string keywords, string category, int startIndex, int count);
 
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="PageableOutofRangeException" />
+        [Transactional]
+        ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId);
+
         [Transactional]
         ImageBlock FindImagesByTag(long tagId, int startIndex, int count);
 
@@ -43,6 +48,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         /// <exception cref="ArgumentException" />
         [Transactional]
         TagBlock FindTags(int startIndex, int count);
+
+        IList<TagDTO> FindTagsOnImages(int n);
 
         [Transactional]
         long AddComment(long userId, long imgId, string message);

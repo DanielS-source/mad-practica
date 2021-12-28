@@ -1,5 +1,6 @@
 using Es.Udc.DotNet.ModelUtil.IoC;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Cookies;
@@ -15,6 +16,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Http.Session
     public static class SessionManager
     {
         private static IUserService userService;
+        private static IImageService imageService;
         private const string UserSession = "USER_SESSION";
         private const string LocaleSession = "LOCALE_SESSION";
 
@@ -22,6 +24,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Http.Session
         {
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["ManagerIoC"];
             userService = iocManager.Resolve<IUserService>();
+            imageService = iocManager.Resolve<IImageService>();
         }
 
         #region UserService

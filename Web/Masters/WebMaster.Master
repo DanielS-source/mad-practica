@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script src="../Scripts/bootstrap.bundle.min.js"></script>
     <script src="../Scripts/bootstrap.min.js"></script>
-    <script src="../Scripts/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <title></title>
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -23,10 +23,13 @@
                         <asp:HyperLink ID ="lnkMainPage" runat="server" Text="Página principal" meta:resourcekey="lnkMainPage" NavigateUrl="../Pages/MainPage.aspx"/>
                     </div>
                     <div class="list-group-item list-group-item-action bg-light">
-                        <asp:HyperLink ID ="lnkLogin" runat="server" Text="Iniciar sesión" meta:resourcekey="lnkLogin" NavigateUrl="../Pages/Login.aspx"/>
+                        <asp:HyperLink ID ="lnkLogin" runat="server" Text="Iniciar sesión" meta:resourcekey="lnkLogin" NavigateUrl="../Pages/Login/Login.aspx"/>
                     </div>
                     <div class="list-group-item list-group-item-action bg-light">
                         <asp:HyperLink ID ="lnkUploadImage" runat="server" Text="Subir imagen" meta:resourcekey="lnkUploadImage" NavigateUrl="../Pages/UploadImage.aspx"/>
+                    </div>
+                    <div class="list-group-item list-group-item-action bg-light">
+                        <asp:HyperLink ID ="lnkTags" runat="server" Text="Tags" meta:resourcekey="lnkTags" NavigateUrl="../Pages/Tags/Tags.aspx"/>
                     </div>
                 </ul>
             </div>
@@ -56,17 +59,15 @@
             </div>
         </div>
 
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
+    <script type="text/javascript">
+        $(function () { $("#menu-toggle") }).click(function () { $("#wrapper").toggleClass("toggled") });
     </script>
+
 
     <div class="container body-content">
     <hr />
         <footer>
-            <p>&copy;  <%: DateTime.Now.Year %> - Photobomb by Daniel Silva, Yago Iglesias & Alejandro Viñán</p>
+            <p>&copy;  <%: DateTime.Now.Year %> - Photobomb by Daniel Silva, Yago Mira & Alejandro Viñán</p>
         </footer>
     </div>
   

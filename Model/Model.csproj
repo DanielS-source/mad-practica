@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1A981DA6-0DDA-44F6-A6F9-A9D2C797EBAD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Es.Udc.DotNet.PracticaMaD.Model</RootNamespace>
     <AssemblyName>Model</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -50,6 +50,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -104,15 +107,19 @@
     <Compile Include="Image.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ImageService\Exceptions\PageableOutofRangeException.cs" />
     <Compile Include="ImageService\ImageDTO.cs" />
     <Compile Include="ImageService\CommentsWithUsernameDto.cs" />
     <Compile Include="ImageService\CommentsBlock.cs" />
     <Compile Include="ImageService\IImageService.cs" />
     <Compile Include="ImageService\ImageBlock.cs" />
+    <Compile Include="ImageService\ImagePageable.cs" />
     <Compile Include="ImageService\ImageService.cs" />
+    <Compile Include="ImageService\ImageWithTagsDto.cs" />
     <Compile Include="ImageService\TagBlock.cs" />
     <Compile Include="ImageDao\ImageDaoEntityFramework.cs" />
     <Compile Include="ImageDao\IImageDao.cs" />
+    <Compile Include="ImageService\TagDTO.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
