@@ -26,7 +26,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Register
             }
         }
 
-        #region Required fields
+        #region ServerValidators
 
         protected void UsernameValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -48,7 +48,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Register
             ValidatePassword();
         }
 
+        #endregion ServerValidators
 
+
+        #region ButtonClicks
         protected void LoginLinkButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Request.Params.Get("returnUrl")))
@@ -60,26 +63,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Register
                 Response.Redirect(Response.ApplyAppPathModifier("~/Pages/Login/Login.aspx?returnUrl=" + Request.Params.Get("returnUrl")));
             }
         }
-
-        #endregion Required fields
-
-        #region Optional fields
-
-        protected void LanguageDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CultureInfo culture = new CultureInfo(LanguageDropDownList.SelectedValue + "-" + CountryDropDownList.SelectedValue);
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
-
-            UpdateLanguageDropDownList(LanguageDropDownList.SelectedValue);
-            UpdateCountryDropDownList(LanguageDropDownList.SelectedValue, CountryDropDownList.SelectedValue);
-
-            LanguageLabel.Text = GetLocalResourceObject("LanguageLabel.Text").ToString();
-            CountryLabel.Text = GetLocalResourceObject("CountryLabel.Text").ToString();
-
-            RegisterButton.Text = GetLocalResourceObject("RegisterButton.Text").ToString();
-        }
-
 
         protected void RegisterButton_Click(object sender, EventArgs e)
         {
@@ -101,6 +84,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Register
 
                 SessionManager.RegisterUser(Context, (string)ViewState["Username"], (string)ViewState["Password"],
                 new UserProfileDetails(
+                    (string)ViewState["Username"],
+                    (string)ViewState["Password"],
                     (string)ViewState["FirstName"],
                     (string)ViewState["LastName"],
                     (string)ViewState["Email"],
@@ -112,10 +97,26 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Register
 
         }
 
+        #endregion ButtonClicks
 
-        #endregion Optional fields
 
         #region Private functions
+
+        protected void LanguageDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CultureInfo culture = new CultureInfo(LanguageDropDownList.SelectedValue + "-" + CountryDropDownList.SelectedValue);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
+            UpdateLanguageDropDownList(LanguageDropDownList.SelectedValue);
+            UpdateCountryDropDownList(LanguageDropDownList.SelectedValue, CountryDropDownList.SelectedValue);
+
+            LanguageLabel.Text = GetLocalResourceObject("LanguageLabel.Text").ToString();
+            CountryLabel.Text = GetLocalResourceObject("CountryLabel.Text").ToString();
+
+            RegisterButton.Text = GetLocalResourceObject("RegisterButton.Text").ToString();
+        }
+
 
         private void UpdateLanguageDropDownList(string selectedLanguage)
         {
