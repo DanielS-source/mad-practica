@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Es.Udc.DotNet.PracticaMaD.Web.Pages.Register.Register" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <form runat="server">
         <div id="Required" class="custom-container d-flex justify-content-center" runat="server">
             <div>
                 <asp:CustomValidator ID="UsernameValidator" Font-Size="Smaller" ErrorMessage="<%$ Resources: , UsernameValidator.ErrorMessage %>" CssClass="text-danger" ValidationGroup="Required" OnServerValidate="UsernameValidator_ServerValidate" runat="server"></asp:CustomValidator>
@@ -94,6 +93,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
 </asp:Content>

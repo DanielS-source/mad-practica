@@ -2,7 +2,6 @@
 
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <form runat="server">
         <div class="custom-container" style="padding: 5%;">
             <div class="d-flex justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
@@ -48,5 +47,4 @@
                 </div>
             </div>
         </div>
-    </form>
 </asp:Content>

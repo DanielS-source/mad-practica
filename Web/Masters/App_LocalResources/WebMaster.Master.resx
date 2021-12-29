@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lnkLogin.Text" xml:space="preserve">
-    <value>Iniciar sesión</value>
-  </data>
-  <data name="lnkMainPage.Text" xml:space="preserve">
-    <value>Página principal</value>
-  </data>
-  <data name="lnkUploadImage.Text" xml:space="preserve">
-    <value>Subir imagen</value>
-  </data>
   <data name="LogoutLinkButton.Text" xml:space="preserve">
-    <value>Desconectarse</value>
+    <value>Logout</value>
   </data>
 </root>

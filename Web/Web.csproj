@@ -175,6 +175,7 @@
     <Content Include="Pages\Login\App_LocalResources\Login.aspx.resx" />
     <Content Include="Pages\Register\App_LocalResources\Register.aspx.es.resx" />
     <Content Include="Pages\Register\App_LocalResources\Register.aspx.resx" />
+    <Content Include="Masters\App_LocalResources\WebMaster.Master.resx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -236,6 +237,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Google\GooglePlusAccessToken.cs" />
+    <Compile Include="Google\GoogleUserOutputData.cs" />
     <Compile Include="Http\Cookies\CookiesManager.cs" />
     <Compile Include="Http\Exceptions\AuthenticationException.cs" />
     <Compile Include="Http\Session\CulturePage.cs">

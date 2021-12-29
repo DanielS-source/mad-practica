@@ -13,6 +13,15 @@ namespace Web {
     public partial class Site1 {
         
         /// <summary>
+        /// MainPagePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel MainPagePanel;
+        
+        /// <summary>
         /// lnkMainPage control.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,13 @@ namespace Web {
         protected global::System.Web.UI.WebControls.HyperLink lnkMainPage;
         
         /// <summary>
-        /// lnkLogin control.
+        /// UploadImagePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkLogin;
+        protected global::System.Web.UI.WebControls.Panel UploadImagePanel;
         
         /// <summary>
         /// lnkUploadImage control.
@@ -40,6 +49,15 @@ namespace Web {
         protected global::System.Web.UI.WebControls.HyperLink lnkUploadImage;
         
         /// <summary>
+        /// TagsPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel TagsPanel;
+        
+        /// <summary>
         /// lnkTags control.
         /// </summary>
         /// <remarks>
@@ -47,6 +65,60 @@ namespace Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lnkTags;
+        
+        /// <summary>
+        /// LoginPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel LoginPanel;
+        
+        /// <summary>
+        /// lnkLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkLogin;
+        
+        /// <summary>
+        /// LoggoutPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel LoggoutPanel;
+        
+        /// <summary>
+        /// LogoutLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LogoutLinkButton;
+        
+        /// <summary>
+        /// UserProfilePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel UserProfilePanel;
+        
+        /// <summary>
+        /// UserProfileButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton UserProfileButton;
         
         /// <summary>
         /// ContentPlaceHolder control.

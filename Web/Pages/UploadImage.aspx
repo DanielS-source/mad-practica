@@ -2,8 +2,6 @@
 
 <asp:Content ID="content" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="form">
-        <form id="PostImage" method="post" runat="server">
-
             <div class="field">
                 <span class="label">
                     <asp:Localize ID="lclTitle" runat="server" Text="<%$ Resources:Common, title %>" />
@@ -86,8 +84,6 @@
             <div class="button">
                 <asp:Button ID="btnCreate" runat="server" meta:resourcekey="btnCreate" OnClick="BtnCreateClick" />
             </div>
-
-        </form>
     </div>
 
 </asp:Content>

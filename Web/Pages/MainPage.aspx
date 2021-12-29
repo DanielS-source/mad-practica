@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="MainPage.aspx.cs" Inherits="Web.Pages.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    
-    <form id="filterImagesForm" method="post" runat="server" class="form-group">
 
         <div class="container border border-primary rounded">
             <div class="row justify-content-around">
@@ -43,7 +41,6 @@
                 </div>
             </div>
         </div>
-    </form>
     <br/>
     <br/>
 

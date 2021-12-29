@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="Tags.aspx.cs" Inherits="Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags.Tags" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <form runat="server">
         <div class="d-flex justify-content-center mt-4">
 
             <asp:DataList ID="TagsDataList" RepeatDirection="Horizontal" ItemType="Es.Udc.DotNet.PracticaMaD.Model.ImageService.TagDTO" OnItemDataBound="TagsDataList_ItemDataBound" runat="server">
@@ -55,5 +54,4 @@
                 <asp:LinkButton ID="NextImageLinkButton" Text="<%$ Resources: , NextLinkButton.Text %>" CssClass="float-left" CausesValidation="False" OnClick="NextImageLinkButton_Click" runat="server"></asp:LinkButton>
             </div>
         </div>
-    </form>
 </asp:Content>
