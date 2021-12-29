@@ -147,4 +147,7 @@
   <data name="UsernameValidator.ErrorMessage" xml:space="preserve">
     <value>Incorrect username or password</value>
   </data>
+  <data name="GoogleLoginButton.Text" xml:space="preserve">
+    <value>Login with Google</value>
+  </data>
 </root>

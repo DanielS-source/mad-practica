@@ -40,6 +40,7 @@
                         <asp:Label ID="RememberLabel" Text="<%$ Resources: , RememberLabel.Text %>" CssClass="form-check-label" for="RememberCheckBox" runat="server"></asp:Label>
                     </div>
                     <asp:Button ID="LoginButton" Text="<%$ Resources: , LoginButton.Text %>" CssClass="btn btn-secondary btn-block mt-3" OnClick="LoginButton_Click" runat="server" />
+                    <asp:Button ID="GoogleLoginButton" Text="<%$ Resources: , GoogleLoginButton.Text %>" CssClass="google googlebtn" OnClick="Google_Click" runat="server" />
                     <div class="d-flex justify-content-center mt-4">
                         <asp:Label ID="RegisterLabel" Text="<%$ Resources: , RegisterLabel.Text %>" runat="server"></asp:Label>
                         <asp:LinkButton ID="RegisterLinkButton" Text="<%$ Resources: , RegisterLinkButton.Text %>" CssClass="ml-2" CausesValidation="False" OnClick="RegisterLinkButton_Click" runat="server"></asp:LinkButton>
