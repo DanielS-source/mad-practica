@@ -9,5 +9,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CategoryDao
 {
     public interface ICategoryDao : IGenericDao<Category, Int64>
     {
+        Category FindByName(string categoryName);
     }
 }

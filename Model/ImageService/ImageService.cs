@@ -2,18 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Transactions;
 using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
-using System.Runtime.Caching;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -45,7 +44,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             IList<long> tagsIds)
         {
 
-            Image image = adaptToImage(imageDTO);
+            Image image = AdaptToImage(imageDTO);
+            image.dateImg = DateTime.Now;
+            image.pathImg = "C:\\Software\\DataBase\\Images\\" + image.usrId + image.dateImg;
+            image.catId = CategoryDao.FindByName(imageDTO.category).catId;
+
+            System.Drawing.Image img = System.Drawing.Image.FromStream(imageDTO.file);
+            img.Save(image.pathImg, ImageFormat.Jpeg);
 
             foreach (long tagId in tagsIds)
             {
@@ -245,7 +250,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public void DeleteImage(long imageId)
         {
             Image image = ImageDao.Find(imageId);
-            deleteImageFromPath(image.pathImg);
+            DeleteImageFromPath(image.pathImg);
             ImageDao.Remove(imageId);
         }
 
@@ -303,45 +308,41 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return new CommentsBlock(commentsWithUsername, existMore);
         }
 
-        private void deleteImageFromPath(String path) {
-
+        private void DeleteImageFromPath(String path) {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
 
-        private ImageDTO toImageDTO(Image image)
+        private ImageDTO ToImageDTO(Image image)
         {
             return new ImageDTO(image, CategoryDao.Find(image.catId).name);
         }
 
-        private List<ImageDTO> toImageDTOs(List<Image> images)
+        private List<ImageDTO> ToImageDTOs(List<Image> images)
         {
             List<ImageDTO> imageDTOs = new List<ImageDTO>();
             foreach(Image image in images)
             {
-                imageDTOs.Add(toImageDTO(image));
+                imageDTOs.Add(ToImageDTO(image));
             }
 
             return imageDTOs;
         }
 
-        public Image PostImage(Image image, IList<long> tagsIds)
+        private Image AdaptToImage(ImageDTO imageDTO)
         {
-            throw new NotImplementedException();
-        }
-
-        private Image adaptToImage(ImageDTO imageDTO)
-        {
-            Image image = new Image();
-            image.usrId = imageDTO.usrId;
-            image.pathImg = imageDTO.pathImg;
-            image.title = imageDTO.title;
-            image.description = imageDTO.description;
-            image.dateImg = imageDTO.dateImg;
-            image.catId = imageDTO.catId;
-            image.f = imageDTO.f;
-            image.t = imageDTO.t;
-            image.ISO = imageDTO.ISO;
-            image.wb = imageDTO.wb;
-            return image;
+            return new Image
+            {
+                usrId = imageDTO.usrId,
+                title = imageDTO.title,
+                description = imageDTO.description,
+                f = imageDTO.f,
+                t = imageDTO.t,
+                ISO = imageDTO.ISO,
+                wb = imageDTO.wb
+            };
         }
 
     }

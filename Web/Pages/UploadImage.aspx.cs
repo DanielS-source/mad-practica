@@ -15,7 +15,6 @@ namespace Web.Pages
     public partial class WebForm3 : System.Web.UI.Page
     {
 
-        private const string UserSession = "USER_SESSION";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -34,7 +33,6 @@ namespace Web.Pages
 
             //Save the File to the Directory (Folder).
             FileUpload1.SaveAs(folderPath + Path.GetFileName(FileUpload1.FileName));
-
             //Display the Picture in Image control.
             Image1.ImageUrl = "~/Files/" + Path.GetFileName(FileUpload1.FileName);
         }
@@ -44,36 +42,41 @@ namespace Web.Pages
 
             if (Page.IsValid)
             {
-                /* Create the Image */
-                ImageDTO image = new ImageDTO {
-                    /* GENERAL data */
-                    //usrId = SessionManager.getUserId(Context),
-                    title = txtTitle.Text,
-                    description = txtDescription.Text,
-                    dateImg = DateTime.Now,
-                    category = "SomeCategory",
-                    /* EXIF data */
-                    f = txtDiaphragmAperture.Text,
-                    t = txtShutterSpeed.Text,
-                    ISO = txtISO.Text,
-                    wb = txtWhiteBalance.Text,
-                };
+                if (FileUpload1.HasFile)
+                {
+                    /* Create the Image */
+                    ImageDTO image = new ImageDTO
+                    {
+                        /* GENERAL data */
+                        usrId = SessionManager.getUserId(Context),
+                        title = txtTitle.Text,
+                        description = txtDescription.Text,
+                        dateImg = DateTime.Now,
+                        category = "SomeCategory",
+                        /* EXIF data */
+                        f = txtDiaphragmAperture.Text,
+                        t = txtShutterSpeed.Text,
+                        ISO = txtISO.Text,
+                        wb = txtWhiteBalance.Text,
+                        file = FileUpload1.FileContent
+                    };
 
-                /* Create the Tags */
-                IList<long> tags = new List<long>();
+                    /* Create the Tags */
+                    IList<long> tags = new List<long>();
 
-                /* Get the Service */
-                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
-                IImageService imageService = iocManager.Resolve<IImageService>();
+                    /* Get the Service */
+                    IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                    IImageService imageService = iocManager.Resolve<IImageService>();
 
-                /* Post Image */
-                Image createdImage = imageService.PostImage(image, tags);
+                    /* Post Image */
+                    Image createdImage = imageService.PostImage(image, tags);
 
-                /* Log methods */
-                Context.Items.Add("Created Image", createdImage);
-                LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
-
-                Server.Transfer(Response.ApplyAppPathModifier("./MainPage.aspx"));
+                    /* Log methods */
+                    //Context.Items.Add("Created Image", createdImage);
+                    //LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
+                    Console.WriteLine(createdImage);
+                    Response.Redirect("~/Pages/MainPage.aspx");
+                }
             }
         }
     }

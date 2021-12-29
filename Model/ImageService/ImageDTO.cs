@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public string wb { get;  set; }
         public long catId { get;  set; }
         public string category { get;  set; }
+        public Stream file { get; set; }
 
 
 
