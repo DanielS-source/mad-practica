@@ -21,7 +21,7 @@
                     <div class="sidebar-heading">Menu</div>
                     <ul class="list-group list-group-flush">
                         <asp:Panel ID="MainPagePanel" class="list-group-item list-group-item-action bg-light" runat="server">
-                            <asp:HyperLink ID ="lnkMainPage" runat="server" Text="Página principal" meta:resourcekey="lnkMainPage" NavigateUrl="../Pages/MainPage.aspx"/>
+                            <asp:HyperLink ID ="lnkMainPage" runat="server" Text="Página principal" meta:resourcekey="lnkMainPage" NavigateUrl="../Pages/MainPage/MainPage.aspx"/>
                         </asp:Panel>
                         <asp:Panel ID="UploadImagePanel" class="list-group-item list-group-item-action bg-light" runat="server">
                             <asp:HyperLink ID ="lnkUploadImage" runat="server" Text="Subir imagen" meta:resourcekey="lnkUploadImage" NavigateUrl="../Pages/UploadImage.aspx"/>
@@ -43,15 +43,14 @@
                             <i class="icon-reorder"></i>
                             <span class="sr-only">Toggle Menu</span>
                         </button>
-                        <div class=" align-self-stretch">
-                            <h1>Photobomb</h1>
+                        <div class=" ml-5">
+                            <h1 class="text-center">Photobomb</h1>
                         </div>
-                        <asp:Panel ID="UserProfilePanel" class="px-4" runat="server">
-                            <asp:LinkButton ID="UserProfileButton" CssClass="btn btn-secondary btn-lg rounded-circle" CausesValidation="False" OnClick="UserProfileButton_Click" runat="server">
+                        <div class="px-4">
+                            <asp:LinkButton ID="UserProfileButton" CssClass="btn btn-secondary btn-lg rounded-circle" Text="UserProfile" CausesValidation="False" OnClick="UserProfileButton_Click" runat="server">
                                 <i class="icon-user"></i>
-                                <span class="sr-only">Visit profile</span>
                             </asp:LinkButton>
-                        </asp:Panel>
+                        </div>
                     </nav>
 
                     <div class="container body-content">
