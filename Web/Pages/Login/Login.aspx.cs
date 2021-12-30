@@ -138,7 +138,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Login
                 catch (Exception ex)
                 {
                     //throw new Exception(ex.Message, ex);
-                    Response.Redirect("~/Pages/MainPage.aspx");
+                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
                 }
             }
             //********Fin del Google OAuth********

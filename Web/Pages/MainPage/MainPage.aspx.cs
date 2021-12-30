@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Es.Udc.DotNet.ModelUtil.IoC;
+using Es.Udc.DotNet.PracticaMaD.Model;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -15,32 +18,41 @@ namespace Web.Pages
         {
             if (!IsPostBack) 
             {
-                categoryDropDown.DataSource = CreateDataSource();
-                categoryDropDown.DataTextField = "ColorTextField";
-                categoryDropDown.DataValueField = "ColorValueField";
-
-                categoryDropDown.DataBind();
-
-                categoryDropDown.SelectedIndex = 0;
+                this.initializeDropdown();
             }
         }
+        void initializeDropdown()
+        {
+            IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+            IImageService imageService = iocManager.Resolve<IImageService>();
 
-        ICollection CreateDataSource()
+            List<Category> categoryList = imageService.GetAllCategories();
+
+            categoryDropDown.DataSource = CreateDataSource(categoryList);
+            categoryDropDown.DataTextField = "name";
+            categoryDropDown.DataValueField = "catId";
+
+            categoryDropDown.DataBind();
+
+            categoryDropDown.SelectedIndex = 0;
+        }
+
+        ICollection CreateDataSource(List<Category> categoryList)
         {
 
             // Create a table to store data for the DropDownList control.
             DataTable dt = new DataTable();
 
             // Define the columns of the table.
-            dt.Columns.Add(new DataColumn("ColorTextField", typeof(String)));
-            dt.Columns.Add(new DataColumn("ColorValueField", typeof(String)));
+            dt.Columns.Add(new DataColumn("name", typeof(String)));
+            dt.Columns.Add(new DataColumn("catId", typeof(long)));
 
             // Populate the table with sample values.
-            dt.Rows.Add(CreateRow("White", "White", dt));
-            dt.Rows.Add(CreateRow("Silver", "Silver", dt));
-            dt.Rows.Add(CreateRow("Dark Gray", "DarkGray", dt));
-            dt.Rows.Add(CreateRow("Khaki", "Khaki", dt));
-            dt.Rows.Add(CreateRow("Dark Khaki", "DarkKhaki", dt));
+
+            foreach (Category c in categoryList)
+            {
+                dt.Rows.Add(CreateRow(c.catId, c.name, dt));
+            }
 
             // Create a DataView from the DataTable to act as the data source
             // for the DropDownList control.
@@ -49,7 +61,7 @@ namespace Web.Pages
 
         }
 
-        DataRow CreateRow(String Text, String Value, DataTable dt)
+        DataRow CreateRow(long catId, String Value, DataTable dt)
         {
 
             // Create a DataRow using the DataTable defined in the 
@@ -61,8 +73,8 @@ namespace Web.Pages
             // fields with the appropriate value. Remember that column 0 
             // is defined as ColorTextField, and column 1 is defined as 
             // ColorValueField.
-            dr[0] = Text;
-            dr[1] = Value;
+            dr[0] = Value;
+            dr[1] = catId;
 
             return dr;
 

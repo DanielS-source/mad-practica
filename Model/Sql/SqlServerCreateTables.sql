@@ -101,6 +101,13 @@ CREATE TABLE Category(
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByCatId] 
 ON Category (catId)
 
+INSERT INTO Category(name)
+VALUES 
+    ('Comida'),
+    ('Gente'),
+    ('Paisaje')
+    
+        
 
 PRINT N'Table Category created.'
 GO

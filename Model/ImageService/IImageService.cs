@@ -62,6 +62,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         [Transactional]
         void LikeImage(long usrId, long imgId);
+
+        [Transactional]
+        List<Category> GetAllCategories();
     }
 
 }
