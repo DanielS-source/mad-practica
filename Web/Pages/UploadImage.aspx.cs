@@ -74,7 +74,6 @@ namespace Web.Pages
                     /* Log methods */
                     //Context.Items.Add("Created Image", createdImage);
                     //LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
-                    Console.WriteLine(createdImage);
                     Response.Redirect("~/Pages/MainPage.aspx");
                 }
             }

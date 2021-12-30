@@ -20,9 +20,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
     {
         private List<string> keys = new List<string>();
 
-        public ImageService()
-        {
-        }
+        public ImageService() {}
 
         [Inject]
         public IImageDao ImageDao { private get; set; }
