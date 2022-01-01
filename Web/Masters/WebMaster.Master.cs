@@ -52,7 +52,7 @@ namespace Web
 
             if (SessionManager.IsUserAuthenticated(Context))
             {
-                long usrId = SessionManager.getUserId(Context);
+                long usrId = SessionManager.GetUserId(Context);
                 String url =
                     String.Format("../UserProfile/UserProfile.aspx?userId={0}", usrId);
 

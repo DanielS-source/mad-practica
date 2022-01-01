@@ -15,7 +15,7 @@ using System.Data;
 
 namespace Web.Pages
 {
-    public partial class WebForm3 : System.Web.UI.Page
+    public partial class WebForm3 : CulturePage
     {
 
         protected void Page_Load(object sender, EventArgs e)
@@ -40,46 +40,44 @@ namespace Web.Pages
             Image1.ImageUrl = "~/Files/" + Path.GetFileName(FileUpload1.FileName);
         }
 
-        protected void BtnCreateClick(object sender, EventArgs e)
+        protected void PostImage(object sender, EventArgs e)
         {
 
-            if (Page.IsValid)
+            if (IsValidGroup("Required"))
             {
-                if (FileUpload1.HasFile)
+                Trace.IsEnabled = true;
+                /* Create the Image */
+                ImageDTO image = new ImageDTO
                 {
-                    /* Create the Image */
-                    ImageDTO image = new ImageDTO
-                    {
-                        /* GENERAL data */
-                        usrId = SessionManager.getUserId(Context),
-                        title = txtTitle.Text,
-                        description = txtDescription.Text,
-                        dateImg = DateTime.Now,
-                        category = "SomeCategory",
-                        /* EXIF data */
-                        f = txtDiaphragmAperture.Text,
-                        t = txtShutterSpeed.Text,
-                        ISO = txtISO.Text,
-                        wb = txtWhiteBalance.Text,
-                        file = FileUpload1.FileContent
-                    };
+                    /* GENERAL data */
+                    usrId = 1L,
+                    title = txtTitle.Text,
+                    description = txtDescription.Text,
+                    dateImg = DateTime.Now,
+                    category = categoryDropDown.SelectedItem.Text,
+                    /* EXIF data */
+                    f = txtDiaphragmAperture.Text,
+                    t = txtShutterSpeed.Text,
+                    ISO = txtISO.Text,
+                    wb = txtWhiteBalance.Text,
+                    file = FileUpload1.FileBytes
+                };
+                LogManager.RecordMessage("Image  " + image.title + " created.", MessageType.Info);
+                /* Create the Tags */
+                List<long> tags = new List<long>();
 
-                    /* Create the Tags */
-                    IList<long> tags = new List<long>();
+                /* Get the Service */
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
 
-                    /* Get the Service */
-                    IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
-                    IImageService imageService = iocManager.Resolve<IImageService>();
+                /* Post Image */
+                Image createdImage = imageService.PostImage(image, tags);
 
-                    /* Post Image */
-                    Image createdImage = imageService.PostImage(image, tags);
-
-                    /* Log methods */
-                    //Context.Items.Add("Created Image", createdImage);
-                    //LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
-                    Console.WriteLine(createdImage);
-                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
-                }
+                /* Log methods */
+                Context.Items.Add("Created Image", createdImage);
+                LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
+                Console.WriteLine(createdImage);
+                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }
         protected void initializeDropdown()

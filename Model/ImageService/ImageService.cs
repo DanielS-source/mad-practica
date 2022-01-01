@@ -44,11 +44,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
             Image image = AdaptToImage(imageDTO);
             image.dateImg = DateTime.Now;
-            image.pathImg = "C:\\Software\\DataBase\\Images\\" + image.usrId + image.dateImg;
+            image.pathImg = "C:\\Software\\DataBase\\Images\\" + image.usrId + image.dateImg.Ticks;
             image.catId = CategoryDao.FindByName(imageDTO.category).catId;
 
-            System.Drawing.Image img = System.Drawing.Image.FromStream(imageDTO.file);
-            img.Save(image.pathImg, ImageFormat.Jpeg);
+            File.WriteAllBytes(image.pathImg, imageDTO.file);
 
             foreach (long tagId in tagsIds)
             {
@@ -63,7 +62,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         }
 
         [Transactional]
-        public ImageBlock SearchImages(string keywords, string category, int startIndex, int count)
+        public SearchImageBlock SearchImages(string keywords, string category, int startIndex, int count)
         {
             List<Image> images = new List<Image>();
 
@@ -81,7 +80,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
             bool existMoreImages = (images.Count == count);
 
-            return new ImageBlock(images, existMoreImages);
+            return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
         }
 
         /// <exception cref="ArgumentException"/>
@@ -124,13 +123,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
 
         /// <exception cref="ArgumentException"/>
-        public ImageBlock FindImagesByTag(long tagId, int startIndex, int count)
+        public SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count)
         {
             List<Image> images = ImageDao.FindByTag(tagId, startIndex, count);
 
             bool existMoreImages = (images.Count == count);
 
-            return new ImageBlock(images, existMoreImages);
+            return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
         }
 
         /// <exception cref="InstanceNotFoundException"/>
@@ -341,6 +340,27 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                 ISO = imageDTO.ISO,
                 wb = imageDTO.wb
             };
+        }
+
+        private List<SearchImageDTO> AdaptToSearchImageDTOs(List<Image> images)
+        {
+            List<SearchImageDTO> searchImages = new List<SearchImageDTO>();
+            foreach (Image image in images)
+            {
+                searchImages.Add(AdaptToSearchImageDTO(image));
+            }
+            return searchImages;
+        }
+
+        private SearchImageDTO AdaptToSearchImageDTO(Image image)
+        {
+            string category = CategoryDao.Find(image.catId).name;
+            string username = UserProfileDao.Find(image.usrId).loginName;
+            byte[] img = File.ReadAllBytes(image.pathImg);
+            List<Comments> comments = null;//CommentsDao.findByImage(image.imgId, 0, 2);
+            SearchImageDTO search = new SearchImageDTO(image, username, category, img, comments);
+
+            return search;
         }
 
         public List<Category> GetAllCategories()

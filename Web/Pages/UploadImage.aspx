@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Post Photo" Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="UploadImage.aspx.cs" Inherits="Web.Pages.WebForm3" %>
+﻿<%@ Page Title="Post Photo" Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="UploadImage.aspx.cs" Inherits="Web.Pages.WebForm3" Trace="true" %>
 
 <asp:Content ID="content" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="form">
@@ -82,7 +82,7 @@
         <asp:Image ID="Image1" runat="server" Height = "100" Width = "100" />
 
         <div class="button">
-            <asp:Button ID="btnCreate" runat="server" meta:resourcekey="btnCreate" OnClick="BtnCreateClick" />
+            <asp:Button ID="btnCreate" Text="Upload" runat="server" meta:resourcekey="btnCreate" OnClick="PostImage" />
         </div>
     </div>
 

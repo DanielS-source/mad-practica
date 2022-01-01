@@ -1,6 +1,7 @@
 ﻿using Es.Udc.DotNet.ModelUtil.IoC;
 using Es.Udc.DotNet.PracticaMaD.Model;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
+using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,11 +10,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Image = Es.Udc.DotNet.PracticaMaD.Model.Image;
 
 namespace Web.Pages
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class WebForm1 : CulturePage
     {
+        public List<SearchImageDTO> images = new List<SearchImageDTO>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) 
@@ -21,6 +25,8 @@ namespace Web.Pages
                 this.initializeDropdown();
             }
         }
+
+        #region CategoryDropdown
         void initializeDropdown()
         {
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
@@ -79,5 +85,29 @@ namespace Web.Pages
             return dr;
 
         }
+        #endregion CategoryDropdown
+
+        #region SearchImages
+
+        protected void SearchImages(object sender, EventArgs e)
+        {
+            if (IsValidGroup("Required"))
+            {
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                images = imageService.SearchImages(keywordsInput.Text, categoryDropDown.SelectedItem.Text, 0, 10).Images;
+
+                for (int i = 0; i < images.Count; i++)
+                {
+                    string imreBase64Data = Convert.ToBase64String(images[0].file);
+                    string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                    images[i].imageSrc = imgDataURL;
+                }
+            }
+        }
+
+
+        #endregion SearchImages
     }
 }

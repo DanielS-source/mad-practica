@@ -14,8 +14,6 @@
                         <br />
 
                         <asp:TextBox ID="keywordsInput" runat="server" Width="75%" Height="90%" CssClass=""></asp:TextBox>
-                        <asp:RegularExpressionValidator ID="notEmptyKeywords" runat="server" ControlToValidate="keywordsInput"
-                            Display="Dynamic" Text="<%$ Resources: Common, mandatoryField %>"></asp:RegularExpressionValidator>
                     </div>
 
                 </div>
@@ -33,10 +31,13 @@
                     </div>
                 </div>
 
+                <div class="button">
+                    <asp:Button ID="btnCreate" Text="Search" runat="server" meta:resourcekey="btnCreate" OnClick="SearchImages" />
+                </div>
+
                 <div class="col-md-2 justify-content-around flex">
                     <div class="d-flex justify-content-center align-items-center h-100">
-                        <button type="button" id="searchImagesSubmit" class="icon-search h-50 w-25" style="vertical-align: middle"></button>
-
+                        <button type="button" id="searchImagesSubmit" class="icon-search h-50 w-25" style="vertical-align: middle" runat="server" OnClick="SearchImages"/>
                     </div>
                 </div>
             </div>
@@ -46,80 +47,27 @@
 
     <div class="container border border-primary rounded">
         <br />
-        <div class="mh-100">
-            <ul style="overflow-y: scroll; -webkit-overflow-scrolling: touch">
-                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
-                                <li>
-                    <h1>patata</h1>
-                </li>
+        <% foreach (var image in images) { %>
+            <div class="container border border-primary rounded">
+                <span><%= image.username %></span>
 
-            </ul>
-        </div>
+                <span><%= image.title %></span>
+                <span><%= image.description %></span>
+
+                <img id="img" runat="server" src="<%= image.imageSrc %>"/>
+
+                <span> image.category</span> 
+                <span><%= image.dateImg %></span>
+
+                <span><%= image.f %></span>
+                <span><%= image.t %></span>
+                <span><%= image.ISO %></span>
+                <span><%= image.wb %></span>
+
+                <span><%= image.likes %></span>
+                <span>Comments</span>
+            </div>
+        <% } %>
 
     </div>
 
