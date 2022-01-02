@@ -229,7 +229,7 @@ namespace Web.Pages
 
                 for (int i = 0; i < images.Count; i++)
                 {
-                    string imreBase64Data = Convert.ToBase64String(images[0].file);
+                    string imreBase64Data = Convert.ToBase64String(images[i].file);
                     string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
                     images[i].imageSrc = imgDataURL;
                 }
@@ -238,5 +238,6 @@ namespace Web.Pages
 
 
         #endregion SearchImages
+
     }
 }

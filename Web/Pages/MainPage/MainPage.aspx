@@ -43,33 +43,35 @@
             </div>
         </div>
     <br/>
-    <br/>
 
-    <div class="container border border-primary rounded">
-        <br />
+    <div class="row row-cols-1 row-cols-md-2">
         <% foreach (var image in images) { %>
-            <div class="container border border-primary rounded">
-                <span><%= image.username %></span>
-
-                <span><%= image.title %></span>
-                <span><%= image.description %></span>
-
-                <img id="img" runat="server" src="<%= image.imageSrc %>"/>
-
-                <span> image.category</span> 
-                <span><%= image.dateImg %></span>
-
-                <span><%= image.f %></span>
-                <span><%= image.t %></span>
-                <span><%= image.ISO %></span>
-                <span><%= image.wb %></span>
-
-                <span><%= image.likes %></span>
-                <span>Comments</span>
+            <!-- Card -->
+            <div class="card">
+              <!-- Card image -->
+              <div class="view overlay">
+                <img class="card-img-top" src="<%= image.imageSrc %>" alt="Image">
+              </div>
+              <!-- Card content -->
+              <div class="card-body">
+                <!-- Title -->
+                <h4 class="card-title"><%= image.title %></h4>
+                <hr>
+                <!-- Text -->
+                <p class="card-text"><%= image.description %></p>
+              </div>
+              <!-- Card footer -->
+              <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+                <ul class="list-unstyled list-inline font-small">
+                  <li class="list-inline-item pr-2 white-text"><i class="icon-calendar pr-1"></i><%= image.dateImg %></li>
+                  <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-comments pr-1"></i>In progress</a></li>
+                  <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-thumbs-up pr-1"></i><%= image.likes %></a></li>
+                  <li class="list-inline-item"><a href="#" class="white-text"><i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %></a></li>
+                  <li class="list-inline-item"><a href="#" class="white-text"><i class="icon-ellipsis-horizontal pr-1"> </i>See More</a></li>
+                </ul>
+              </div>
             </div>
+            <!-- Card -->
         <% } %>
-
     </div>
-
-
 </asp:Content>
