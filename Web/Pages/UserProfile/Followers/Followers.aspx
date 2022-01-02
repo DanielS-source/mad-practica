@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="Web.Pages.WebForm2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/UserProfile/UserProfile.Master" AutoEventWireup="true" CodeBehind="Followers.aspx.cs" Inherits="Web.Pages.WebForm2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
      <div id="Required" class="custom-container d-flex justify-content-center" runat="server">
          <div>

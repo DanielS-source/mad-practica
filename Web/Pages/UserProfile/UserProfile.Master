@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="UserProfile.master.cs" Inherits="Es.Udc.DotNet.PracticaMaD.Web.Pages.UserProfile.UserProfile" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+    <div class="row">
+        <div class="col-3">
+            <div class="bg-light">
+                <div class="d-flex px-3 py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-person mb-3" viewBox="0 0 16 16">
+                        <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                        <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
+                        <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path d="M8 12c4 0 5 1.755 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12z" />
+                    </svg>
+                    <div class="ml-1">
+                        <asp:Label ID="HelloLabel" Text="<%$ Resources: , HelloLabel.Text %>" CssClass="font-weight-light text-muted" runat="server"></asp:Label>
+                        <p>
+                            <asp:Label ID="NameLabel" Font-Size="X-Large" runat="server"></asp:Label>
+                        </p>
+                    </div>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <asp:LinkButton ID="AccountLinkButton" Text="<%$ Resources: , AccountLinkButton.Text %>" CssClass="nav-link text-dark font-italic bg-light px-4" CausesValidation="False" OnClick="AccountLinkButton_Click" runat="server"></asp:LinkButton>
+                    </li>
+                     <li class="nav-item">
+                        <asp:LinkButton ID="FollowersFollowsButton" Text="<%$ Resources: , FollowersFollowsButton.Text %>" CssClass="nav-link text-dark font-italic bg-light px-4" CausesValidation="False" OnClick="FollowersFollowsButton_Click" runat="server"></asp:LinkButton>
+                    </li>
+                    <li class="nav-item">
+                        <asp:LinkButton ID="LogoutLinkButton" Text="<%$ Resources: , LogoutLinkButton.Text %>" CssClass="nav-link text-dark font-italic bg-light px-4" CausesValidation="False" OnClick="LogoutLinkButton_Click" runat="server"></asp:LinkButton>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server" />
+        </div>
+    </div>
+</asp:Content>

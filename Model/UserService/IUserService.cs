@@ -25,6 +25,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         void ChangePassword(long userProfileId, String oldClearPassword,
             String newClearPassword);
 
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        void ChangeCulture(long userProfileId, string language, string country);
+
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        void ChangeEmail(long userProfileId, string email);
+
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        void ChangeFirstNameLastName(long userProfileId, string firstName, string lastName);
+
         /// <summary>
         /// Finds the user profile details.
         /// </summary>

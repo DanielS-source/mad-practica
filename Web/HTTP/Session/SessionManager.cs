@@ -137,6 +137,47 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Http.Session
             CookiesManager.RemoveCookies(context);
         }
 
+        /// <exception cref="AuthenticationException"/>
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        public static void ChangeCulture(HttpContext context, string language, string country)
+        {
+            if (!IsUserAuthenticated(context))
+            {
+                throw new AuthenticationException();
+            }
+
+            userService.ChangeCulture((long)context.Session[UserSession], language, country);
+
+            context.Session.Add(LocaleSession, new Locale(language, country));
+        }
+
+        /// <exception cref="AuthenticationException"/>
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        public static void ChangeEmail(HttpContext context, string email)
+        {
+            if (!IsUserAuthenticated(context))
+            {
+                throw new AuthenticationException();
+            }
+
+            userService.ChangeEmail((long)context.Session[UserSession], email);
+        }
+
+        /// <exception cref="AuthenticationException"/>
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        public static void ChangeFirstNameLastName(HttpContext context, string firstName, string lastName)
+        {
+            if (!IsUserAuthenticated(context))
+            {
+                throw new AuthenticationException();
+            }
+
+            userService.ChangeFirstNameLastName((long)context.Session[UserSession], firstName, lastName);
+        }
+
         public static Locale GetLocale(HttpContext context)
         {
             if (IsUserAuthenticated(context))

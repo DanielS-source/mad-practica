@@ -1,4 +1,5 @@
 ﻿using Es.Udc.DotNet.ModelUtil.Exceptions;
+using Es.Udc.DotNet.ModelUtil.Transactions;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
@@ -37,6 +38,62 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             UserProfileDao.Update(userProfile);
 
         }
+
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        [Transactional]
+        public void ChangeCulture(long userProfileId, string language, string country)
+        {
+            if (!PropertyValidator.IsValidCulture(language, country))
+            {
+                throw new InputValidationException("Invalid culture value (it must follow the ISO-639 for the language code and the ISO-3166 for the country code): " + language + "-" + country);
+            }
+
+            UserProfile userProfile = UserProfileDao.Find(userProfileId);
+
+            userProfile.language = language;
+            userProfile.country = country;
+
+            UserProfileDao.Update(userProfile);
+        }
+
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        [Transactional]
+        public void ChangeEmail(long userProfileId, string email)
+        {
+            if (!PropertyValidator.IsValidEmail(email))
+            {
+                throw new InputValidationException("Invalid email, it must be between 1 and 40 characters and contain an '@' before a '.' (Email=" + email + ")");
+            }
+
+            UserProfile userProfile = UserProfileDao.Find(userProfileId);
+            userProfile.email = email;
+
+            UserProfileDao.Update(userProfile);
+        }
+
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        [Transactional]
+        public void ChangeFirstNameLastName(long userProfileId, string firstName, string lastName)
+        {
+            if (!PropertyValidator.IsValidFirstName(firstName))
+            {
+                throw new InputValidationException("Invalid first name, it must be between 1 and 40 characters (FirstName=" + firstName + ")");
+            }
+            if (!PropertyValidator.IsValidLastName(lastName))
+            {
+                throw new InputValidationException("Invalid last name, it must be between 1 and 40 characters (LastName=" + lastName + ")");
+            }
+
+            UserProfile userProfile = UserProfileDao.Find(userProfileId);
+            userProfile.firstName = firstName;
+            userProfile.lastName = lastName;
+
+            UserProfileDao.Update(userProfile);
+        }
+
 
         // UserProfileDetails FindUserProfileDetails(long userProfileId);
         public UserProfileDetails FindUserProfileDetails(long userProfileId)

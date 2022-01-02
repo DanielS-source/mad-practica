@@ -52,11 +52,13 @@ namespace Web
 
             if (SessionManager.IsUserAuthenticated(Context))
             {
+
                 long usrId = SessionManager.GetUserId(Context);
                 String url =
-                    String.Format("../UserProfile/UserProfile.aspx?userId={0}", usrId);
+                    String.Format("~/Pages/UserProfile/Account/Account.aspx?userId={0}", usrId);
 
                 Response.Redirect(url);
+
             }
             else 
             {
