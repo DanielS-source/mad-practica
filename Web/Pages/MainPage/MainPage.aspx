@@ -9,7 +9,7 @@
                         <h4>
                             <asp:Localize ID="keywordsSpan" runat="server" Text="<%$ Resources:Common, keywords %>" />
                         </h4>
-
+                        <%--  --%>
                         <div class="w-100"></div>
                         <br />
 

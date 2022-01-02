@@ -55,7 +55,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
             DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
 
             List<UserProfile> followers = userProfileContext.Include("Followers").
-                Where(u => u.Followers.Any(f => f.usrId.Equals(userId))).
+                Where(u => u.usrId.Equals(userId)).
                 OrderBy(f => f.usrId).
                 Skip(count * startIndex).
                 Take(count).
@@ -66,7 +66,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 throw new ArgumentException("Page out of range" + startIndex);
             }
 
-            return followers;
+            return followers[0].Followers.
+                Skip(count * startIndex).
+                Take(count).
+                ToList();
         }
 
         public List<UserProfile> GetFollowed(long userId, int startIndex, int count)
@@ -85,8 +88,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
             DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
 
             List<UserProfile> followed = userProfileContext.Include("Follows").
-                Where(u => u.Followers.Any(f => f.usrId.Equals(userId))).
-                OrderBy(f => f.usrId).
+                Where(u => u.usrId.Equals(userId)).
+                OrderBy(u => u.usrId).
                 Skip(count * startIndex).
                 Take(count).
                 ToList();
@@ -95,6 +98,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
             {
                 throw new ArgumentException("Page out of range" + startIndex);
             }
+
+            return followed;
+        }
+
+        public List<UserProfile> GetAllFollowed(long userId)
+        {
+            DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
+
+            List<UserProfile> followed = userProfileContext.Include("Follows").
+                Where(u => u.usrId.Equals(userId)).
+                OrderBy(f => f.usrId).
+                ToList();
 
             return followed;
         }

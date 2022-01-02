@@ -220,6 +220,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             UserProfile user = UserProfileDao.Find(usrId);
             UserProfile followedUser = UserProfileDao.Find(followedUsrId);
             user.Follows.Add(followedUser);
+            UserProfileDao.Update(user);
             return;
         }
 
@@ -321,6 +322,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             }
         }
 
+        public bool isFollowing(long usrId, long followedId)
+        {
+            UserProfile followedUser = UserProfileDao.Find(followedId);
 
+            return UserProfileDao.GetAllFollowed(usrId).Contains(followedUser);
+        }
     }
 }
