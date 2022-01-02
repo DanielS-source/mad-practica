@@ -2,18 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Es.Udc.DotNet.ModelUtil.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Transactions;
 using Ninject;
 using Es.Udc.DotNet.PracticaMaD.Model.TagDao;
-using System.Runtime.Caching;
 using Es.Udc.DotNet.PracticaMaD.Model.Cache;
 using Es.Udc.DotNet.PracticaMaD.Model.CommentsDao;
 using Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao;
 using Es.Udc.DotNet.PracticaMaD.Model.CategoryDao;
 using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
@@ -21,9 +20,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
     {
         private List<string> keys = new List<string>();
 
-        public ImageService()
-        {
-        }
+        public ImageService() {}
 
         [Inject]
         public IImageDao ImageDao { private get; set; }
@@ -45,7 +42,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             IList<long> tagsIds)
         {
 
-            Image image = adaptToImage(imageDTO);
+            Image image = AdaptToImage(imageDTO);
+            image.dateImg = DateTime.Now;
+            image.pathImg = "C:\\Software\\DataBase\\Images\\" + image.usrId + image.dateImg.Ticks;
+            image.catId = CategoryDao.FindByName(imageDTO.category).catId;
+
+            File.WriteAllBytes(image.pathImg, imageDTO.file);
 
             foreach (long tagId in tagsIds)
             {
@@ -60,7 +62,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         }
 
         [Transactional]
-        public ImageBlock SearchImages(string keywords, string category, int startIndex, int count)
+        public SearchImageBlock SearchImages(string keywords, string category, int startIndex, int count)
         {
             List<Image> images = new List<Image>();
 
@@ -78,7 +80,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
             bool existMoreImages = (images.Count == count);
 
-            return new ImageBlock(images, existMoreImages);
+            return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
         }
 
         /// <exception cref="ArgumentException"/>
@@ -121,13 +123,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
 
         /// <exception cref="ArgumentException"/>
-        public ImageBlock FindImagesByTag(long tagId, int startIndex, int count)
+        public SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count)
         {
             List<Image> images = ImageDao.FindByTag(tagId, startIndex, count);
 
             bool existMoreImages = (images.Count == count);
 
-            return new ImageBlock(images, existMoreImages);
+            return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
         }
 
         /// <exception cref="InstanceNotFoundException"/>
@@ -245,7 +247,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public void DeleteImage(long imageId)
         {
             Image image = ImageDao.Find(imageId);
-            deleteImageFromPath(image.pathImg);
+            DeleteImageFromPath(image.pathImg);
             ImageDao.Remove(imageId);
         }
 
@@ -303,46 +305,68 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return new CommentsBlock(commentsWithUsername, existMore);
         }
 
-        private void deleteImageFromPath(String path) {
-
+        private void DeleteImageFromPath(String path) {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
 
-        private ImageDTO toImageDTO(Image image)
+        private ImageDTO ToImageDTO(Image image)
         {
             return new ImageDTO(image, CategoryDao.Find(image.catId).name);
         }
 
-        private List<ImageDTO> toImageDTOs(List<Image> images)
+        private List<ImageDTO> ToImageDTOs(List<Image> images)
         {
             List<ImageDTO> imageDTOs = new List<ImageDTO>();
             foreach(Image image in images)
             {
-                imageDTOs.Add(toImageDTO(image));
+                imageDTOs.Add(ToImageDTO(image));
             }
 
             return imageDTOs;
         }
 
-        public Image PostImage(Image image, IList<long> tagsIds)
+        private Image AdaptToImage(ImageDTO imageDTO)
         {
-            throw new NotImplementedException();
+            return new Image
+            {
+                usrId = imageDTO.usrId,
+                title = imageDTO.title,
+                description = imageDTO.description,
+                f = imageDTO.f,
+                t = imageDTO.t,
+                ISO = imageDTO.ISO,
+                wb = imageDTO.wb
+            };
         }
 
-        private Image adaptToImage(ImageDTO imageDTO)
+        private List<SearchImageDTO> AdaptToSearchImageDTOs(List<Image> images)
         {
-            Image image = new Image();
-            image.usrId = imageDTO.usrId;
-            image.pathImg = imageDTO.pathImg;
-            image.title = imageDTO.title;
-            image.description = imageDTO.description;
-            image.dateImg = imageDTO.dateImg;
-            image.catId = imageDTO.catId;
-            image.f = imageDTO.f;
-            image.t = imageDTO.t;
-            image.ISO = imageDTO.ISO;
-            image.wb = imageDTO.wb;
-            return image;
+            List<SearchImageDTO> searchImages = new List<SearchImageDTO>();
+            foreach (Image image in images)
+            {
+                searchImages.Add(AdaptToSearchImageDTO(image));
+            }
+            return searchImages;
         }
 
+        private SearchImageDTO AdaptToSearchImageDTO(Image image)
+        {
+            string category = CategoryDao.Find(image.catId).name;
+            string username = UserProfileDao.Find(image.usrId).loginName;
+            byte[] img = File.ReadAllBytes(image.pathImg);
+            List<Comments> comments = null;//CommentsDao.findByImage(image.imgId, 0, 2);
+            SearchImageDTO search = new SearchImageDTO(image, username, category, img, comments);
+
+            return search;
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            Console.Write("patata");
+            return CategoryDao.GetAllElements();
+        }
     }
 }

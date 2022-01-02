@@ -47,7 +47,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 new UserProfileDetails(userProfile.firstName,
                     userProfile.lastName, userProfile.email,
                     userProfile.language, userProfile.country);
-
+            Console.Write(userProfileDetails.Email);
             return userProfileDetails;
 
         }

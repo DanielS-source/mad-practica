@@ -133,7 +133,7 @@
     <Content Include="Css\CustomStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Login\Login.aspx" />
-    <Content Include="Pages\MainPage.aspx" />
+    <Content Include="Pages\MainPage\MainPage.aspx" />
     <Content Include="Pages\Register\Register.aspx" />
     <Content Include="Pages\Tags\App_LocalResources\Tags.aspx.es.resx" />
     <Content Include="Pages\Tags\App_LocalResources\Tags.aspx.resx" />
@@ -152,20 +152,25 @@
       <LastGenOutput>WebMaster.Master.es.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Pages\Login\App_LocalResources\Login.aspx.es.resx" />
+    <Content Include="Pages\Login\App_LocalResources\Login.aspx.resx" />
+    <Content Include="Pages\Register\App_LocalResources\Register.aspx.es.resx" />
+    <Content Include="Pages\Register\App_LocalResources\Register.aspx.resx" />
+    <Content Include="Masters\App_LocalResources\WebMaster.Master.resx" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Pages\UserProfile\App_LocalResources\UserProfile.aspx.es.resx" />
+    <Content Include="Pages\UserProfile\App_LocalResources\UserProfile.aspx.resx" />
+    <None Include="packages.config" />
+    <Content Include="Pages\UserProfile\UserProfile.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -174,23 +179,17 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Pages\Login\App_LocalResources\Login.aspx.es.resx" />
-    <Content Include="Pages\Login\App_LocalResources\Login.aspx.resx" />
-    <Content Include="Pages\Register\App_LocalResources\Register.aspx.es.resx" />
-    <Content Include="Pages\Register\App_LocalResources\Register.aspx.resx" />
-    <Content Include="Masters\App_LocalResources\WebMaster.Master.resx" />
-    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.6.0.js" />
-    <Content Include="Scripts\jquery-3.6.0.min.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
-    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -208,8 +207,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.0.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -218,7 +215,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <Content Include="Css\StyleSheet.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -266,11 +262,11 @@
     <Compile Include="Pages\Login\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPage.aspx.cs">
+    <Compile Include="Pages\MainPage\MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\MainPage.aspx.designer.cs">
+    <Compile Include="Pages\MainPage\MainPage.aspx.designer.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Register\Register.aspx.cs">
@@ -293,6 +289,13 @@
     </Compile>
     <Compile Include="Pages\UploadImage.aspx.designer.cs">
       <DependentUpon>UploadImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserProfile\UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UserProfile\UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Masters\WebMaster.Master.cs">

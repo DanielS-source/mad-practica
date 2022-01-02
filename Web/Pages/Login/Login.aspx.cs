@@ -18,7 +18,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Login
     {
         protected string googleplus_client_id = "367350001953-s261onetsralvvuhihdlc5alsgufb41f.apps.googleusercontent.com";    // Replace this with your Client ID
         protected string googleplus_client_secret = "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";                                                // Replace this with your Client Secret
-        protected string googleplus_redirect_url = "https://localhost:44331/Pages/MainPage.aspx";                                         // Replace this with your Redirect URL; Your Redirect URL from your developer.google application should match this URL.
+        protected string googleplus_redirect_url = "https://localhost:44331/Pages/MainPage/MainPage.aspx";                                         // Replace this with your Redirect URL; Your Redirect URL from your developer.google application should match this URL.
         protected string Parameters;
 
         protected void UsernameValidator_ServerValidate(object source, ServerValidateEventArgs args)
@@ -88,7 +88,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Login
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            
         }
 
 

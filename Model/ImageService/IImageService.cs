@@ -18,7 +18,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         Image PostImage(ImageDTO imageDTO, IList<long> tagsIds);
 
         [Transactional]
-        ImageBlock SearchImages(string keywords, string category, int startIndex, int count);
+        SearchImageBlock SearchImages(string keywords, string category, int startIndex, int count);
 
         /// <exception cref="ArgumentException" />
         /// <exception cref="PageableOutofRangeException" />
@@ -26,7 +26,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId);
 
         [Transactional]
-        ImageBlock FindImagesByTag(long tagId, int startIndex, int count);
+        SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count);
 
         [Transactional]
         void DeleteImage(long imageId);
@@ -62,6 +62,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         [Transactional]
         void LikeImage(long usrId, long imgId);
+
+        [Transactional]
+        List<Category> GetAllCategories();
     }
 
 }

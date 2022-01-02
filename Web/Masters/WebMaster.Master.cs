@@ -12,9 +12,11 @@ namespace Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Render_Session();
+
             if (!IsPostBack)
             {
-                Render_Session();
+                
             }
         }
 
@@ -25,28 +27,43 @@ namespace Web
             {
                 LoginPanel.Visible = false;
                 LoggoutPanel.Visible = true;
-                UserProfileButton.Visible = true;
                 UploadImagePanel.Visible = true;
             }
             else //Usuario sin autenticar
             {
                 LoginPanel.Visible = true;
                 LoggoutPanel.Visible = false;
-                UserProfileButton.Visible = false;
                 UploadImagePanel.Visible = false;
             }
+
+            UserProfileButton.Visible = true;
         }
 
         protected void LogoutLinkButton_Click(object sender, EventArgs e)
         {
             SessionManager.Logout(Context);
 
-            Response.Redirect("~/Pages/MainPage.aspx");
+            Response.Redirect("~/Pages/MainPage/MainPage.aspx");
         }
 
         protected void UserProfileButton_Click(object sender, EventArgs e)
         {
-           //Redirigir al perfil de usuario.
+            //Redirigir al perfil de usuario.
+
+            if (SessionManager.IsUserAuthenticated(Context))
+            {
+                long usrId = SessionManager.GetUserId(Context);
+                String url =
+                    String.Format("../UserProfile/UserProfile.aspx?userId={0}", usrId);
+
+                Response.Redirect(url);
+            }
+            else 
+            {
+                Response.Redirect("../Login/Login.aspx");
+            }
+
+
         }
     }
 }
