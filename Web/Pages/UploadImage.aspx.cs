@@ -73,10 +73,6 @@ namespace Web.Pages
                 /* Post Image */
                 Image createdImage = imageService.PostImage(image, tags);
 
-                /* Log methods */
-                Context.Items.Add("Created Image", createdImage);
-                LogManager.RecordMessage("Image  " + createdImage.imgId + " created.", MessageType.Info);
-                Console.WriteLine(createdImage);
                 Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }

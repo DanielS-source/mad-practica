@@ -15,15 +15,6 @@ namespace Web.Pages
     {
 
         /// <summary>
-        /// Control lclTitle.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lclTitle;
-
-        /// <summary>
         /// Control txtTitle.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace Web.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTitle;
-
-        /// <summary>
-        /// Control lclDescription.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lclDescription;
 
         /// <summary>
         /// Control txtDescription.
@@ -69,15 +51,6 @@ namespace Web.Pages
         protected global::System.Web.UI.WebControls.DropDownList categoryDropDown;
 
         /// <summary>
-        /// Control Localize1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
-
-        /// <summary>
         /// Control txtDiaphragmAperture.
         /// </summary>
         /// <remarks>
@@ -85,15 +58,6 @@ namespace Web.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDiaphragmAperture;
-
-        /// <summary>
-        /// Control Localize2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
 
         /// <summary>
         /// Control txtShutterSpeed.
@@ -105,15 +69,6 @@ namespace Web.Pages
         protected global::System.Web.UI.WebControls.TextBox txtShutterSpeed;
 
         /// <summary>
-        /// Control Localize3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
-
-        /// <summary>
         /// Control txtISO.
         /// </summary>
         /// <remarks>
@@ -121,15 +76,6 @@ namespace Web.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtISO;
-
-        /// <summary>
-        /// Control Localize4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize4;
 
         /// <summary>
         /// Control txtWhiteBalance.
@@ -148,24 +94,6 @@ namespace Web.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
-
-        /// <summary>
-        /// Control btnUpload.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpload;
-
-        /// <summary>
-        /// Control Image1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
 
         /// <summary>
         /// Control btnCreate.
