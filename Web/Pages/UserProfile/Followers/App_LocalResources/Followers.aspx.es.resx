@@ -123,4 +123,7 @@
   <data name="previousBtn.Text" xml:space="preserve">
     <value>Anterior</value>
   </data>
+  <data name="title.Text" xml:space="preserve">
+    <value>Seguidores</value>
+  </data>
 </root>

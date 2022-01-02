@@ -24,14 +24,19 @@ namespace Web.Pages
             long userId = Convert.ToInt32(Request.Params.Get("userId"));
 
             String url =
-                String.Format("../Followers/Followers.aspx?userId={0}", userId);
+                String.Format("../Followers/Followers.aspx?userId={0}&op={1}&startIndex={2}", userId, 0, 0);
 
             Response.Redirect(url);
         }
 
         protected void btnFollowed_Click(object sender, EventArgs e)
         {
+            long userId = Convert.ToInt32(Request.Params.Get("userId"));
 
+            String url =
+                String.Format("../Followers/Followers.aspx?userId={0}&op={1}&=startIndex={2}", userId, 1, 0);
+
+            Response.Redirect(url);
         }
 
         protected void getUserData() 

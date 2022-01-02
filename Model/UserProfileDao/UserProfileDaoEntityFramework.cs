@@ -99,7 +99,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 throw new ArgumentException("Page out of range" + startIndex);
             }
 
-            return followed;
+            return followed[0].Follows.
+                Skip(count * startIndex).
+                Take(count).
+                ToList();
         }
 
         public List<UserProfile> GetAllFollowed(long userId)

@@ -13,7 +13,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
 
         public UserBlock(List<UserProfileDetails> userProfiles, bool existMoreUserProfiles)
         {
-            this.UserProfiles = UserProfiles;
+            this.UserProfiles = userProfiles;
             this.ExistMoreUserProfiles = existMoreUserProfiles;
         }
     }
