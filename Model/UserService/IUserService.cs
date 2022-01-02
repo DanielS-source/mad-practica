@@ -95,5 +95,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         UserBlock GetFollowed(long userId, int startIndex, int count);
 
         ImageBlock GetUserImages(long userProfileId, int startIndex, int count);
+
+        bool isFollowing(long usrId, long followedId);
     }
 }

@@ -17,5 +17,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
         List<UserProfile> GetFollowers(long userId, int startIndex, int count);
 
         List<UserProfile> GetFollowed(long userId, int startIndex, int count);
+
+        List<UserProfile> GetAllFollowed(long userId);
     }
 }

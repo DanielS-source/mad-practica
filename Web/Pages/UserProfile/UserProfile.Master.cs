@@ -23,7 +23,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.UserProfile
 
             long usrId = SessionManager.GetUserId(Context);
             String url =
-                String.Format("../Followers/Followers.aspx?userId={0}", usrId);
+                String.Format("../Follows/Follows.aspx?userId={0}", usrId);
 
             Response.Redirect(url);
 

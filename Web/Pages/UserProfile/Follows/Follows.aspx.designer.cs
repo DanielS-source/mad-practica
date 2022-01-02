@@ -11,70 +11,79 @@ namespace Web.Pages
 {
 
 
-    public partial class WebForm1
+    public partial class WebForm2
     {
 
         /// <summary>
-        /// Control keywordsSpan.
+        /// Control Required.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize keywordsSpan;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Required;
 
         /// <summary>
-        /// Control keywordsInput.
+        /// Control userContainer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox keywordsInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl userContainer;
 
         /// <summary>
-        /// Control Localize1.
+        /// Control cellAccountID.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.TableCell cellAccountID;
 
         /// <summary>
-        /// Control categoryDropDown.
+        /// Control btnFollowers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList categoryDropDown;
+        protected global::System.Web.UI.WebControls.LinkButton btnFollowers;
 
         /// <summary>
-        /// Control btnCreate.
+        /// Control btnFollowed.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreate;
+        protected global::System.Web.UI.WebControls.LinkButton btnFollowed;
 
         /// <summary>
-        /// Control searchImagesSubmit.
+        /// Control followDiv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton searchImagesSubmit;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl followDiv;
 
         /// <summary>
-        /// Control img.
+        /// Control backgroundSpan.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage img;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl backgroundSpan;
+
+        /// <summary>
+        /// Control followingBtn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton followingBtn;
     }
 }
