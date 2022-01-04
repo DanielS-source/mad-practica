@@ -12,9 +12,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.TagDao
         /// <exception cref="InstanceNotFoundException"/>
         Tag FindByName(string name);
 
-        // <exception cref="ArgumentException"/>
+        IList<Tag> FindAllPosibleTagsinImages(int n);
+
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="PageableOutofRangeException"/>
         IList<Tag> GetAllElementsPageable(int pageSize, int pageNumber);
 
-        IList<Tag> FindAllPosibleTagsinImages(int n);
     }
 }

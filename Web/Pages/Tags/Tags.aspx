@@ -29,11 +29,12 @@
                                 </div>
                             </div>
                             <asp:TextBox ID="TextTextBox" Width="500px" Height="105px" MaxLength="280" TextMode="MultiLine" Enabled="false" Style="resize: none;" runat="server"></asp:TextBox>
+                            <asp:Image ID="ImageImagen" runat="server" AlternateText="ImagenTag" />
                             <asp:Panel ID="ImageTagsPanel" ScrollBars="Horizontal" runat="server">
                                 <asp:DataList ID="ImageTagsDataList" RepeatDirection="Horizontal" OnItemDataBound="ImageTagsDataList_ItemDataBound" runat="server">
                                     <ItemTemplate>
                                         <div class="ml-2 mr-2">
-                                            <asp:Label ID="Label" runat="server"></asp:Label>
+                                            <asp:Label ID="Tag" runat="server"></asp:Label>
                                         </div>
                                     </ItemTemplate>
                                 </asp:DataList>

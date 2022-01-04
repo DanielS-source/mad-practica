@@ -24,7 +24,7 @@
                             <asp:HyperLink ID ="lnkMainPage" runat="server" Text="Página principal" meta:resourcekey="lnkMainPage" NavigateUrl="../Pages/MainPage/MainPage.aspx"/>
                         </asp:Panel>
                         <asp:Panel ID="UploadImagePanel" class="list-group-item list-group-item-action bg-light" runat="server">
-                            <asp:HyperLink ID ="lnkUploadImage" runat="server" Text="Subir imagen" meta:resourcekey="lnkUploadImage" NavigateUrl="../Pages/UploadImage.aspx"/>
+                            <asp:HyperLink ID ="lnkUploadImage" runat="server" Text="Subir imagen" meta:resourcekey="lnkUploadImage" NavigateUrl="../Pages/UploadImage/UploadImage.aspx"/>
                         </asp:Panel>
                         <asp:Panel ID="TagsPanel" class="list-group-item list-group-item-action bg-light" runat="server">
                             <asp:HyperLink ID ="lnkTags" runat="server" Text="Tags" meta:resourcekey="lnkTags" NavigateUrl="../Pages/Tags/Tags.aspx"/>

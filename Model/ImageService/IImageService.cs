@@ -1,4 +1,5 @@
 ﻿using Es.Udc.DotNet.PracticaMaD.Model.ImageDao;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
 using Es.Udc.DotNet.ModelUtil.Transactions;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         /// <exception cref="ArgumentException" />
         /// <exception cref="PageableOutofRangeException" />
-        [Transactional]
         ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId);
 
-        [Transactional]
-        SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count);
+        //[Transactional]
+        //SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count);
 
         [Transactional]
         void DeleteImage(long imageId);
@@ -46,8 +46,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         void AddTagsToImage(long imgId, IList<long> tagsId);
 
         /// <exception cref="ArgumentException" />
+        /// <exception cref="PageableOutofRangeException"/>
         [Transactional]
-        TagBlock FindTags(int startIndex, int count);
+        TagBlock FindTags(int pageSize, int pageNumber);
 
         IList<TagDTO> FindTagsOnImages(int n);
 

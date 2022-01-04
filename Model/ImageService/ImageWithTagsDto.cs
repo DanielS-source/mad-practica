@@ -24,6 +24,25 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             Tags = tags;
         }
 
+        public ImageWithTagsDto(Image image, IList<TagDTO> tags, string imgUser, string imgCategory, byte[] img, List<Comments> imgComments)
+        {
+            usrId = image.usrId;
+            title = image.title;
+            description = image.description;
+            dateImg = image.dateImg;
+            f = image.f;
+            t = image.t;
+            ISO = image.ISO;
+            wb = image.wb;
+            likes = image.likes;
+            Tags = tags;
+
+            category = imgCategory;
+            LoginName = imgUser;
+            file = img;
+            comments = imgComments;
+        }
+
         public ImageWithTagsDto() { }
 
         public long usrId { get; set; }
@@ -36,6 +55,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public string t { get; set; }
         public string ISO { get; set; }
         public string wb { get; set; }
+        public string category { get; set; }
+        public long likes { get; set; }
+        public byte[] file { get; set; }
+        public string imageSrc { get; set; }
+        public List<Comments> comments { get; set; }
         public IList<TagDTO> Tags { get; private set; }
 
         public override int GetHashCode()

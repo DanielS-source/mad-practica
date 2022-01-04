@@ -54,10 +54,17 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
                 loginLabel.Text = imageDto.LoginName;
 
                 Label dateLabel = (Label)e.Item.FindControl("DateLabel");
-                dateLabel.Text = imageDto.dateImg.ToString();
+                dateLabel.Text = imageDto.dateImg.ToString("d");
 
                 TextBox textTextBox = (TextBox)e.Item.FindControl("TextTextBox");
                 textTextBox.Text = imageDto.title;
+
+                Image imageImagen = (Image)e.Item.FindControl("ImageImagen");
+
+                string imreBase64Data = Convert.ToBase64String(imageDto.file);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                imageImagen.ImageUrl = imgDataURL;
+
 
                 DataList imageLabelsDataList = (DataList)e.Item.FindControl("ImageTagsDataList");
                 imageLabelsDataList.DataSource = imageDto.Tags;
@@ -71,7 +78,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
             {
                 TagDTO tagOutput = (TagDTO)e.Item.DataItem;
 
-                Label label = (Label)e.Item.FindControl("Label");
+                Label label = (Label)e.Item.FindControl("Tag");
                 label.Text = tagOutput.Name;
             }
         }
@@ -108,12 +115,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
 
         private void LoadImages()
         {
-            if (!(ViewState["label"] is null))
+            if (!(ViewState["tag"] is null))
             {
                 IIoCManager iocManager = (IIoCManager)Context.Application["ManagerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                ImagePageable imagePageable = imageService.FindImagesByTagPageable(ImagePageSize, CurrentImagePage, (long)ViewState["label"]);
+                ImagePageable imagePageable = imageService.FindImagesByTagPageable(ImagePageSize, CurrentImagePage, (long)ViewState["tag"]);
 
                 ImagesDataList.DataSource = imagePageable.ImageWithTagsDTO;
                 ImagesDataList.DataBind();

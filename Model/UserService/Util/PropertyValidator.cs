@@ -6,7 +6,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService.Utils
 {
     public static class PropertyValidator
     {
-       
+
+        #region Tag
+
+        public static bool IsValidTagName(string name)
+        {
+            return !string.IsNullOrWhiteSpace(name)
+                && name.Length >= 1 && name.Length <= 12; // It must be between 1 and 12 characters
+        }
+
+        #endregion Tag
+
+
         #region UserProfile Properties
 
         public static bool IsValidLogin(string login)

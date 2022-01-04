@@ -88,8 +88,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId)
         {
             IList<ImageWithTagsDto> imagesDTO = new List<ImageWithTagsDto>();
+            string category;
+            string username;
+            byte[] img;
+            List<Comments> comments;
 
-            foreach (Image image in ImageDao.FindByTag(tagId, pageNumber, pageSize))
+            foreach (Image image in ImageDao.FindByTag(pageSize, pageNumber, tagId))
             {
                 UserProfile userProfile = UserProfileDao.Find(image.usrId);
 
@@ -102,16 +106,24 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                     ));
                 }
 
+                category = CategoryDao.Find(image.catId).name;
+                username = UserProfileDao.Find(image.usrId).loginName;
+                img = File.ReadAllBytes(image.pathImg);
+                comments = null;
+
                 imagesDTO.Add(new ImageWithTagsDto(
                     image,
+                    tagsDTO,
                     userProfile.loginName,
-                    tagsDTO
+                    category,
+                    img,
+                    comments
                 ));
             }
 
             try
             {
-                ImageDao.FindByTag(tagId, pageNumber + 1, pageSize);
+                ImageDao.FindByTag(pageSize, pageNumber + 1, tagId);
 
                 return new ImagePageable(imagesDTO, !pageNumber.Equals(0), true);
             }
@@ -123,14 +135,14 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
 
         /// <exception cref="ArgumentException"/>
-        public SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count)
+        /*public SearchImageBlock FindImagesByTag(long tagId, int startIndex, int count)
         {
             List<Image> images = ImageDao.FindByTag(tagId, startIndex, count);
 
             bool existMoreImages = (images.Count == count);
 
             return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
-        }
+        }*/
 
         /// <exception cref="InstanceNotFoundException"/>
         [Transactional]
@@ -209,21 +221,29 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         }
 
         /// <exception cref="ArgumentException"/>
-        public TagBlock FindTags(int startIndex, int count)
+        /// <exception cref="PageableOutofRangeException"/>
+        public TagBlock FindTags(int pageSize, int pageNumber)
         {
-            IList<TagBlock> tags = new List<TagBlock>();
-            foreach (Tag tag in TagDao.GetAllElementsPageable(count, startIndex))
+            IList<TagDTO> tagDto = new List<TagDTO>();
+            foreach (Tag tag in TagDao.GetAllElementsPageable(pageSize, pageNumber))
             {
-                tags.Add(new TagBlock(
+                tagDto.Add(new TagDTO(
                     tag.tagId,
                     tag.name,
-                    tag.uses
+                    tag.Image.Count()
                 ));
             }
 
-            TagDao.GetAllElementsPageable(count, startIndex + 1);
+            try
+            {
+                TagDao.GetAllElementsPageable(pageSize, pageNumber + 1);
 
-            return new TagBlock(tags, !startIndex.Equals(0), true);
+                return new TagBlock(tagDto, !pageNumber.Equals(0), true);
+            }
+            catch (PageableOutofRangeException)
+            {
+                return new TagBlock(tagDto, !pageNumber.Equals(0), false);
+            }
 
         }
 

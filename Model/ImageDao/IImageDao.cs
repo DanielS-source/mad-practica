@@ -1,7 +1,7 @@
 ﻿using Es.Udc.DotNet.ModelUtil.Dao;
 using System;
 using System.Collections.Generic;
-
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
 namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
 {
 
@@ -27,7 +27,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
         Image FindByUserWithTags(long userProfileId);
 
         /// <exception cref="ArgumentException"/>
-        List<Image> FindByTag(long tagId, int startIndex, int count);
+        /// <exception cref="PageableOutofRangeException"/>
+        IList<Image> FindByTag(int pageSize, int pageNumber, long tagId);
 
     }
 

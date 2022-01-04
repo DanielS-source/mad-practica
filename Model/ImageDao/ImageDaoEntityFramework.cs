@@ -1,5 +1,6 @@
 ﻿using Es.Udc.DotNet.ModelUtil.Dao;
 using Es.Udc.DotNet.ModelUtil.Exceptions;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -91,32 +92,31 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             return image;
         }
 
+
         /// <exception cref="ArgumentException"/>
-        public List<Image> FindByTag(long tagId, int startIndex, int count)
+        /// <exception cref="PageableOutofRangeException"/>
+        public IList<Image> FindByTag(int pageSize, int pageNumber, long tagId)
         {
+                if (pageSize <= 0)
+                {
+                    throw new ArgumentException("Page size must be greater than zero");
+                }
 
-            if (count <= 0)
-            {
-                throw new ArgumentException("Page size must be greater than zero");
-            }
+                DbSet<Image> imageContext = Context.Set<Image>();
 
-            DbSet<Image> imageContext = Context.Set<Image>();
+                if (pageNumber < 0)
+                {
+                    throw new PageableOutofRangeException(pageNumber);
+                }
 
-            if (startIndex < 0)
-            {
-                throw new ArgumentException("Page out of range" + startIndex);
-            }
+                IList<Image> images = imageContext.Include("Tag").Where(i => i.Tag.Any(l => l.tagId.Equals(tagId))).OrderByDescending(c => c.dateImg).Skip(pageSize * pageNumber).Take(pageSize).ToList();
 
+                if (pageNumber > 0 && images.Count().Equals(0))
+                {
+                    throw new PageableOutofRangeException(pageNumber);
+                }
 
-            List<Image> images = imageContext.Include("Tag").Where(c => c.Tag.Any(t => t.tagId.Equals(tagId))).OrderByDescending(c => c.dateImg).Skip(count * startIndex).Take(count).ToList();
-
-            if (startIndex > 0 && images.Count().Equals(0))
-            {
-                throw new ArgumentException("Page out of range" + startIndex);
-            }
-
-            return images;
-
+                return images;
         }
 
     }

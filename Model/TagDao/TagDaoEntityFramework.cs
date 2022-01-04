@@ -1,5 +1,6 @@
 ﻿using Es.Udc.DotNet.ModelUtil.Dao;
 using Es.Udc.DotNet.ModelUtil.Exceptions;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -26,36 +27,39 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.TagDao
                 return tag;
         }
 
-        /// <exception cref="ArgumentException"/>
-        public IList<Tag> GetAllElementsPageable(int pageSize, int pageNumber)
-        {
-                if (pageSize <= 0)
-                {
-                    throw new ArgumentException("Page size must be greater than zero");
-                }
-
-                DbSet<Tag> tagContext = Context.Set<Tag>();
-
-                if (pageNumber < 0)
-                {
-                    throw new ArgumentException("Page out of range" + pageNumber);
-                }
-
-                IList<Tag> tags = tagContext.OrderBy(t => t.tagId).Skip(pageSize * pageNumber).Take(pageSize).ToList();
-
-                if (pageNumber > 0 && tags.Count().Equals(0))
-                {
-                throw new ArgumentException("Page out of range" + pageNumber);
-            }
-
-                return tags;
-        }
 
         public IList<Tag> FindAllPosibleTagsinImages(int n)
         {
-                DbSet<Tag> tagContext = Context.Set<Tag>();
+            DbSet<Tag> tagContext = Context.Set<Tag>();
 
-                return tagContext.Include("Image").OrderByDescending(t => t.Image.Count()).Take(n).ToList();
+            return tagContext.Include("Image").OrderByDescending(t => t.Image.Count()).Take(n).ToList();
+        }
+
+
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="PageableOutofRangeException"/>
+        public IList<Tag> GetAllElementsPageable(int pageSize, int pageNumber)
+        {
+            if (pageSize <= 0)
+            {
+                throw new ArgumentException("Page size must be greater than zero");
+            }
+
+            DbSet<Tag> tagContext = Context.Set<Tag>();
+
+            if (pageNumber < 0)
+            {
+                throw new PageableOutofRangeException(pageNumber);
+            }
+
+            IList<Tag> tags = tagContext.OrderBy(t => t.tagId).Skip(pageSize * pageNumber).Take(pageSize).ToList();
+
+            if (pageNumber > 0 && tags.Count().Equals(0))
+            {
+                throw new PageableOutofRangeException(pageNumber);
+            }
+
+            return tags;
         }
 
     }

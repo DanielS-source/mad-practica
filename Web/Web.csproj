@@ -138,7 +138,7 @@
     <Content Include="Pages\Tags\App_LocalResources\Tags.aspx.es.resx" />
     <Content Include="Pages\Tags\App_LocalResources\Tags.aspx.resx" />
     <Content Include="Pages\Tags\Tags.aspx" />
-    <Content Include="Pages\UploadImage.aspx" />
+    <Content Include="Pages\UploadImage\UploadImage.aspx" />
     <Content Include="App_GlobalResources\Common.es.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Common.es.designer.cs</LastGenOutput>
@@ -181,6 +181,8 @@
     <Content Include="Pages\UserProfile\FirstNameLastName\App_LocalResources\FirstNameLastName.aspx.resx" />
     <Content Include="Pages\UserProfile\Password\App_LocalResources\Password.aspx.es.resx" />
     <Content Include="Pages\UserProfile\Password\App_LocalResources\Password.aspx.resx" />
+    <Content Include="Pages\UploadImage\App_LocalResources\UploadImage.aspx.es.resx" />
+    <Content Include="Pages\UploadImage\App_LocalResources\UploadImage.aspx.resx" />
     <None Include="packages.config" />
     <Content Include="Pages\UserProfile\Followers\Followers.aspx" />
     <Content Include="Pages\UserProfile\Password\Password.aspx" />
@@ -301,11 +303,11 @@
     <Compile Include="Pages\Tags\Tags.aspx.designer.cs">
       <DependentUpon>Tags.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UploadImage.aspx.cs">
+    <Compile Include="Pages\UploadImage\UploadImage.aspx.cs">
       <DependentUpon>UploadImage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\UploadImage.aspx.designer.cs">
+    <Compile Include="Pages\UploadImage\UploadImage.aspx.designer.cs">
       <DependentUpon>UploadImage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserProfile\Account\Account.aspx.cs">
