@@ -167,8 +167,6 @@
     <Content Include="Pages\UserProfile\Culture\Culture.aspx" />
     <Content Include="Pages\UserProfile\Email\Email.aspx" />
     <Content Include="Pages\UserProfile\FirstNameLastName\FirstNameLastName.aspx" />
-    <Content Include="Pages\UserProfile\Followers\App_LocalResources\Followers.aspx.es.resx" />
-    <Content Include="Pages\UserProfile\Followers\App_LocalResources\Followers.aspx.resx" />
     <Content Include="Pages\UserProfile\Account\App_LocalResources\Account.aspx.es.resx" />
     <Content Include="Pages\UserProfile\Account\App_LocalResources\Account.aspx.resx" />
     <Content Include="Pages\UserProfile\App_LocalResources\UserProfile.Master.es.resx" />
@@ -179,13 +177,22 @@
     <Content Include="Pages\UserProfile\Email\App_LocalResources\Email.aspx.resx" />
     <Content Include="Pages\UserProfile\FirstNameLastName\App_LocalResources\FirstNameLastName.aspx.es.resx" />
     <Content Include="Pages\UserProfile\FirstNameLastName\App_LocalResources\FirstNameLastName.aspx.resx" />
+    <Content Include="Pages\UserProfile\Followers\Followers.aspx" />
     <Content Include="Pages\UserProfile\Password\App_LocalResources\Password.aspx.es.resx" />
     <Content Include="Pages\UserProfile\Password\App_LocalResources\Password.aspx.resx" />
     <Content Include="Pages\UploadImage\App_LocalResources\UploadImage.aspx.es.resx" />
     <Content Include="Pages\UploadImage\App_LocalResources\UploadImage.aspx.resx" />
+    <Content Include="Pages\UserProfile\Follows\App_LocalResources\Follows.aspx.resx" />
+    <Content Include="Pages\UserProfile\Follows\App_LocalResources\Follow.aspx.es.resx" />
+    <Content Include="Pages\UserProfile\Followers\App_LocalResources\Followers.aspx.resx" />
+    <Content Include="Pages\UserProfile\Followers\App_LocalResources\Followers.aspx.es.resx" />
     <None Include="packages.config" />
-    <Content Include="Pages\UserProfile\Followers\Followers.aspx" />
+    <Content Include="Pages\UserProfile\Follows\Follows.aspx" />
     <Content Include="Pages\UserProfile\Password\Password.aspx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -345,6 +352,13 @@
     <Compile Include="Pages\UserProfile\Followers\Followers.aspx.designer.cs">
       <DependentUpon>Followers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UserProfile\Follows\Follows.aspx.cs">
+      <DependentUpon>Follows.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UserProfile\Follows\Follows.aspx.designer.cs">
+      <DependentUpon>Follows.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserProfile\Password\Password.aspx.cs">
       <DependentUpon>Password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -366,6 +380,11 @@
     </Compile>
     <Compile Include="Masters\WebMaster.Master.designer.cs">
       <DependentUpon>WebMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

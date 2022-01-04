@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="nextBtn.Text" xml:space="preserve">
-    <value>Next</value>
+  <data name="btnFollowed.Text" xml:space="preserve">
+    <value>Followed</value>
   </data>
-  <data name="previousBtn.Text" xml:space="preserve">
-    <value>Previous</value>
-  </data>
-  <data name="title.Text" xml:space="preserve">
+  <data name="btnFollowers.Text" xml:space="preserve">
     <value>Followers</value>
+  </data>
+  <data name="follow.Text" xml:space="preserve">
+    <value>Follow</value>
+  </data>
+  <data name="followingBtn.Text" xml:space="preserve">
+    <value>Following</value>
   </data>
 </root>

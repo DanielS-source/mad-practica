@@ -13,15 +13,6 @@ namespace Web.Pages {
     public partial class WebForm3 {
         
         /// <summary>
-        /// lclTitle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lclTitle;
-        
-        /// <summary>
         /// txtTitle control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTitle;
-        
-        /// <summary>
-        /// lclDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lclDescription;
         
         /// <summary>
         /// txtDescription control.
@@ -67,15 +49,6 @@ namespace Web.Pages {
         protected global::System.Web.UI.WebControls.DropDownList categoryDropDown;
         
         /// <summary>
-        /// Localize1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
-        
-        /// <summary>
         /// txtDiaphragmAperture control.
         /// </summary>
         /// <remarks>
@@ -83,15 +56,6 @@ namespace Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDiaphragmAperture;
-        
-        /// <summary>
-        /// Localize2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
         
         /// <summary>
         /// txtShutterSpeed control.
@@ -103,15 +67,6 @@ namespace Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtShutterSpeed;
         
         /// <summary>
-        /// Localize3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
-        
-        /// <summary>
         /// txtISO control.
         /// </summary>
         /// <remarks>
@@ -119,15 +74,6 @@ namespace Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtISO;
-        
-        /// <summary>
-        /// Localize4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize4;
         
         /// <summary>
         /// txtWhiteBalance control.
