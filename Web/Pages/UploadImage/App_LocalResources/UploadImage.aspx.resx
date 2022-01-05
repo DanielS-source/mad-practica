@@ -120,6 +120,9 @@
   <data name="AddTagButton.Text" xml:space="preserve">
     <value>Create tag</value>
   </data>
+  <data name="FileValidator.ErrorMessage" xml:space="preserve">
+    <value>You need to upload a file</value>
+  </data>
   <data name="InfoLabel.Text" xml:space="preserve">
     <value>Select a label</value>
   </data>

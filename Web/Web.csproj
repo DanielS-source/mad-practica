@@ -132,6 +132,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Css\CustomStyle.css" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\ImageDetails\ImageDetails.aspx" />
     <Content Include="Pages\Login\Login.aspx" />
     <Content Include="Pages\MainPage\MainPage.aspx" />
     <Content Include="Pages\Register\Register.aspx" />
@@ -282,6 +283,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WebMaster.Master.es.resx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ImageDetails\ImageDetails.aspx.cs">
+      <DependentUpon>ImageDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ImageDetails\ImageDetails.aspx.designer.cs">
+      <DependentUpon>ImageDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -399,7 +407,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\ImageDetails\App_LocalResources\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -46,7 +46,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             image.dateImg = DateTime.Now;
             image.pathImg = "C:\\Software\\DataBase\\Images\\" + image.usrId + image.dateImg.Ticks;
             image.catId = CategoryDao.FindByName(imageDTO.category).catId;
-
+            //Check whether Directory (Images) exists.
+            if (!Directory.Exists("C:\\Software\\DataBase\\Images\\"))
+            {
+                //If Directory (Images) does not exists. Create it.
+                Directory.CreateDirectory("C:\\Software\\DataBase\\Images\\");
+            }
             File.WriteAllBytes(image.pathImg, imageDTO.file);
 
             foreach (long tagId in tagsIds)
