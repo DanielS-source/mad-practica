@@ -245,9 +245,16 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 followers.Add(userProfileDetails);
             }
 
-            bool existMore = followers.Count == count;
+            try 
+            {
+                List<UserProfile> followersDb = UserProfileDao.GetFollowers(userId, startIndex + 1, count);
 
-            return new UserBlock(followers, existMore);
+                return new UserBlock(followers, true);
+            } 
+            catch (ArgumentException)
+            {
+                return new UserBlock(followers, false);
+            }
         }
 
         public UserBlock GetFollowed(long userId, int startIndex, int count)
@@ -271,9 +278,16 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
                 followed.Add(userProfileDetails);
             }
 
-            bool existMore = followed.Count == count;
+            try
+            {
+                List<UserProfile> followedDb = UserProfileDao.GetFollowed(userId, startIndex + 1, count);
 
-            return new UserBlock(followed, existMore);
+                return new UserBlock(followed, true);
+            }
+            catch (ArgumentException)
+            {
+                return new UserBlock(followed, false);
+            }
         }
 
         public ImageBlock GetUserImages(long userProfileId, int startIndex, int count)
