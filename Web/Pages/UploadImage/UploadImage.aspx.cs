@@ -39,23 +39,6 @@ namespace Web.Pages
 
         }
 
-        protected void Upload_Image(object sender, EventArgs e)
-        {
-            string folderPath = Server.MapPath("~/Files/");
-
-            //Check whether Directory (Folder) exists.
-            if (!Directory.Exists(folderPath))
-            {
-                //If Directory (Folder) does not exists. Create it.
-                Directory.CreateDirectory(folderPath);
-            }
-
-            //Save the File to the Directory (Folder).
-            FileUpload1.SaveAs(folderPath + Path.GetFileName(FileUpload1.FileName));
-            //Display the Picture in Image control.
-            Image1.ImageUrl = "~/Files/" + Path.GetFileName(FileUpload1.FileName);
-        }
-
         protected void PostImage(object sender, EventArgs e)
         {
 
@@ -97,6 +80,13 @@ namespace Web.Pages
                 Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }
+
+        protected void FileValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            FileValidator.IsValid = FileUpload1.HasFile;
+        }
+
+        #region CategoryDropdown
         protected void initializeDropdown()
         {
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
@@ -156,6 +146,7 @@ namespace Web.Pages
 
         }
 
+        #endregion CategoryDropdown
 
         #region Tags
         protected void TagValidator_ServerValidate(object source, ServerValidateEventArgs args)

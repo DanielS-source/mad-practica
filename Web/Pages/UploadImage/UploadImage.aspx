@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Post Photo" Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="UploadImage.aspx.cs" Inherits="Web.Pages.WebForm3" Trace="true" %>
+﻿<%@ Page Title="Post Photo" Language="C#" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="UploadImage.aspx.cs" Inherits="Web.Pages.WebForm3" %>
 
 <asp:Content ID="content" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div id="form" class="card">
@@ -14,6 +14,7 @@
                     placeholder="<%$ Resources:Common, title %>">
                 </asp:TextBox>
             </span>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtTitle"></asp:RequiredFieldValidator>
         </div>
 
         <div class="field">
@@ -23,6 +24,7 @@
                     placeholder="<%$ Resources:Common, description %>">
                 </asp:TextBox>
             </span>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtDescription"></asp:RequiredFieldValidator>
         </div>
 
         <div class="field mb-4">
@@ -68,9 +70,6 @@
                 </asp:TextBox>
             </span>
         </div>
-
-        <asp:FileUpload ID="FileUpload1" runat="server" />
-        <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClick="Upload_Image" />
 
         <hr />
         <br />
@@ -126,11 +125,10 @@
             </div>
         </div>
         <!-- END TAGS -->
-
+        
         <hr />
-        <asp:Image ID="Image1" runat="server" Height = "100" Width = "100" />
-
-
+        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:CustomValidator ID="FileValidator" Font-Size="Smaller" ErrorMessage="<%$ Resources: , FileValidator.ErrorMessage %>" CssClass="text-danger" ValidationGroup="Required" OnServerValidate="FileValidator_ServerValidate" runat="server"></asp:CustomValidator>
         <div class="button">
             <asp:Button ID="btnCreate" class="btn purple-gradient btn-rounded" Text="Upload" runat="server" meta:resourcekey="btnCreate" OnClick="PostImage" />
         </div>
