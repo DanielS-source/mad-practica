@@ -32,6 +32,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.CommentsDao
 
             var result =comments.Where(c => c.imgId == imgId)
                         .Include(c => c.UserProfile)
+                        .OrderBy(c => c.postDate)
                         .Skip(startIndex)
                         .Take(count)
                         .ToList();

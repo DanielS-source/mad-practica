@@ -9,8 +9,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
     public class SearchImageDTO
     {
         public SearchImageDTO(Image image, string imgUser, string imgCategory, byte[] img, List<Comments> imgComments)
-
         {
+            imgId = image.imgId;
             usrId = image.usrId;
             title = image.title;
             description = image.description;
@@ -26,6 +26,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             file = img;
             comments = imgComments;
         }
+
+        public long imgId { get; set; }
         public long usrId { get; set; }
         public string username { get; set; }
         public string title { get; set; }

@@ -21,6 +21,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         [Transactional]
         SearchImageBlock SearchImages(string keywords, string category, int startIndex, int count);
 
+        SearchImageDTO GetImageById(long imgId);
+
         /// <exception cref="ArgumentException" />
         /// <exception cref="PageableOutofRangeException" />
         ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId);

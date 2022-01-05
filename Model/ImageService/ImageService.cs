@@ -88,6 +88,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
         }
 
+        public SearchImageDTO GetImageById(long imgId)
+        {
+            return AdaptToSearchImageDTO(ImageDao.Find(imgId));
+        }
+
         /// <exception cref="ArgumentException"/>
         /// <exception cref="PageableOutofRangeException"/>
         public ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId)
@@ -384,7 +389,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             byte[] img = File.ReadAllBytes(image.pathImg);
             List<Comments> comments = null;//CommentsDao.findByImage(image.imgId, 0, 2);
             SearchImageDTO search = new SearchImageDTO(image, username, category, img, comments);
-
+            string imreBase64Data = Convert.ToBase64String(img);
+            search.imageSrc = string.Format("data:image/png;base64,{0}", imreBase64Data);
             return search;
         }
 

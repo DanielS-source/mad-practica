@@ -21,8 +21,7 @@
                 <li class="list-inline-item pr-2 white-text"><i class="icon-calendar pr-1"></i><%= image.dateImg %></li>
                 <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-comments pr-1"></i>In progress</a></li>
                 <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-thumbs-up pr-1"></i><%= image.likes %></a></li>
-                <li class="list-inline-item"><a href="#" class="white-text"><i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %></a></li>
-                <li class="list-inline-item"><a href="#" class="white-text"><i class="icon-ellipsis-horizontal pr-1"> </i>See More</a></li>
+                <li class="list-inline-item"><a href="/Pages/UserProfile/Account/Account.aspx?userId=<%= image.usrId %>"" class="white-text"><i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %></a></li>
             </ul>
             <ul class="list-unstyled list-inline font-small">
                 <li class="list-inline-item"><a href="#" class="white-text">EXIF</a></li>
@@ -32,9 +31,21 @@
                 <li class="list-inline-item pr-2 white-text"><%= image.wb %></li>
             </ul>
         </div>
+        <!-- Comment Form -->
         <div>
-            <span>Comments</span>
+            <span>Comments<br />
+            </span>
+        &nbsp;<asp:TextBox ID="txtComment" runat="server" Height="46px" Width="929px"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Height="43px" OnClick="Button1_Click" style="margin-top: 0px" Text="Button" Width="190px" />
         </div>
+        <!-- Comment Form -->
+        <!-- Comment List -->
+        <% foreach (var comment in comments.CommentList) { %>
+            <span><a href="/Pages/UserProfile/Account/Account.aspx?userId=<%= comment.usrId %>" class="white-text"> <%= comment.loginName %></a></span>
+            <span> <%= comment.message %></span>
+            <span> <%= comment.postDate %></span>
+        <% } %>
+        <!-- Comment Lits -->
     </div>
     <!-- Card -->
 </asp:Content>
