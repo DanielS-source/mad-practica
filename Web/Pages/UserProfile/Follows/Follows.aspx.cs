@@ -94,19 +94,23 @@ namespace Web.Pages
             }
             else 
             {
+                followBtn.Visible = false;
+                followingBtn.Visible = false;
+
                 if (!isFollowing)
                 {
 
                     //followingBtn.Text = "\" <%$Resources: , follow.Text %> \"";
-                    followingBtn.CssClass = "btn btn-success";
-
+                    //followingBtn.CssClass = "btn btn-success";
+                    followBtn.Visible = true;
                     backgroundSpan.Attributes.Remove("class");
                     backgroundSpan.Attributes.Add("class", "input-group-text bg-success");
                 }
                 else
                 {
                     //followingBtn.Text = "\" <%$Resources: , followingBtn.Text %> \"";
-                    followingBtn.CssClass = "btn btn-secondary";
+                    //followingBtn.CssClass = "btn btn-secondary";
+                    followingBtn.Visible = true;
                     followingBtn.Enabled = false;
 
                     backgroundSpan.Attributes.Remove("class");
