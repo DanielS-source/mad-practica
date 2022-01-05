@@ -24,7 +24,7 @@ namespace Web.Pages
             long userId = Convert.ToInt32(Request.Params.Get("userId"));
 
             String url =
-                String.Format("../Followers/Followers.aspx?userId={0}&op={1}&startIndex={2}", userId, 0, 0);
+                String.Format("../Followers/Followers.aspx?userId={0}&op={1}", userId,0);
 
             Response.Redirect(url);
         }
@@ -34,7 +34,7 @@ namespace Web.Pages
             long userId = Convert.ToInt32(Request.Params.Get("userId"));
 
             String url =
-                String.Format("../Followers/Followers.aspx?userId={0}&op={1}&=startIndex={2}", userId, 1, 0);
+                String.Format("../Followers/Followers.aspx?userId={0}&op={1}", userId, 1);
 
             Response.Redirect(url);
         }

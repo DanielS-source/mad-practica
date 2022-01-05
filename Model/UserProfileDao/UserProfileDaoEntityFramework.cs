@@ -54,9 +54,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
 
             DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
 
-            List<UserProfile> followers = userProfileContext.Include("Followers").
+            List<UserProfile> user = userProfileContext.Include("Followers").
                 Where(u => u.usrId.Equals(userId)).
-                OrderBy(f => f.usrId).
+                ToList();
+
+
+            List<UserProfile> followers = user[0].Followers.
                 Skip(count * startIndex).
                 Take(count).
                 ToList();
@@ -66,10 +69,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 throw new ArgumentException("Page out of range" + startIndex);
             }
 
-            return followers[0].Followers.
-                Skip(count * startIndex).
-                Take(count).
-                ToList();
+            return followers;
         }
 
         public List<UserProfile> GetFollowed(long userId, int startIndex, int count)
@@ -87,9 +87,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
 
             DbSet<UserProfile> userProfileContext = Context.Set<UserProfile>();
 
-            List<UserProfile> followed = userProfileContext.Include("Follows").
+            List<UserProfile> user = userProfileContext.Include("Follows").
                 Where(u => u.usrId.Equals(userId)).
-                OrderBy(u => u.usrId).
+                ToList();
+
+            List<UserProfile> followed = user[0].Follows.
                 Skip(count * startIndex).
                 Take(count).
                 ToList();
@@ -99,10 +101,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 throw new ArgumentException("Page out of range" + startIndex);
             }
 
-            return followed[0].Follows.
-                Skip(count * startIndex).
-                Take(count).
-                ToList();
+            return followed;
         }
 
         public List<UserProfile> GetAllFollowed(long userId)
@@ -114,7 +113,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserProfileDao
                 OrderBy(f => f.usrId).
                 ToList();
 
-            return followed;
+            return followed[0].Follows.ToList();
         }
     }
 

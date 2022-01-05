@@ -11,7 +11,6 @@ namespace Web.Pages.UserProfile.Followers
 {
     public partial class Followers : System.Web.UI.Page
     {
-        public int startIndex;
         private int pageSize = Properties.Settings.Default.page_size;
 
         public List<UserProfileDetails> followers = new List<UserProfileDetails>();
@@ -21,7 +20,6 @@ namespace Web.Pages.UserProfile.Followers
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            startIndex = Convert.ToInt32(Request.Params.Get("startIndex"));
             this.getFollowers();
             this.render();
 
@@ -36,11 +34,11 @@ namespace Web.Pages.UserProfile.Followers
             int operation = Convert.ToInt32(Request.Params.Get("op"));
             if (operation == 0)
             {
-                this.followersBlock = userService.GetFollowers(userId, startIndex, pageSize);
+                this.followersBlock = userService.GetFollowers(userId, CurrentFollowPage, pageSize);
             }
             else 
             {
-                this.followersBlock = userService.GetFollowed(userId, startIndex, pageSize);
+                this.followersBlock = userService.GetFollowed(userId, CurrentFollowPage, pageSize);
             }
                 
             
@@ -49,24 +47,16 @@ namespace Web.Pages.UserProfile.Followers
 
         protected void nextBtn_Click(object sender, EventArgs e)
         {
-            long userId = Convert.ToInt32(Request.Params.Get("userId"));
-            int operation = Convert.ToInt32(Request.Params.Get("op"));
-            startIndex = startIndex + 1;
-            String url =
-                String.Format("../Followers/Followers.aspx?userId={0}&op={1}&=startIndex={2}", userId, operation, startIndex);
-
-            Response.Redirect(url);
+            CurrentFollowPage++;
+            getFollowers();
+            render();
         }
 
         protected void previousBtn_Click(object sender, EventArgs e)
         {
-            long userId = Convert.ToInt32(Request.Params.Get("userId"));
-            int operation = Convert.ToInt32(Request.Params.Get("op"));
-
-            String url =
-                String.Format("../Followers/Followers.aspx?userId={0}&op={1}&=startIndex={2}", userId, operation, startIndex--);
-
-            Response.Redirect(url);
+            CurrentFollowPage--;
+            getFollowers();
+            render();
         }
 
         protected void render()
@@ -74,7 +64,7 @@ namespace Web.Pages.UserProfile.Followers
             previousBtn.Visible = true;
             nextBtn.Visible = true;
 
-            if (followers.Count <= 0 || startIndex <= 0)
+            if (followers.Count <= 0 || CurrentFollowPage <= 0)
             {
                 previousBtn.Visible = false;
             }
@@ -85,6 +75,25 @@ namespace Web.Pages.UserProfile.Followers
             }
 
 
+        }
+
+        private int CurrentFollowPage
+        {
+            get
+            {
+                if (ViewState["followPage"] is null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return (int)ViewState["followPage"];
+                }
+            }
+            set
+            {
+                ViewState["followPage"] = value;
+            }
         }
     }
 
