@@ -23,8 +23,14 @@ namespace Web.Pages
             }
 
             this.comments = imageService.GetImageRelatedComments(image.imgId, 0, 10);
-
+            if (IsPostBack)
+            {
+                this.image = imageService.GetImageById(image.imgId);
+            }
         }
+
+
+        #region AddComment
 
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -33,5 +39,23 @@ namespace Web.Pages
             long userId = 1L;//SessionManager.GetUserId(Context);
             imageService.AddComment(userId, this.image.imgId, txtComment.Text);
         }
+
+        #endregion AddComment
+
+        #region LikeImage
+
+        protected void LikeImage(object sender, EventArgs e)
+        {
+            if (SessionManager.IsUserAuthenticated(Context))
+            {
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                long userId = 1L;//SessionManager.GetUserId(Context);
+                imageService.LikeImage(userId, image.imgId);
+            }
+        }
+
+        #endregion LikeImage
     }
 }

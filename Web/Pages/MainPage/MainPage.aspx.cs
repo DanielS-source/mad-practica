@@ -239,5 +239,19 @@ namespace Web.Pages
 
         #endregion SearchImages
 
+        #region LikeImage
+
+        protected void LikeImage(object sender, EventArgs e)
+        {
+            if (SessionManager.IsUserAuthenticated(Context))
+            {
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                //imageService.LikeImage(1L, ima)
+            }
+        }
+
+        #endregion LikeImage
     }
 }

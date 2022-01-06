@@ -18,10 +18,24 @@
         <!-- Card footer -->
         <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
             <ul class="list-unstyled list-inline font-small">
-                <li class="list-inline-item pr-2 white-text"><i class="icon-calendar pr-1"></i><%= image.dateImg %></li>
-                <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-comments pr-1"></i>In progress</a></li>
-                <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-thumbs-up pr-1"></i><%= image.likes %></a></li>
-                <li class="list-inline-item"><a href="/Pages/UserProfile/Account/Account.aspx?userId=<%= image.usrId %>"" class="white-text"><i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %></a></li>
+                <li class="list-inline-item pr-2 white-text">
+                    <i class="icon-calendar pr-1"></i><%= image.dateImg %>
+                </li>
+                <li class="list-inline-item pr-2">
+                    <a href="#" class="white-text">
+                        <i class="icon-comments pr-1"></i>In progress
+                    </a>
+                </li>
+                <li class="list-inline-item pr-2">
+                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LikeImage">
+                        <i class="icon-thumbs-up pr-1"></i><%= image.likes %>
+                    </asp:LinkButton>
+                </li>
+                <li class="list-inline-item">
+                    <a href="/Pages/UserProfile/Account/Account.aspx?userId=<%= image.usrId %>"" class="white-text">
+                        <i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %>
+                    </a>
+                </li>
             </ul>
             <ul class="list-unstyled list-inline font-small">
                 <li class="list-inline-item"><a href="#" class="white-text">EXIF</a></li>
