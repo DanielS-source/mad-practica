@@ -21,7 +21,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
         private const string loginName = "loginNameTest";
 
         private const string clearPassword = "password";
-        private const string firstName = "name";
+        private const string firstName = "nameTest";
         private const string lastName = "lastName";
         private const string email = "user@udc.es";
         private const string language = "es";
@@ -233,12 +233,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                     Image2
                 };
 
-                Boolean existMoreImages = false;
+                bool existMoreImages = false;
                 int startIndex = 0;
                 int count = 10;
                 ImageBlock expectedImages = new ImageBlock(imageList, existMoreImages);
 
-                ImageBlock foundImages = ImageService.SearchImages("Pokemon", null, startIndex, count);
+                SearchImageBlock foundImages = ImageService.SearchImages("Pokemon", null, startIndex, count);
 
                 Assert.AreEqual(expectedImages.Images.Count, foundImages.Images.Count);
             }
@@ -353,12 +353,12 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 Image Image2 = ImageService.PostImage(ImageDao2, tagsId2);
                 Image Image3 = ImageService.PostImage(ImageDao3, tagsId3);
 
-                List<Image> FoundImage = ImageDao.FindByTag(tag1.tagId, startIndex, count);
+                List<Image> FoundImage = ImageDao.FindByTag(count, startIndex, tag1.tagId).ToList();
                 Assert.AreEqual(Image1.pathImg, FoundImage[0].pathImg);
                 Assert.AreEqual(tag1.tagId, FoundImage[0].Tag.ToList()[0].tagId);
                 Assert.AreEqual(tag1.tagId, FoundImage[1].Tag.ToList()[0].tagId);
 
-                List<Image> FoundImage_2 = ImageDao.FindByTag(tag3.tagId, startIndex, count);
+                List<Image> FoundImage_2 = ImageDao.FindByTag(count, startIndex, tag1.tagId).ToList();
                 Assert.AreEqual(Image2.pathImg, FoundImage_2[1].pathImg);
                 Assert.AreEqual(tag3.tagId, FoundImage_2[1].Tag.ToList()[0].tagId);
 
@@ -410,18 +410,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
                 Image Image2 = ImageService.PostImage(ImageDTO2, tagsId2);
                 Image Image3 = ImageService.PostImage(ImageDTO3, tagsId3);
 
-                ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
-                Assert.AreEqual(2, FoundImages.Images.Count);
-                Assert.AreEqual(Image1.pathImg, FoundImages.Images[0].pathImg);
-                Assert.AreEqual(tag1.tagId, FoundImages.Images[0].Tag.ToList()[0].tagId);
-                Assert.AreEqual(tag1.tagId, FoundImages.Images[1].Tag.ToList()[0].tagId);
+                ImagePageable FoundImages = ImageService.FindImagesByTagPageable(count, startIndex, tag1.tagId);
+                Assert.AreEqual(2, FoundImages.ImageWithTagsDTO.Count);
+                Assert.AreEqual(Image1.pathImg, FoundImages.ImageWithTagsDTO[0].pathImg);
+                Assert.AreEqual(tag1.tagId, FoundImages.ImageWithTagsDTO[0].Tags.ToList()[0].TagId);
+                Assert.AreEqual(tag1.tagId, FoundImages.ImageWithTagsDTO[1].Tags.ToList()[0].TagId);
 
-                ImageBlock FoundImages_2 = ImageService.FindImagesByTag(tag3.tagId, startIndex, count);
-                Assert.AreEqual(3, FoundImages_2.Images.Count);
-                Assert.AreEqual(Image1.pathImg, FoundImages_2.Images[0].pathImg);
-                Assert.AreEqual(tag3.tagId, FoundImages_2.Images[0].Tag.ToList()[2].tagId);
-                Assert.AreEqual(tag3.tagId, FoundImages_2.Images[1].Tag.ToList()[1].tagId);
-                Assert.AreEqual(tag3.tagId, FoundImages_2.Images[2].Tag.ToList()[1].tagId);
+                ImagePageable FoundImages_2 = ImageService.FindImagesByTagPageable(count, startIndex, tag3.tagId);
+                Assert.AreEqual(3, FoundImages_2.ImageWithTagsDTO.Count);
+                Assert.AreEqual(Image1.pathImg, FoundImages_2.ImageWithTagsDTO[0].pathImg);
+                Assert.AreEqual(tag3.tagId, FoundImages_2.ImageWithTagsDTO[0].Tags.ToList()[2].TagId);
+                Assert.AreEqual(tag3.tagId, FoundImages_2.ImageWithTagsDTO[1].Tags.ToList()[1].TagId);
+                Assert.AreEqual(tag3.tagId, FoundImages_2.ImageWithTagsDTO[2].Tags.ToList()[1].TagId);
             }
         }
 
@@ -503,13 +503,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             Image Image1 = ImageService.PostImage(ImageDTO1, emptyTags);
             Image Image2 = ImageService.PostImage(ImageDTO2, emptyTags);
 
-            ImageBlock FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
-            Assert.AreEqual(0, FoundImages.Images.Count);
+            ImagePageable FoundImages = ImageService.FindImagesByTagPageable(count, startIndex, tag1.tagId);
+            Assert.AreEqual(0, FoundImages.ImageWithTagsDTO.Count);
 
             ImageService.AddTagsToImage(Image1.imgId, tagsId);
 
-            FoundImages = ImageService.FindImagesByTag(tag1.tagId, startIndex, count);
-            Assert.AreEqual(1, FoundImages.Images.Count);
+            FoundImages = ImageService.FindImagesByTagPageable(count, startIndex, tag1.tagId);
+            Assert.AreEqual(1, FoundImages.ImageWithTagsDTO.Count);
 
         }
 
@@ -552,7 +552,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService.Tests
             Image Image2 = ImageService.PostImage(ImageDTO2, tagsId);
 
             TagBlock tags = ImageService.FindTags(startIndex, count);
-            Assert.AreEqual(2, tags.TagsBlock.Count);
+            Assert.AreEqual(2, tags.TagDto.Count);
         }
 
     }
