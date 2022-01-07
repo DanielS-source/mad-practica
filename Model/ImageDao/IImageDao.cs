@@ -30,6 +30,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
         /// <exception cref="PageableOutofRangeException"/>
         IList<Image> FindByTag(int pageSize, int pageNumber, long tagId);
 
+        List<Image> FindByUser(long userId, int count);
+
     }
 
 }

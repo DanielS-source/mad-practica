@@ -51,7 +51,7 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                long userId = 1L;//SessionManager.GetUserId(Context);
+                long userId = SessionManager.GetUserId(Context);
                 imageService.LikeImage(userId, image.imgId);
             }
         }

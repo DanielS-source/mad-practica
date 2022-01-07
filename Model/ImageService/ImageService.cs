@@ -287,6 +287,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             Image image = ImageDao.Find(imgId);
             UserProfile user = UserProfileDao.Find(userId);
             image.LikedBy.Add(user);
+            ImageDao.Update(image);
             return;
         }
 
@@ -398,6 +399,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         {
             Console.Write("patata");
             return CategoryDao.GetAllElements();
+        }
+
+        public SearchImageBlock FinByUser(long userId, int count) 
+        {
+            List<Image> images = ImageDao.FindByUser(userId, count);
+
+            bool existMore = (images.Count == count);
+
+            return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMore);
         }
     }
 }
