@@ -3,6 +3,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 using System;
 using System.Collections.Generic;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
@@ -50,14 +51,26 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
             {
                 ImageWithTagsDto imageDto = (ImageWithTagsDto)e.Item.DataItem;
 
-                Label loginLabel = (Label)e.Item.FindControl("LoginLabel");
-                loginLabel.Text = imageDto.LoginName;
+                HyperLink autorLink = (HyperLink)e.Item.FindControl("AutorLink");
+                autorLink.Text = "<i class='icon-location-arrow pr-1'> "+ imageDto.LoginName +" </i>";
+                autorLink.NavigateUrl = "~/Pages/UserProfile/Follows/Follows.aspx?userId=" + imageDto.usrId;
 
-                Label dateLabel = (Label)e.Item.FindControl("DateLabel");
-                dateLabel.Text = imageDto.dateImg.ToString("d");
+                HyperLink detailsLink = (HyperLink)e.Item.FindControl("DetailsLink");
+                detailsLink.Text = "<i class='icon-ellipsis-horizontal pr-1'> See More </i>";
+                detailsLink.NavigateUrl = "~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId;
 
-                TextBox textTextBox = (TextBox)e.Item.FindControl("TextTextBox");
-                textTextBox.Text = imageDto.title;
+                HyperLink likesLink = (HyperLink)e.Item.FindControl("LikesLink");
+                likesLink.Text = "<i class='icon-thumbs-up pr-1'> "+ imageDto.likes +" </i>";
+                //likesLink.NavigateUrl = "~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId; //Links A Likes
+
+                HtmlGenericControl dateLabel = (HtmlGenericControl)e.Item.FindControl("DateLabel");
+                dateLabel.InnerText = imageDto.dateImg.ToString();
+
+                HtmlGenericControl imageTitle = (HtmlGenericControl)e.Item.FindControl("ImageTitle");
+                imageTitle.InnerText = imageDto.title;
+
+                Label imageDescription = (Label)e.Item.FindControl("ImageDescription");
+                imageDescription.Text = imageDto.description;
 
                 Image imageImagen = (Image)e.Item.FindControl("ImageImagen");
 
@@ -95,6 +108,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
             LoadImages();
         }
 
+
         #region Private functions
 
         private void LoadTags()
@@ -120,6 +134,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
                 IIoCManager iocManager = (IIoCManager)Context.Application["ManagerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
+               
                 ImagePageable imagePageable = imageService.FindImagesByTagPageable(ImagePageSize, CurrentImagePage, (long)ViewState["tag"]);
 
                 ImagesDataList.DataSource = imagePageable.ImageWithTagsDTO;
@@ -131,6 +146,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
 
                 InfoLabel.Visible = false;
                 EmptyData.Visible = imagePageable.ImageWithTagsDTO.Count.Equals(0);
+                if (EmptyData.Visible == true)
+                    PageableLabelPanel.Visible = false;
+                else
+                    PageableLabelPanel.Visible = true;
+
             }
             else
             {

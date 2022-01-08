@@ -24,7 +24,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
         List<Image> FindByDate(long userProfileId, int startIndex, int count);
 
         /// <exception cref="InstanceNotFoundException"/>
-        Image FindByUserWithTags(long userProfileId);
+        Image FindByUserWithTags(long userProfileId, string pathImg);
 
         /// <exception cref="ArgumentException"/>
         /// <exception cref="PageableOutofRangeException"/>

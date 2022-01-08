@@ -23,6 +23,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         SearchImageDTO GetImageById(long imgId);
 
+        ImageDTO GetRealImageById(long imgId);
+
         /// <exception cref="ArgumentException" />
         /// <exception cref="PageableOutofRangeException" />
         ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId);
@@ -35,7 +37,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         /// <exception cref="InstanceNotFoundException"/>
         [Transactional]
-        void UpdateImage(long usrId, long imgId, IList<long> tagsId);
+        void UpdateImage(long usrId, long imgId, string pathImg, IList<long> tagsId);
 
         /// <exception cref="InputValidationException"/>
         /// <exception cref="DuplicateInstanceException"/>

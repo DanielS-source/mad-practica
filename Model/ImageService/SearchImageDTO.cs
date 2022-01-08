@@ -27,6 +27,26 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             comments = imgComments;
         }
 
+        public SearchImageDTO(Image image, string imgUser, string imgCategory, byte[] img, List<Comments> imgComments, IList<TagDTO> tags)
+        {
+            imgId = image.imgId;
+            usrId = image.usrId;
+            title = image.title;
+            description = image.description;
+            dateImg = image.dateImg;
+            f = image.f;
+            t = image.t;
+            ISO = image.ISO;
+            wb = image.wb;
+            likes = image.likes;
+
+            category = imgCategory;
+            username = imgUser;
+            file = img;
+            comments = imgComments;
+            Tags = tags;
+        }
+
         public long imgId { get; set; }
         public long usrId { get; set; }
         public string username { get; set; }
@@ -42,5 +62,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public byte[] file { get; set; }
         public string imageSrc { get; set; }
         public List<Comments> comments { get; set; }
+
+        public IList<TagDTO> Tags { get; private set; }
     }
 }

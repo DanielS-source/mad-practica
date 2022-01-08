@@ -93,6 +93,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return AdaptToSearchImageDTO(ImageDao.Find(imgId));
         }
 
+        public ImageDTO GetRealImageById(long imgId)
+        {
+            return ToImageDTO(ImageDao.Find(imgId));
+        }
+
         /// <exception cref="ArgumentException"/>
         /// <exception cref="PageableOutofRangeException"/>
         public ImagePageable FindImagesByTagPageable(int pageSize, int pageNumber, long tagId)
@@ -156,10 +161,10 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         /// <exception cref="InstanceNotFoundException"/>
         [Transactional]
-        public void UpdateImage(long usrId, long imgId, IList<long> tagsId)
+        public void UpdateImage(long usrId, long imgId, string pathImg, IList<long> tagsId)
         {
 
-            Image image = ImageDao.FindByUserWithTags(usrId);
+            Image image = ImageDao.FindByUserWithTags(usrId, pathImg);
 
             IList<Tag> tags = new List<Tag>();
 
@@ -388,7 +393,20 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             string username = UserProfileDao.Find(image.usrId).loginName;
             byte[] img = File.ReadAllBytes(image.pathImg);
             List<Comments> comments = null;//CommentsDao.findByImage(image.imgId, 0, 2);
-            SearchImageDTO search = new SearchImageDTO(image, username, category, img, comments);
+           
+
+            /*-------TAGS-------*/
+            IList<TagDTO> tagsDTO = new List<TagDTO>();
+            foreach (Tag tag in image.Tag)
+            {
+                tagsDTO.Add(new TagDTO(
+                    tag.tagId,
+                    tag.name
+                ));
+            }
+            /*-------TAGS-------*/
+
+            SearchImageDTO search = new SearchImageDTO(image, username, category, img, comments, tagsDTO);
             string imreBase64Data = Convert.ToBase64String(img);
             search.imageSrc = string.Format("data:image/png;base64,{0}", imreBase64Data);
             return search;

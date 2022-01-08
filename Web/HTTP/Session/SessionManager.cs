@@ -61,6 +61,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Http.Session
             }
         }
 
+        /// <exception cref="AuthenticationException"/>
+        /// <exception cref="InputValidationException"/>
+        /// <exception cref="InstanceNotFoundException"/>
+        public static void UpdateImage(HttpContext context, long imgId, string pathImg, IList<long> tagsId)
+        {
+            if (!IsUserAuthenticated(context))
+            {
+                throw new AuthenticationException();
+            }
+
+            imageService.UpdateImage((long)context.Session[UserSession], imgId, pathImg, tagsId);
+        }
+
         /// <exception cref="InputValidationException"/>
         /// <exception cref="DuplicateInstanceException"/>
         public static void RegisterUser(HttpContext context, string login, string pass, UserProfileDetails userProfileDetails)

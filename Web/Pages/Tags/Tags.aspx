@@ -11,40 +11,8 @@
                 </ItemTemplate>
             </asp:DataList>
         </div>
-        <div class="d-flex justify-content-center mt-4">
-            <asp:Label ID="InfoLabel" Font-Size="X-Large" Font-Bold="True" Text="<%$ Resources: , InfoLabel.Text %>" runat="server"></asp:Label>
-            <asp:Label ID="EmptyData" Font-Size="X-Large" Font-Bold="True" Text="<%$ Resources: , EmptyData.Text %>" runat="server"></asp:Label>
-            <asp:Panel ID="ImagesPanel" Height="440px" runat="server">
-                <asp:DataList ID="ImagesDataList" ItemType="Es.Udc.DotNet.PracticaMaD.Model.ImageService.ImageWithTagsDto" OnItemDataBound="ImagesDataList_ItemDataBound" runat="server">
-                    <ItemTemplate>
-                        <div style="width: 500px">
-                            <div class="form-row">
-                                <div class="input-group col">
-                                    <asp:Label ID="LoginLabel" Text="Usuario" runat="server"></asp:Label>
-                                </div>
-                                <div class="float-right">
-                                    <div class="input-group col ">
-                                        <asp:Label ID="DateLabel" Text="Fecha" CssClass=" font-weight-light text-muted" runat="server"></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-                            <asp:TextBox ID="TextTextBox" Width="500px" Height="105px" MaxLength="280" TextMode="MultiLine" Enabled="false" Style="resize: none;" runat="server"></asp:TextBox>
-                            <asp:Image ID="ImageImagen" runat="server" AlternateText="ImagenTag" />
-                            <asp:Panel ID="ImageTagsPanel" ScrollBars="Horizontal" runat="server">
-                                <asp:DataList ID="ImageTagsDataList" RepeatDirection="Horizontal" OnItemDataBound="ImageTagsDataList_ItemDataBound" runat="server">
-                                    <ItemTemplate>
-                                        <div class="ml-2 mr-2">
-                                            <asp:Label ID="Tag" runat="server"></asp:Label>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:DataList>
-                            </asp:Panel>
-                        </div>
-                    </ItemTemplate>
-                </asp:DataList>
-            </asp:Panel>
-        </div>
-        <div class="row mt-3">
+
+        <asp:Panel CssClass="row mt-3 font-weight-bold border border-light" ID="PageableLabelPanel" runat="server">
             <div class="col">
                 <asp:LinkButton ID="PreviousImageLinkButton" Text="<%$ Resources: , PreviousLinkButton.Text %>" CssClass="float-right" CausesValidation="False" OnClick="PreviousImageLinkButton_Click" runat="server"></asp:LinkButton>
             </div>
@@ -54,5 +22,53 @@
             <div class="col">
                 <asp:LinkButton ID="NextImageLinkButton" Text="<%$ Resources: , NextLinkButton.Text %>" CssClass="float-left" CausesValidation="False" OnClick="NextImageLinkButton_Click" runat="server"></asp:LinkButton>
             </div>
+        </asp:Panel>
+
+        <div class="d-flex justify-content-center mt-4" >
+            <asp:Label ID="InfoLabel" Font-Size="X-Large" Font-Bold="True" Text="<%$ Resources: , InfoLabel.Text %>" runat="server"></asp:Label>
+            <asp:Label ID="EmptyData" Font-Size="X-Large" Font-Bold="True" Text="<%$ Resources: , EmptyData.Text %>" runat="server"></asp:Label>
+            <asp:Panel ID="ImagesPanel" Height="700px" runat="server">
+                <asp:DataList ID="ImagesDataList" ItemType="Es.Udc.DotNet.PracticaMaD.Model.ImageService.ImageWithTagsDto" OnItemDataBound="ImagesDataList_ItemDataBound" runat="server">
+                    <ItemTemplate>
+                        <!-- Card -->
+                        <div class="card">
+                          <!-- Card image -->
+                          <div class="view overlay">
+                              <asp:Image ID="ImageImagen" CssClass="card-img" runat="server" AlternateText="ImagenTag" />
+                          </div>
+                          <!-- Card content -->
+                          <div class="card-body">
+                            <!-- Title -->
+                            <h4 CssClass="card-title" id="ImageTitle" runat="server"></h4>
+                            <hr>
+                              <!-- Text -->
+                            <asp:Label CssClass="card-text" ID="ImageDescription" runat="server"></asp:Label>
+                          </div>
+                          <!-- Card footer -->
+                          <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+                            <ItemTemplate class="list-unstyled list-inline font-small">
+                              <i class="icon-calendar pr-1"></i>
+                              <li class="list-inline-item pr-2 white-text"  ID="DateLabel" runat="server"></li>
+                              <li class="list-inline-item pr-2"><asp:HyperLink CssClass="white-text" ID="LikesLink" runat="server"></asp:HyperLink></li>
+                              <li class="list-inline-item"><asp:HyperLink CssClass="white-text" ID="AutorLink" runat="server"></asp:HyperLink></li>
+                              <li class="list-inline-item"><asp:HyperLink CssClass="white-text" ID="DetailsLink" runat="server"></asp:HyperLink></li>
+                            </ItemTemplate>
+                          </div>
+                          <hr />
+                          <asp:Panel ID="ImageTagsPanel" ScrollBars="Horizontal" runat="server">
+                            <asp:DataList ID="ImageTagsDataList" RepeatDirection="Horizontal" OnItemDataBound="ImageTagsDataList_ItemDataBound" runat="server">
+                                <ItemTemplate>
+                                    <div class="ml-2 mr-2" style="margin-bottom:10px;padding:10px;font-weight:bold !important;">
+                                        <asp:Label ID="Tag" runat="server"></asp:Label>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:DataList>
+                          </asp:Panel>
+                        </div>
+                        <br />
+                    </ItemTemplate>
+                </asp:DataList>
+            </asp:Panel>
         </div>
+
 </asp:Content>

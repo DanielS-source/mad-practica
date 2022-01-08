@@ -22,6 +22,42 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags {
         protected global::System.Web.UI.WebControls.DataList TagsDataList;
         
         /// <summary>
+        /// PageableLabelPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PageableLabelPanel;
+        
+        /// <summary>
+        /// PreviousImageLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PreviousImageLinkButton;
+        
+        /// <summary>
+        /// ImagePageTag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ImagePageTag;
+        
+        /// <summary>
+        /// NextImageLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton NextImageLinkButton;
+        
+        /// <summary>
         /// InfoLabel control.
         /// </summary>
         /// <remarks>
@@ -56,32 +92,5 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList ImagesDataList;
-        
-        /// <summary>
-        /// PreviousImageLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PreviousImageLinkButton;
-        
-        /// <summary>
-        /// ImagePageTag control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ImagePageTag;
-        
-        /// <summary>
-        /// NextImageLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton NextImageLinkButton;
     }
 }
