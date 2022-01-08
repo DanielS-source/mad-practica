@@ -58,17 +58,23 @@ namespace Web.Pages
             cellAccountID.Text = user.Email;
             userContainer.InnerHtml = "<h1 class=\"text-center\">" + user.FirstName + "</h1>";
 
-            if (SessionManager.GetUserId(Context) == userId) 
-            { 
-            
+            try
+            {
+                if (SessionManager.GetUserId(Context) == userId)
+                {
+
+                }
             }
+            catch(NullReferenceException)
+            {}
+
         }
 
         protected void followingBtn_Click(object sender, EventArgs e)
         {
             if (!SessionManager.IsUserAuthenticated(Context))
             {
-                Response.Redirect("../Login/Login.aspx");
+                Response.Redirect("~/Pages/Login/Login.aspx");
             }
             else
             {
@@ -91,38 +97,50 @@ namespace Web.Pages
 
             long userId = Convert.ToInt32(Request.Params.Get("userId"));
 
-            bool isFollowing = userService.isFollowing(SessionManager.GetUserId(Context), userId);
 
-            if (SessionManager.GetUserId(Context) == userId)
+            try
             {
-                followDiv.Visible = false;
+                bool isFollowing = userService.isFollowing(SessionManager.GetUserId(Context), userId);
+
+                if (SessionManager.GetUserId(Context) == userId)
+                {
+                    followDiv.Visible = false;
+
+                }
+                else 
+                {
+                    followBtn.Visible = false;
+                    followingBtn.Visible = false;
+
+                    if (!isFollowing)
+                    {
+
+                        //followingBtn.Text = "\" <%$Resources: , follow.Text %> \"";
+                        //followingBtn.CssClass = "btn btn-success";
+                        followBtn.Visible = true;
+                        backgroundSpan.Attributes.Remove("class");
+                        backgroundSpan.Attributes.Add("class", "input-group-text bg-success");
+                    }
+                    else
+                    {
+                        //followingBtn.Text = "\" <%$Resources: , followingBtn.Text %> \"";
+                        //followingBtn.CssClass = "btn btn-secondary";
+                        followingBtn.Visible = true;
+                        followingBtn.Enabled = false;
+
+                        backgroundSpan.Attributes.Remove("class");
+                        backgroundSpan.Attributes.Add("class", "input-group-text bg-secondary");
+
+                    }
+                }
 
             }
-            else 
+            catch (NullReferenceException)
             {
-                followBtn.Visible = false;
+                followBtn.Visible = true;
                 followingBtn.Visible = false;
-
-                if (!isFollowing)
-                {
-
-                    //followingBtn.Text = "\" <%$Resources: , follow.Text %> \"";
-                    //followingBtn.CssClass = "btn btn-success";
-                    followBtn.Visible = true;
-                    backgroundSpan.Attributes.Remove("class");
-                    backgroundSpan.Attributes.Add("class", "input-group-text bg-success");
-                }
-                else
-                {
-                    //followingBtn.Text = "\" <%$Resources: , followingBtn.Text %> \"";
-                    //followingBtn.CssClass = "btn btn-secondary";
-                    followingBtn.Visible = true;
-                    followingBtn.Enabled = false;
-
-                    backgroundSpan.Attributes.Remove("class");
-                    backgroundSpan.Attributes.Add("class", "input-group-text bg-secondary");
-
-                }
+                backgroundSpan.Attributes.Remove("class");
+                backgroundSpan.Attributes.Add("class", "input-group-text bg-success");
             }
         }
 

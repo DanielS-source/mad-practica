@@ -1,16 +1,29 @@
 ﻿using Es.Udc.DotNet.PracticaMaD.Model.UserService;
+using Es.Udc.DotNet.PracticaMaD.Web.Http.Exceptions;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 using System;
+using System.Web.Security;
 using System.Web.UI;
 
 namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.UserProfile
 {
     public partial class UserProfile : MasterPage
     {
-        protected void Page_Init(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            UserProfileDetails userProfileDetails = SessionManager.FindUser(Context);
-            NameLabel.Text = userProfileDetails.FirstName;
+            if (!IsPostBack)
+            {
+                try
+                {
+                    UserProfileDetails userProfileDetails = SessionManager.FindUser(Context);
+                    NameLabel.Text = userProfileDetails.FirstName;
+                }
+                catch (AuthenticationException)
+                {
+                    UserProfileMainPanel.Visible = false;
+                }
+
+            }
         }
 
         protected void AccountLinkButton_Click(object sender, EventArgs e)
@@ -20,12 +33,19 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.UserProfile
 
         protected void FollowersFollowsButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                long usrId = SessionManager.GetUserId(Context);
+                String url =
+                    String.Format("../Follows/Follows.aspx?userId={0}", usrId);
 
-            long usrId = SessionManager.GetUserId(Context);
-            String url =
-                String.Format("../Follows/Follows.aspx?userId={0}", usrId);
+                Response.Redirect(url);
 
-            Response.Redirect(url);
+            }
+            catch(NullReferenceException)
+            {
+                UserProfileMainPanel.Visible = false;
+            }
 
         }
 

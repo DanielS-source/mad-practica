@@ -121,7 +121,7 @@
         <!-- Comment Form -->
         <!-- Comment List -->
         <% foreach (var comment in comments.CommentList) { %>
-            <span><a href="/Pages/UserProfile/Account/Account.aspx?userId=<%= comment.usrId %>" class="white-text"> <%= comment.loginName %></a></span>
+            <span><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= comment.usrId %>" class="white-text"> <%= comment.loginName %></a></span>
             <span> <%= comment.message %></span>
             <span> <%= comment.postDate %></span>
         <% } %>

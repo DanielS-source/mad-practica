@@ -68,8 +68,17 @@ namespace Web.Pages
         {
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
             IImageService imageService = iocManager.Resolve<IImageService>();
-            long userId = 1L;//SessionManager.GetUserId(Context);
-            imageService.AddComment(userId, this.image.imgId, txtComment.Text);
+
+            try //En caso de que haya un usuario logeado, comprobamos que sea el autor
+            {
+                long userId = 1L;//SessionManager.GetUserId(Context);
+                imageService.AddComment(userId, this.image.imgId, txtComment.Text);
+
+            }
+            catch (NullReferenceException) //En caso de que no haya un usuario logeado
+            {
+                Response.Redirect("~/Pages/Login/Login.aspx");
+            }
         }
 
         #endregion AddComment
