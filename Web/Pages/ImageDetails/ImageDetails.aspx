@@ -32,7 +32,7 @@
                     </asp:LinkButton>
                 </li>
                 <li class="list-inline-item">
-                    <a href="/Pages/UserProfile/Account/Account.aspx?userId=<%= image.usrId %>"" class="white-text">
+                    <a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= image.usrId %>"" class="white-text">
                         <i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %>
                     </a>
                 </li>

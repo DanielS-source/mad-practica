@@ -119,5 +119,17 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
                 return images;
         }
 
+        public List<Image> FindByUser(long userId, int count)
+        {
+            DbSet<Image> imageContext = Context.Set<Image>();
+
+            List<Image> images = imageContext.Include("LikedBy")
+                .Where(i => i.usrId.Equals(userId))
+                .OrderByDescending(i => i.dateImg)
+                .Take(count)
+                .ToList();
+
+            return images;
+        }
     }
 }

@@ -70,6 +70,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         [Transactional]
         List<Category> GetAllCategories();
+
+        [Transactional]
+        SearchImageBlock FinByUser(long userId, int count);
     }
 
 }

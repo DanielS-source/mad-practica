@@ -1,4 +1,5 @@
 ﻿using Es.Udc.DotNet.ModelUtil.IoC;
+using Es.Udc.DotNet.PracticaMaD.Model.ImageService;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 using System;
@@ -12,10 +13,15 @@ namespace Web.Pages
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
+        public List<SearchImageDTO> images = new List<SearchImageDTO>();
         protected void Page_Load(object sender, EventArgs e)
         {
-           getUserData();
-           renderNonFollowing();
+            if (!IsPostBack) 
+            {
+                getUserData();
+                renderNonFollowing();
+                SearchImages();
+            }
 
         }
 
@@ -117,6 +123,24 @@ namespace Web.Pages
                     backgroundSpan.Attributes.Add("class", "input-group-text bg-secondary");
 
                 }
+            }
+        }
+
+        protected void SearchImages()
+        {
+            
+            IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+            IImageService imageService = iocManager.Resolve<IImageService>();
+
+            long userId = Convert.ToInt32(Request.Params.Get("userId"));
+
+            images = imageService.FinByUser(userId, 3).Images;
+
+            for (int i = 0; i < images.Count; i++)
+            {
+                string imreBase64Data = Convert.ToBase64String(images[i].file);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                images[i].imageSrc = imgDataURL;
             }
         }
     }

@@ -19,7 +19,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             t = image.t;
             ISO = image.ISO;
             wb = image.wb;
-            likes = image.likes;
+            likes = image.LikedBy.Count;
 
             category = imgCategory;
             username = imgUser;
