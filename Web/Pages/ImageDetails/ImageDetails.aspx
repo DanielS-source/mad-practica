@@ -11,6 +11,9 @@
         <div class="card-body">
         <!-- Title -->
         <h4 class="card-title"><%= image.title %></h4>
+        <% if (image.usrId == userId) { %>
+            <asp:Button ID="btnDelete" Text="Delete image" runat="server" OnClick="DeleteImage" />
+        <% } %>
         <hr>
         <!-- Text -->
         <p class="card-text"><%= image.description %></p>
@@ -124,6 +127,11 @@
             <span><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= comment.usrId %>" class="white-text"> <%= comment.loginName %></a></span>
             <span> <%= comment.message %></span>
             <span> <%= comment.postDate %></span>
+            <% if (comment.usrId == userId) { %>
+            <asp:TextBox ID="editCommentText" runat="server" Height="46px" Width="929px"></asp:TextBox>
+            <asp:Button ID="btnEditComment" Text="Edit comment" runat="server" CommandArgument='<%#Eval("comment.comId")%>' OnClick="EditComment" />
+            <asp:Button ID="btnDeleteComment" Text="Delete comment" runat="server" CommandArgument='<%#Eval("comment.comId")%>' OnClick="DeleteComment" />
+            <% } %>
         <% } %>
         <!-- Comment Lits -->
     </div>

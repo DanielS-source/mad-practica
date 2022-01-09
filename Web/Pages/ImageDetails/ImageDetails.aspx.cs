@@ -16,6 +16,7 @@ namespace Web.Pages
         protected SearchImageDTO image;
         protected ImageDTO real_image;
         protected CommentsBlock comments;
+        protected long userId = 1L;
 
         private const int TagPageSize = 4;
 
@@ -84,7 +85,6 @@ namespace Web.Pages
         #endregion AddComment
 
         #region LikeImage
-
         protected void LikeImage(object sender, EventArgs e)
         {
             if (SessionManager.IsUserAuthenticated(Context))
@@ -96,8 +96,51 @@ namespace Web.Pages
                 imageService.LikeImage(userId, image.imgId);
             }
         }
-
         #endregion LikeImage
+
+        #region DeleteImage
+        protected void DeleteImage(object sender, EventArgs e)
+        {
+            if (SessionManager.IsUserAuthenticated(Context))
+            {
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                imageService.DeleteImage(image.imgId);
+                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+            }
+        }
+        #endregion DeleteImage
+
+        #region DeleteComment
+        protected void DeleteComment(object sender, EventArgs e)
+        {
+            if (SessionManager.IsUserAuthenticated(Context))
+            {
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                string commentID = ((LinkButton)sender).CommandArgument.ToString();
+                long commId = Convert.ToInt64(commentID);
+                imageService.DeleteComment(commId, userId);
+            }
+        }
+        #endregion DeleteComment
+
+        #region EditComment
+        protected void EditComment(object sender, EventArgs e)
+        {
+            if (SessionManager.IsUserAuthenticated(Context))
+            {
+                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+                IImageService imageService = iocManager.Resolve<IImageService>();
+
+                string commentID = ((LinkButton)sender).CommandArgument.ToString();
+                long commId = Convert.ToInt64(commentID);
+                imageService.EditComment(commId, editCommentText.Text);
+            }
+        }
+        #endregion EditComment
 
         #region Tags
         protected void TagValidator_ServerValidate(object source, ServerValidateEventArgs args)

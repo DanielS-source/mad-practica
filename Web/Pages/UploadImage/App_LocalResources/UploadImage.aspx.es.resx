@@ -120,11 +120,32 @@
   <data name="AddTagButton.Text" xml:space="preserve">
     <value>Crear ag</value>
   </data>
+  <data name="category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="diaphragmAperture" xml:space="preserve">
+    <value>Apertura de Diafragma</value>
+  </data>
   <data name="FileValidator.ErrorMessage" xml:space="preserve">
     <value>Tienes que subir un archivo</value>
   </data>
   <data name="InfoLabel.Text" xml:space="preserve">
     <value>Selecciona una etiqueta</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="keywords" xml:space="preserve">
+    <value>Palabras clave</value>
+  </data>
+  <data name="mandatoryField" xml:space="preserve">
+    <value>Campo obligatorio</value>
+  </data>
+  <data name="shutterSpeed" xml:space="preserve">
+    <value>Tiempo de exposición</value>
   </data>
   <data name="TagCompareValidator.ErrorMessage" xml:space="preserve">
     <value>Este tag ya existe</value>
@@ -134,5 +155,11 @@
   </data>
   <data name="TagValidator.ErrorMessage" xml:space="preserve">
     <value>Completa este campo</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="whiteBalance" xml:space="preserve">
+    <value>Balance de blancos</value>
   </data>
 </root>

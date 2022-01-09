@@ -27,7 +27,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.Cache
             keys.Add(cacheKey); 
             if (keys.Count > MAX_SIZE)
             {
-                //Removes last item if cache size exceeds 5
+                //Removes last item if cache size exceeds MAX_SIZE
                 var key = keys[0];
                 cache.Remove(key);
                 keys.Remove(key);

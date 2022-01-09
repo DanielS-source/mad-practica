@@ -63,6 +63,9 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         void EditComment(long comId, String text);
 
         [Transactional]
+        void DeleteComment(long comId, long userId);
+
+        [Transactional]
         CommentsBlock GetImageRelatedComments(long imgId, int startIndex, int count);
 
         [Transactional]

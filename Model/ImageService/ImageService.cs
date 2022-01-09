@@ -18,8 +18,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 {
     public class ImageService : IImageService
     {
-        private List<string> keys = new List<string>();
-
         public ImageService() {}
 
         [Inject]
@@ -318,6 +316,18 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             if (comment != null)
             {
                 comment.message = text;
+            }
+        }
+
+        public void DeleteComment(long comId, long userId)
+        {
+            Comments comment = CommentsDao.Find(comId);
+            if (comment != null)
+            {
+                if (comment.usrId == userId)
+                {
+                    CommentsDao.Remove(comId);
+                }
             }
         }
 

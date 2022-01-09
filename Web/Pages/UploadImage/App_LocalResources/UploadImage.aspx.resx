@@ -120,11 +120,32 @@
   <data name="AddTagButton.Text" xml:space="preserve">
     <value>Create tag</value>
   </data>
+  <data name="category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="diaphragmAperture" xml:space="preserve">
+    <value>Diaphragm Aperture</value>
+  </data>
   <data name="FileValidator.ErrorMessage" xml:space="preserve">
     <value>You need to upload a file</value>
   </data>
   <data name="InfoLabel.Text" xml:space="preserve">
     <value>Select a label</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="keywords" xml:space="preserve">
+    <value>Key words</value>
+  </data>
+  <data name="mandatoryField" xml:space="preserve">
+    <value>Mandatory Field</value>
+  </data>
+  <data name="shutterSpeed" xml:space="preserve">
+    <value>Shutter Speed</value>
   </data>
   <data name="TagCompareValidator.ErrorMessage" xml:space="preserve">
     <value>This tag already exists</value>
@@ -134,5 +155,11 @@
   </data>
   <data name="TagValidator.ErrorMessage" xml:space="preserve">
     <value>Fill in this field</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="whiteBalance" xml:space="preserve">
+    <value>White Balance</value>
   </data>
 </root>
