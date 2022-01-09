@@ -397,7 +397,6 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         public List<Category> GetAllCategories()
         {
-            Console.Write("patata");
             return CategoryDao.GetAllElements();
         }
 
