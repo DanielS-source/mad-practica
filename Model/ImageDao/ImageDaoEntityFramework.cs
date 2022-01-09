@@ -78,11 +78,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
         }
 
         /// <exception cref="InstanceNotFoundException"/>
-        public Image FindByUserWithTags(long userProfileId)
+        public Image FindByUserWithTags(long userProfileId, string pathImg) //By UserProfileId and ImgPath
         {
             DbSet<Image> imageContext = Context.Set<Image>();
 
-            Image image = imageContext.Include("Tag").SingleOrDefault(c => c.usrId.Equals(userProfileId));
+            Image image = imageContext.Include("Tag").SingleOrDefault(c => c.usrId.Equals(userProfileId) && (@c.pathImg).Equals(pathImg));
 
             if (image is null)
             {

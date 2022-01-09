@@ -11,6 +11,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
     {
         public ImageWithTagsDto(Image image, string login, IList<TagDTO> tags)
         {
+            imgId = image.imgId;
             usrId = image.usrId;
             LoginName = login;
             pathImg = image.pathImg;
@@ -26,6 +27,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         public ImageWithTagsDto(Image image, IList<TagDTO> tags, string imgUser, string imgCategory, byte[] img, List<Comments> imgComments)
         {
+            imgId = image.imgId;
             usrId = image.usrId;
             title = image.title;
             description = image.description;
@@ -45,6 +47,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
         public ImageWithTagsDto() { }
 
+        public long imgId { get; set; }
         public long usrId { get; set; }
         public string LoginName { get; set; }
         public string pathImg { get; set; }
@@ -69,6 +72,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                 int multiplier = 31;
                 int hash = GetType().GetHashCode();
 
+                hash = hash * multiplier + imgId.GetHashCode();
                 hash = hash * multiplier + usrId.GetHashCode();
                 hash = hash * multiplier + (LoginName == null ? 0 : LoginName.GetHashCode());
                 hash = hash * multiplier + (pathImg == null ? 0 : pathImg.GetHashCode());
@@ -93,7 +97,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
             ImageWithTagsDto target = (ImageWithTagsDto)obj;
 
-            return (this.usrId == target.usrId)
+            return (this.imgId == target.imgId)
+                && (this.usrId == target.usrId)
                 && (this.LoginName == target.LoginName)
                 && (this.pathImg == target.pathImg)
                 && (this.title == target.title)

@@ -27,13 +27,11 @@ namespace Web
             {
                 LoginPanel.Visible = false;
                 LoggoutPanel.Visible = true;
-                UploadImagePanel.Visible = true;
             }
             else //Usuario sin autenticar
             {
                 LoginPanel.Visible = true;
                 LoggoutPanel.Visible = false;
-                UploadImagePanel.Visible = false;
             }
 
             UserProfileButton.Visible = true;
@@ -62,10 +60,22 @@ namespace Web
             }
             else 
             {
-                Response.Redirect("../Login/Login.aspx");
+                Response.Redirect("~/Pages/Login/Login.aspx");
             }
-
-
         }
+
+        protected void UploadImageButton_Click(object sender, EventArgs e)
+        {
+            if (SessionManager.IsUserAuthenticated(Context)) //Usuario autenticado
+            {
+                Response.Redirect("~/Pages/UploadImage/UploadImage.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Pages/Login/Login.aspx");
+            }    
+        }
+
+
     }
 }

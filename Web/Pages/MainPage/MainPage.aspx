@@ -14,7 +14,9 @@
                         <br />
 
                         <asp:TextBox ID="keywordsInput" runat="server" Width="75%" Height="90%" CssClass=""></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="keywordsInput"></asp:RequiredFieldValidator>
                     </div>
+                    
 
                 </div>
 
@@ -33,12 +35,6 @@
 
                 <div class="button">
                     <asp:Button ID="btnCreate" Text="Search" runat="server" meta:resourcekey="btnCreate" OnClick="SearchImages" />
-                </div>
-
-                <div class="col-md-2 justify-content-around flex">
-                    <div class="d-flex justify-content-center align-items-center h-100">
-                        <button type="button" id="searchImagesSubmit" class="icon-search h-50 w-25" style="vertical-align: middle" runat="server" OnClick="SearchImages"/>
-                    </div>
                 </div>
             </div>
         </div>

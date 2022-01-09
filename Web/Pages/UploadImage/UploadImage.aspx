@@ -11,7 +11,7 @@
             <span class="entry">
                 <asp:TextBox ID="txtTitle" runat="server" Width="75%" Columns="16" 
                     meta:resourcekey="txtTitle" class="form-control mb-4" 
-                    placeholder="<%$ Resources:Common, title %>">
+                    placeholder="<%$ Resources:, title %>">
                 </asp:TextBox>
             </span>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtTitle"></asp:RequiredFieldValidator>
@@ -21,7 +21,7 @@
             <span class="entry">
                 <asp:TextBox ID="txtDescription" runat="server" Width="75%"
                     Columns="16" meta:resourcekey="txtTitle" class="form-control mb-4" 
-                    placeholder="<%$ Resources:Common, description %>">
+                    placeholder="<%$ Resources:, description %>">
                 </asp:TextBox>
             </span>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtDescription"></asp:RequiredFieldValidator>
@@ -29,7 +29,7 @@
 
         <div class="field mb-4">
             <span class="label">
-                <asp:Localize ID="Localize5" runat="server" Text="<%$ Resources:Common, category %>"/>
+                <asp:Localize ID="Localize5" runat="server" Text="<%$ Resources:, category %>"/>
             </span>
             <asp:DropDownList ID="categoryDropDown" runat="server" Width="70%"></asp:DropDownList>
         </div>
@@ -39,7 +39,7 @@
             <span class="entry">
                 <asp:TextBox ID="txtDiaphragmAperture" runat="server" Width="75%"
                     Columns="16" meta:resourcekey="txtTitle" class="form-control mb-4" 
-                    placeholder="<%$ Resources:Common, diaphragmAperture %>">
+                    placeholder="<%$ Resources:, diaphragmAperture %>">
                 </asp:TextBox>
             </span>
         </div>
@@ -48,7 +48,7 @@
             <span class="entry">
                 <asp:TextBox ID="txtShutterSpeed" runat="server" Width="75%"
                     Columns="16" meta:resourcekey="txtTitle" class="form-control mb-4" 
-                    placeholder="<%$ Resources:Common, shutterSpeed %>">
+                    placeholder="<%$ Resources:, shutterSpeed %>">
                 </asp:TextBox>
             </span>
         </div>
@@ -57,7 +57,7 @@
             <span class="entry">
                 <asp:TextBox ID="txtISO" runat="server" Width="75%"
                     Columns="16" meta:resourcekey="txtTitle" class="form-control mb-4" 
-                    placeholder="<%$ Resources:Common, iso %>">
+                    placeholder="<%$ Resources:, iso %>">
                 </asp:TextBox>
             </span>
         </div>
@@ -66,7 +66,7 @@
             <span class="entry">
                 <asp:TextBox ID="txtWhiteBalance" runat="server" Width="75%"
                     Columns="16" meta:resourcekey="txtTitle" class="form-control mb-4" 
-                    placeholder="<%$ Resources:Common, whiteBalance %>">
+                    placeholder="<%$ Resources:, whiteBalance %>">
                 </asp:TextBox>
             </span>
         </div>
