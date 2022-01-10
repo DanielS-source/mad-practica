@@ -362,9 +362,16 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                     ));
             }
 
-            bool existMore = commentsWithUsername.Count == count;
+            try
+            {
+                CommentsDao.findByImage(imgId, startIndex + 1, count);
 
-            return new CommentsBlock(commentsWithUsername, existMore);
+                return new CommentsBlock(commentsWithUsername, true);
+            }
+            catch (ArgumentException e) 
+            {
+                return new CommentsBlock(commentsWithUsername, false);
+            }
         }
 
         private void DeleteImageFromPath(String path) {
