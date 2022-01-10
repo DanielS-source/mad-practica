@@ -27,6 +27,7 @@ namespace Web.Pages
     public partial class WebForm1 : CulturePage
     {
         public List<SearchImageDTO> images = new List<SearchImageDTO>();
+        public SearchImageBlock imageBlock;
 
         protected string googleplus_client_id = "367350001953-s261onetsralvvuhihdlc5alsgufb41f.apps.googleusercontent.com";    // Replace this with your Client ID
         protected string googleplus_client_secret = "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";                                                // Replace this with your Client Secret
@@ -38,6 +39,7 @@ namespace Web.Pages
             if (!IsPostBack) 
             {
                 this.initializeDropdown();
+                render();
             }
 
             //Esto es parte del Google OAuth
@@ -163,13 +165,24 @@ namespace Web.Pages
 
             List<Category> categoryList = imageService.GetAllCategories();
 
-            categoryDropDown.DataSource = CreateDataSource(categoryList);
-            categoryDropDown.DataTextField = "name";
-            categoryDropDown.DataValueField = "catId";
+            categoryDropDown.Items.Insert(0, new ListItem("", "0"));
 
-            categoryDropDown.DataBind();
+            foreach (Category c in categoryList) 
+            {
+                ListItem lst = new ListItem(c.name, c.catId.ToString());
 
-            categoryDropDown.SelectedIndex = 0;
+                categoryDropDown.Items.Insert(categoryDropDown.Items.Count, lst);
+            }
+
+            
+
+            //categoryDropDown.DataSource = CreateDataSource(categoryList);
+            //categoryDropDown.DataTextField = "name";
+            //categoryDropDown.DataValueField = "catId";
+
+            //categoryDropDown.DataBind();
+
+            //categoryDropDown.SelectedIndex = 0;
         }
 
         ICollection CreateDataSource(List<Category> categoryList)
@@ -222,18 +235,78 @@ namespace Web.Pages
         {
             if (IsValidGroup("Required"))
             {
-                IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
-                IImageService imageService = iocManager.Resolve<IImageService>();
 
-                images = imageService.SearchImages(keywordsInput.Text, categoryDropDown.SelectedItem.Text, 0, 10).Images;
+                getImages();
+                render();
 
-                for (int i = 0; i < images.Count; i++)
+            }
+        }
+
+        protected void getImages() 
+        {
+            IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+            IImageService imageService = iocManager.Resolve<IImageService>();
+
+            imageBlock = imageService.SearchImages(keywordsInput.Text, categoryDropDown.SelectedItem.Text, CurrentImagePage, 1);
+            images = imageBlock.Images;
+
+            for (int i = 0; i < images.Count; i++)
+            {
+                string imreBase64Data = Convert.ToBase64String(images[i].file);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                images[i].imageSrc = imgDataURL;
+            }
+        }
+
+        protected void nextBtn_Click(object sender, EventArgs e)
+        {
+            CurrentImagePage++;
+            getImages();
+
+        }
+
+        protected void previousBtn_Click(object sender, EventArgs e)
+        {
+            CurrentImagePage--;
+            getImages();
+
+        }
+
+        private int CurrentImagePage
+        {
+            get
+            {
+                if (ViewState["imagePage"] is null)
                 {
-                    string imreBase64Data = Convert.ToBase64String(images[i].file);
-                    string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-                    images[i].imageSrc = imgDataURL;
+                    return 0;
+                }
+                else
+                {
+                    return (int)ViewState["imagePage"];
                 }
             }
+            set
+            {
+                ViewState["imagePage"] = value;
+            }
+        }
+
+        protected void render()
+        {
+            previousBtn.Visible = true;
+            nextBtn.Visible = true;
+
+            if (images.Count <= 0 || CurrentImagePage <= 0)
+            {
+                previousBtn.Visible = false;
+            }
+
+            if (images.Count <= 0 || !imageBlock.ExistMoreImages)
+            {
+                nextBtn.Visible = false;
+            }
+
+
         }
 
 

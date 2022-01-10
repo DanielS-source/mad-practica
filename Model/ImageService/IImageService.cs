@@ -72,6 +72,13 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         void LikeImage(long usrId, long imgId);
 
         [Transactional]
+        void UnlikeImage(long userId, long imgId);
+
+
+        [Transactional]
+        bool isLiked(long userId, long imgId);
+
+        [Transactional]
         List<Category> GetAllCategories();
 
         [Transactional]

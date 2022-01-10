@@ -93,7 +93,16 @@ namespace Web.Pages
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
                 long userId = SessionManager.GetUserId(Context);
-                imageService.LikeImage(userId, image.imgId);
+
+                if (!imageService.isLiked(userId, image.imgId))
+                {
+                    imageService.LikeImage(userId, image.imgId);
+                }
+                else 
+                {
+                    imageService.UnlikeImage(userId, image.imgId);
+                }
+                
             }
         }
         #endregion LikeImage

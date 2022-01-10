@@ -294,6 +294,22 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             return;
         }
 
+        public void UnlikeImage(long userId, long imgId)
+        {
+            Image image = ImageDao.Find(imgId);
+            UserProfile user = UserProfileDao.Find(userId);
+            image.LikedBy.Remove(user);
+            ImageDao.Update(image);
+            return;
+        }
+
+        public bool isLiked(long userId, long imgId) 
+        {
+            Image image = ImageDao.Find(imgId);
+            UserProfile user = UserProfileDao.Find(userId);
+            return image.LikedBy.Contains(user);
+        }
+
         public long AddComment(long userId, long imgId, string message) 
         {
             Comments comment = new Comments()

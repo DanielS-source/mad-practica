@@ -22,6 +22,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             t = image.t;
             ISO = image.ISO;
             wb = image.wb;
+            likes = image.LikedBy.Count;
             Tags = tags;
         }
 
@@ -36,7 +37,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             t = image.t;
             ISO = image.ISO;
             wb = image.wb;
-            likes = image.likes;
+            likes = image.LikedBy.Count;
             Tags = tags;
 
             category = imgCategory;
