@@ -150,39 +150,12 @@ namespace Web.Pages
         protected global::System.Web.UI.WebControls.TextBox editCommentText;
 
         /// <summary>
-        /// Control btnEditComment.
+        /// Control CommRepeater.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditComment;
-
-        /// <summary>
-        /// Control btnDeleteComment.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteComment;
-
-        /// <summary>
-        /// Control previousBtn.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton previousBtn;
-
-        /// <summary>
-        /// Control nextBtn.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton nextBtn;
+        protected global::System.Web.UI.WebControls.Repeater CommRepeater;
     }
 }

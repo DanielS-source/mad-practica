@@ -61,7 +61,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
 
                 HyperLink likesLink = (HyperLink)e.Item.FindControl("LikesLink");
                 likesLink.Text = "<i class='icon-thumbs-up pr-1'> "+ imageDto.likes +" </i>";
-                //likesLink.NavigateUrl = "~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId; //Links A Likes
+                likesLink.NavigateUrl = "~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId; //Links A Likes
 
                 HtmlGenericControl dateLabel = (HtmlGenericControl)e.Item.FindControl("DateLabel");
                 dateLabel.InnerText = imageDto.dateImg.ToString();

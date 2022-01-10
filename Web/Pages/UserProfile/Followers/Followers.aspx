@@ -30,7 +30,7 @@
                                     </svg>
                                 </div>
                                 <div class="col">
-                                    <h3><%= userProfile.FirstName%></h3>
+                                    <a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= userProfile.usrId%>"><h3><%= userProfile.FirstName%></h3></a>
                                 </div>
                             </div>
                         </div>

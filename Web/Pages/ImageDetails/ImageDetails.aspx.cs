@@ -5,6 +5,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.UserService.Utils;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -16,7 +17,8 @@ namespace Web.Pages
         protected SearchImageDTO image;
         protected ImageDTO real_image;
         protected CommentsBlock comments;
-        protected long userId = 1L;
+        protected long userId;
+
 
         private const int TagPageSize = 4;
 
@@ -34,20 +36,36 @@ namespace Web.Pages
                 ViewState["pathImage"] = @real_image.pathImg;
             }
 
-            getComments();
+            this.comments = imageService.GetImageRelatedComments(image.imgId, 0, 10);
+            CommRepeater.DataSource = this.comments.CommentList;
+            CommRepeater.DataBind();
             if (IsPostBack)
             {
                 this.image = imageService.GetImageById(image.imgId);
-            }
 
+                try //En caso de que haya un usuario logeado
+                {
+                    this.userId = SessionManager.GetUserId(Context);
+                }
+                catch (NullReferenceException) //En caso de que no haya un usuario logeado
+                {}
+
+            }
             if (!IsPostBack)
             {
                 try //En caso de que haya un usuario logeado, comprobamos que sea el autor
                 {
+
                     if (image.usrId == SessionManager.GetUserId(Context))
+                    {
                         TagsContainer.Visible = true;
+                        btnDelete.Visible = true;
+                    }
                     else
-                        TagsContainer.Visible = false;
+                    {
+                        TagsContainer.Visible = true;
+                        btnDelete.Visible = true;
+                    }
 
                 }
                 catch(NullReferenceException) //En caso de que no haya un usuario logeado
@@ -57,66 +75,6 @@ namespace Web.Pages
 
                 LoadTags();
 
-            }
-
-        }
-
-        protected void getComments() 
-        {
-            IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
-            IImageService imageService = iocManager.Resolve<IImageService>();
-
-            this.comments = imageService.GetImageRelatedComments(image.imgId, CurrentCommentPage, 10);
-
-            render();
-        }
-
-        protected void nextBtn_Click(object sender, EventArgs e)
-        {
-            CurrentCommentPage++;
-            getComments();
-
-        }
-
-        protected void previousBtn_Click(object sender, EventArgs e)
-        {
-            CurrentCommentPage--;
-            getComments();
-
-        }
-
-        private int CurrentCommentPage
-        {
-            get
-            {
-                if (ViewState["commentPage"] is null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return (int)ViewState["commentPage"];
-                }
-            }
-            set
-            {
-                ViewState["commentPage"] = value;
-            }
-        }
-
-        protected void render()
-        {
-            previousBtn.Visible = true;
-            nextBtn.Visible = true;
-
-            if (comments.CommentList.Count <= 0 || CurrentCommentPage <= 0)
-            {
-                previousBtn.Visible = false;
-            }
-
-            if (comments.CommentList.Count <= 0 || !comments.ExistMoreComments)
-            {
-                nextBtn.Visible = false;
             }
 
 
@@ -132,9 +90,8 @@ namespace Web.Pages
 
             try //En caso de que haya un usuario logeado, comprobamos que sea el autor
             {
-                long userId = 1L;//SessionManager.GetUserId(Context);
+                userId = SessionManager.GetUserId(Context);
                 imageService.AddComment(userId, this.image.imgId, txtComment.Text);
-
             }
             catch (NullReferenceException) //En caso de que no haya un usuario logeado
             {
@@ -162,6 +119,8 @@ namespace Web.Pages
                 {
                     imageService.UnlikeImage(userId, image.imgId);
                 }
+
+                Response.Redirect("~/Pages/ImageDetails/ImageDetails.aspx?Image="+image.imgId);
                 
             }
         }
@@ -188,10 +147,17 @@ namespace Web.Pages
             {
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
-
-                string commentID = ((LinkButton)sender).CommandArgument.ToString();
-                long commId = Convert.ToInt64(commentID);
-                imageService.DeleteComment(commId, userId);
+                try //En caso de que haya un usuario logeado, comprobamos que sea el autor
+                {
+                    string commentID = ((Button)sender).CommandArgument.ToString();
+                    long commId = Convert.ToInt64(commentID);
+                    imageService.DeleteComment(commId, userId);
+                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                }
+                catch (NullReferenceException) //En caso de que no haya un usuario logeado
+                {
+                    Response.Redirect("~/Pages/Login/Login.aspx");
+                }
             }
         }
         #endregion DeleteComment
@@ -204,9 +170,13 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                string commentID = ((LinkButton)sender).CommandArgument.ToString();
+                string commentID = ((Button)sender).CommandArgument.ToString();
                 long commId = Convert.ToInt64(commentID);
-                imageService.EditComment(commId, editCommentText.Text);
+
+                string val = editCommentText.Text;
+
+                imageService.EditComment(commId, val);
+                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }
         #endregion EditComment

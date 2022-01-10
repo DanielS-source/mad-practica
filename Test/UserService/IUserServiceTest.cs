@@ -23,7 +23,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService.Tests
         // Variables used in several tests are initialized here
         private const string loginName = "loginNameTest";
 
-        private const string clearPassword = "password";
+        private const string clearPassword = "pAssw0rd";
         private const string firstName = "name";
         private const string lastName = "lastName";
         private const string email = "user@udc.es";
@@ -324,6 +324,40 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService.Tests
 
                 // transaction.Complete() is not called, so Rollback is executed.
             }
+        }
+
+        /// <summary>
+        /// A test for ChangeCulture
+        /// </summary>
+        [TestMethod]
+        public void ChangeCultureTest()
+        {
+            long userProfileId = userService.RegisterUser(loginName, clearPassword,
+                    new UserProfileDetails(firstName, lastName, email, language, country));
+
+            userService.ChangeCulture(userProfileId, "es", "ES");
+
+            UserProfileDetails userProfileDetails = userService.FindUserProfileDetails(userProfileId);
+
+            Assert.AreEqual("es", userProfileDetails.Language);
+            Assert.AreEqual("ES", userProfileDetails.Country);
+        }
+
+        /// <summary>
+        /// A test for ChangeEmail
+        /// </summary>
+        [TestMethod]
+        public void ChangeEmail()
+        {
+
+            long userProfileId = userService.RegisterUser(loginName, clearPassword,
+                    new UserProfileDetails(firstName, lastName, email, language, country));
+
+            userService.ChangeEmail(userProfileId, "other@udc.es");
+
+            UserProfileDetails userProfileDetails = userService.FindUserProfileDetails(userProfileId);
+
+            Assert.AreEqual(userProfileDetails.Email, "other@udc.es");
         }
 
         /// <summary>

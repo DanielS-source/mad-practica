@@ -94,7 +94,7 @@ namespace Web.Pages
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //throw new Exception(ex.Message, ex);
                     Response.Redirect("~/Pages/MainPage/MainPage.aspx");
@@ -149,7 +149,7 @@ namespace Web.Pages
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //catching the exception
             }
@@ -321,7 +321,7 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                //imageService.LikeImage(1L, ima)
+                //imageService.LikeImage(userId, ima)
             }
         }
 
