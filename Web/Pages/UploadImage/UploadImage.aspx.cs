@@ -49,7 +49,7 @@ namespace Web.Pages
                 ImageDTO image = new ImageDTO
                 {
                     /* GENERAL data */
-                    usrId = 1L,
+                    usrId = SessionManager.GetUserId(Context),
                     title = txtTitle.Text,
                     description = txtDescription.Text,
                     dateImg = DateTime.Now,

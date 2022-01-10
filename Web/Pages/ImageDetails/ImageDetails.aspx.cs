@@ -16,9 +16,9 @@ namespace Web.Pages
         protected SearchImageDTO image;
         protected ImageDTO real_image;
         protected CommentsBlock comments;
-        protected long userId = 1L;
 
         private const int TagPageSize = 4;
+        protected long userId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,13 +38,22 @@ namespace Web.Pages
             if (IsPostBack)
             {
                 this.image = imageService.GetImageById(image.imgId);
-            }
 
+                try //En caso de que haya un usuario logeado
+                {
+                    userId = SessionManager.GetUserId(Context);
+                }
+                catch (NullReferenceException) //En caso de que no haya un usuario logeado
+                {}
+
+            }
             if (!IsPostBack)
             {
                 try //En caso de que haya un usuario logeado, comprobamos que sea el autor
                 {
-                    if (image.usrId == SessionManager.GetUserId(Context))
+                    userId = SessionManager.GetUserId(Context);
+
+                    if (image.usrId == userId)
                         TagsContainer.Visible = true;
                     else
                         TagsContainer.Visible = false;
@@ -72,7 +81,7 @@ namespace Web.Pages
 
             try //En caso de que haya un usuario logeado, comprobamos que sea el autor
             {
-                long userId = 1L;//SessionManager.GetUserId(Context);
+                long userId = SessionManager.GetUserId(Context);
                 imageService.AddComment(userId, this.image.imgId, txtComment.Text);
 
             }
@@ -102,6 +111,8 @@ namespace Web.Pages
                 {
                     imageService.UnlikeImage(userId, image.imgId);
                 }
+
+                Response.Redirect("~/Pages/ImageDetails/ImageDetails.aspx?Image="+image.imgId);
                 
             }
         }
@@ -129,9 +140,17 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                string commentID = ((LinkButton)sender).CommandArgument.ToString();
-                long commId = Convert.ToInt64(commentID);
-                imageService.DeleteComment(commId, userId);
+                try //En caso de que haya un usuario logeado, comprobamos que sea el autor
+                {
+                    long userId = SessionManager.GetUserId(Context);
+                    string commentID = ((LinkButton)sender).CommandArgument.ToString();
+                    long commId = Convert.ToInt64(commentID);
+                    imageService.DeleteComment(commId, userId);
+                }
+                catch (NullReferenceException) //En caso de que no haya un usuario logeado
+                {
+                    Response.Redirect("~/Pages/Login/Login.aspx");
+                }
             }
         }
         #endregion DeleteComment

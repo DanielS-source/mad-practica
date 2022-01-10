@@ -11,6 +11,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
     public class UserProfileDetails
     {
         #region Properties Region
+        public long usrId { get; private set; }
 
         public String LoginName { get; private set; }
 
@@ -40,6 +41,27 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         public UserProfileDetails(String firstName, String lastName,
             String email, String language, String country)
         {
+            this.FirstName = firstName;
+            this.Lastname = lastName;
+            this.Email = email;
+            this.Language = language;
+            this.Country = country;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserProfileDetails"/>
+        /// class.
+        /// </summary>
+        /// <param name="usrId">The user's id for the follows/follwers action.</param>
+        /// <param name="firstName">The user's first name.</param>
+        /// <param name="lastName">The user's last name.</param>
+        /// <param name="email">The user's email.</param>
+        /// <param name="language">The language.</param>
+        /// <param name="country">The Country.</param>
+        public UserProfileDetails(long usrId, String firstName, String lastName,
+            String email, String language, String country)
+        {
+            this.usrId = usrId;
             this.FirstName = firstName;
             this.Lastname = lastName;
             this.Email = email;

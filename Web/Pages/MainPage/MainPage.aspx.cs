@@ -321,7 +321,7 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                //imageService.LikeImage(1L, ima)
+                //imageService.LikeImage(userId, ima)
             }
         }
 

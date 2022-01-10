@@ -50,6 +50,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                 //If Directory (Images) does not exists. Create it.
                 Directory.CreateDirectory("C:\\Software\\DataBase\\Images\\");
             }
+
             File.WriteAllBytes(image.pathImg, imageDTO.file);
 
             foreach (long tagId in tagsIds)

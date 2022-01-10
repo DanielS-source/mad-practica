@@ -144,7 +144,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         public long RegisterUser(string loginName, string clearPassword, UserProfileDetails userProfileDetails)
         {
 
-            ValidateUserProfile(userProfileDetails);
+            ValidateUserProfile(loginName, clearPassword, userProfileDetails);
 
             try
             {
@@ -238,7 +238,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             foreach (UserProfile u in followersFromDb) 
             {
                 UserProfileDetails userProfileDetails =
-                new UserProfileDetails(u.firstName,
+                new UserProfileDetails(u.usrId, u.firstName,
                     u.lastName, u.email,
                     u.language, u.country);
 
@@ -271,7 +271,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
             foreach (UserProfile u in followedFromDb)
             {
                 UserProfileDetails userProfileDetails =
-                new UserProfileDetails(u.firstName,
+                new UserProfileDetails(u.usrId, u.firstName,
                     u.lastName, u.email,
                     u.language, u.country);
 
@@ -308,15 +308,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         }
 
         /// <exception cref="InputValidationException"/>
-        private void ValidateUserProfile(UserProfileDetails userProfileDetails)
+        private void ValidateUserProfile(string loginName, string clearPassword, UserProfileDetails userProfileDetails)
         {
-            if (!PropertyValidator.IsValidLogin(userProfileDetails.LoginName))
+            if (!PropertyValidator.IsValidLogin(loginName))
             {
                 throw new InputValidationException("Invalid login, it must be between 4 and 24 characters (Login=" + userProfileDetails.LoginName + ")");
             }
-            if (!PropertyValidator.IsValidPassword(userProfileDetails.EnPassword))
+            if (!PropertyValidator.IsValidPassword(clearPassword))
             {
-                throw new InputValidationException("Invalid password, it must be between 8 and 24 characters and contain at least a number and one upper case letter (Password=" + userProfileDetails.EnPassword + ")");
+                throw new InputValidationException("Invalid password, it must be between 8 and 24 characters and contain at least a number and one upper case letter (Password=" + clearPassword + ")");
             }
             if (!PropertyValidator.IsValidFirstName(userProfileDetails.FirstName))
             {
