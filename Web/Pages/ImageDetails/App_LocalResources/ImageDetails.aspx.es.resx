@@ -120,6 +120,30 @@
   <data name="AddTagButton.Text" xml:space="preserve">
     <value>Crear tag</value>
   </data>
+  <data name="Author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="DeleteComment" xml:space="preserve">
+    <value>Borrar Comentario</value>
+  </data>
+  <data name="DeleteImage" xml:space="preserve">
+    <value>Borrar Imagen</value>
+  </data>
+  <data name="diaphragmAperture" xml:space="preserve">
+    <value>Apertura de Diafragma</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editar Comentario</value>
+  </data>
+  <data name="EditComment" xml:space="preserve">
+    <value>Editar Comentario</value>
+  </data>
+  <data name="iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="shutterSpeed" xml:space="preserve">
+    <value>Tiempo de exposición</value>
+  </data>
   <data name="TagCompareValidator.ErrorMessage" xml:space="preserve">
     <value>Este tag ya existe</value>
   </data>
@@ -131,5 +155,8 @@
   </data>
   <data name="UpdateImageButton.Text" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="whiteBalance" xml:space="preserve">
+    <value>Balance de blancos</value>
   </data>
 </root>

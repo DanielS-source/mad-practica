@@ -281,8 +281,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public void DeleteImage(long imageId)
         {
             Image image = ImageDao.Find(imageId);
-            DeleteImageFromPath(image.pathImg);
             ImageDao.Remove(imageId);
+            DeleteImageFromPath(image.pathImg);
         }
 
         [Transactional]

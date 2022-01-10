@@ -172,7 +172,7 @@ CREATE TABLE Comments(
 
     CONSTRAINT [PK_Comments] PRIMARY KEY (comId),
     CONSTRAINT [FK_User_Comm] FOREIGN KEY (usrId) REFERENCES UserProfile(usrId),
-    CONSTRAINT [FK_Image_Comm] FOREIGN KEY (imgId) REFERENCES Image(imgId)
+    CONSTRAINT [FK_Image_Comm] FOREIGN KEY (imgId) REFERENCES Image(imgId) ON DELETE CASCADE
 ) 
 
 CREATE NONCLUSTERED INDEX [IX_AccountIndexByCommentsId] 

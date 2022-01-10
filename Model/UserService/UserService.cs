@@ -202,12 +202,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.UserService
         // bool UserExists(string loginName);
         public bool UserExists(string loginName)
         {
-
             try
             {
                 UserProfile userProfile = UserProfileDao.FindByLoginName(loginName);
             }
-            catch (InstanceNotFoundException e)
+            catch (InstanceNotFoundException)
             {
                 return false;
             }

@@ -20,20 +20,8 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
             int startIndex, int count)
         {
 
-            //String query = "SELECT VALUE a FROM PhotgramEntitiesContainer.Image AS i "
-            //    + "WHERE i.title = @keywords OR i.description = @keywords"
-            //    + "ORDER BY i.dateImg";
-
-            //ObjectParameter param = new ObjectParameter("keywords", keywords);
-
-            //List<Image> result =
-            //    this.Context.CreateQuery<Image>(query, param).Skip(startIndex).
-            //            Take(count).ToList();
-            //ObjectQuery<Image> adQuery = ((IObjectContextAdapter)Context).ObjectContext.CreateQuery<Image>(query, param) );
-            //return result;
-
             DbSet<Image> images = Context.Set<Image>();
-            if (category == null)
+            if (category == null || category == "")
             {
                 string[] searchTerms = keywords.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 
