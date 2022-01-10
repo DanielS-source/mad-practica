@@ -29,7 +29,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
                     (from i in images
                      where searchTerms.All(s => i.title.Contains(s)) | searchTerms.All(s => i.description.Contains(s))
                      orderby i.imgId
-                     select i).Skip(startIndex).Take(count).ToList();
+                     select i).Skip(startIndex * count).Take(count).ToList();
                 return result;
             }
             else
@@ -44,7 +44,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageDao
                         i.catId == (from c in categories where c.name == category select c.catId).FirstOrDefault())
                         & (searchTerms.All(s => i.title.Contains(s)) | searchTerms.All(s => i.description.Contains(s)))
                      orderby i.imgId
-                     select i).Skip(startIndex).Take(count).ToList();
+                     select i).Skip(startIndex * count).Take(count).ToList();
                 return result;
             }
 

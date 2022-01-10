@@ -14,7 +14,6 @@
                         <br />
 
                         <asp:TextBox ID="keywordsInput" runat="server" Width="75%" Height="90%" CssClass=""></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="keywordsInput"></asp:RequiredFieldValidator>
                     </div>
                     
 

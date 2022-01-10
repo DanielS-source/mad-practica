@@ -247,7 +247,7 @@ namespace Web.Pages
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
             IImageService imageService = iocManager.Resolve<IImageService>();
 
-            imageBlock = imageService.SearchImages(keywordsInput.Text, categoryDropDown.SelectedItem.Text, CurrentImagePage, 1);
+            imageBlock = imageService.SearchImages(keywordsInput.Text, categoryDropDown.SelectedItem.Text, CurrentImagePage, 3);
             images = imageBlock.Images;
 
             for (int i = 0; i < images.Count; i++)
@@ -256,6 +256,8 @@ namespace Web.Pages
                 string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
                 images[i].imageSrc = imgDataURL;
             }
+
+            render();
         }
 
         protected void nextBtn_Click(object sender, EventArgs e)

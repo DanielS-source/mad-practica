@@ -36,9 +36,7 @@ namespace Web.Pages
                 ViewState["pathImage"] = @real_image.pathImg;
             }
 
-            this.comments = imageService.GetImageRelatedComments(image.imgId, 0, 10);
-            CommRepeater.DataSource = this.comments.CommentList;
-            CommRepeater.DataBind();
+            getComments();
             if (IsPostBack)
             {
                 this.image = imageService.GetImageById(image.imgId);
@@ -77,9 +75,71 @@ namespace Web.Pages
 
             }
 
+        }
+
+        protected void getComments() 
+        {
+
+            IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
+            IImageService imageService = iocManager.Resolve<IImageService>();
+
+            this.comments = imageService.GetImageRelatedComments(image.imgId, CurrentCommentsPage, 5);
+            CommRepeater.DataSource = this.comments.CommentList;
+            CommRepeater.DataBind();
+
+            render();
+        }
+
+        protected void nextBtn_Click(object sender, EventArgs e)
+        {
+            CurrentCommentsPage++;
+            getComments();
 
         }
 
+        protected void previousBtn_Click(object sender, EventArgs e)
+        {
+            CurrentCommentsPage--;
+            getComments();
+
+        }
+
+        private int CurrentCommentsPage
+        {
+            get
+            {
+                if (ViewState["commentsPage"] is null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return (int)ViewState["commentsPage"];
+                }
+            }
+            set
+            {
+                ViewState["commentsPage"] = value;
+            }
+        }
+
+        protected void render()
+        {
+            previousBtn.Visible = true;
+            nextBtn.Visible = true;
+
+            if (comments.CommentList.Count <= 0 || CurrentCommentsPage <= 0)
+            {
+                previousBtn.Visible = false;
+            }
+
+            if (comments.CommentList.Count <= 0 || !comments.ExistMoreComments)
+            {
+                nextBtn.Visible = false;
+            }
+
+
+        }
 
         #region AddComment
 

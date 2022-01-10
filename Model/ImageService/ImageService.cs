@@ -72,19 +72,26 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
 
             //Checks if its in the cache
             if (ImageCache.Exists(keywords + category)) {
-                images = ImageCache.Get<List<Image>>(keywords + category);
+                images = ImageCache.Get<List<Image>>(keywords + category + startIndex);
             }
             else
             {
                 images = ImageDao.FindByKeywordsAndCategory(keywords, category, startIndex, count);
 
                 //Adds the results to the cache
-                ImageCache.Add(keywords + category, images);
+                ImageCache.Add(keywords + category + startIndex, images);
             }
 
-            bool existMoreImages = (images.Count == count);
+            if (ImageDao.FindByKeywordsAndCategory(keywords, category, startIndex + 1, count).Count != 0)
+            {
+                return new SearchImageBlock(AdaptToSearchImageDTOs(images), true);
+            } 
+            else 
+            {
+                return new SearchImageBlock(AdaptToSearchImageDTOs(images), false);
+            }
 
-            return new SearchImageBlock(AdaptToSearchImageDTOs(images), existMoreImages);
+            
         }
 
         public SearchImageDTO GetImageById(long imgId)
@@ -363,13 +370,11 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
                     ));
             }
 
-            try
+            if (CommentsDao.findByImage(imgId, startIndex + 1, count).Count != 0)
             {
-                CommentsDao.findByImage(imgId, startIndex + 1, count);
-
                 return new CommentsBlock(commentsWithUsername, true);
             }
-            catch (ArgumentException e) 
+            else 
             {
                 return new CommentsBlock(commentsWithUsername, false);
             }
