@@ -94,7 +94,7 @@ namespace Web.Pages
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //throw new Exception(ex.Message, ex);
                     Response.Redirect("~/Pages/MainPage/MainPage.aspx");
@@ -149,7 +149,7 @@ namespace Web.Pages
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //catching the exception
             }

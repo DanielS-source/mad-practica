@@ -35,6 +35,8 @@ namespace Web.Pages
             }
 
             this.comments = imageService.GetImageRelatedComments(image.imgId, 0, 10);
+            CommRepeater.DataSource = this.comments.CommentList;
+            CommRepeater.DataBind();
             if (IsPostBack)
             {
                 this.image = imageService.GetImageById(image.imgId);
@@ -129,7 +131,7 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                string commentID = ((LinkButton)sender).CommandArgument.ToString();
+                string commentID = ((Button)sender).CommandArgument.ToString();
                 long commId = Convert.ToInt64(commentID);
                 imageService.DeleteComment(commId, userId);
             }
@@ -144,9 +146,12 @@ namespace Web.Pages
                 IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
-                string commentID = ((LinkButton)sender).CommandArgument.ToString();
+                string commentID = ((Button)sender).CommandArgument.ToString();
                 long commId = Convert.ToInt64(commentID);
-                imageService.EditComment(commId, editCommentText.Text);
+
+                string val = editCommentText.Text;
+
+                imageService.EditComment(commId, val);
             }
         }
         #endregion EditComment

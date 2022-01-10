@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Image Details" Language="C#"  MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="ImageDetails.aspx.cs" Inherits="Web.Pages.ImageDetail" %>
+﻿<%@ Page Title="Image Details" Language="C#" EnableEventValidation="false" MasterPageFile="~/Masters/WebMaster.Master" AutoEventWireup="true" CodeBehind="ImageDetails.aspx.cs" Inherits="Web.Pages.ImageDetail" %>
 
 <asp:Content ID="ImgDetails" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <!-- Card -->
@@ -12,7 +12,7 @@
         <!-- Title -->
         <h4 class="card-title"><%= image.title %></h4>
         <% if (image.usrId == userId) { %>
-            <asp:Button ID="btnDelete" Text="Delete image" runat="server" OnClick="DeleteImage" />
+            <asp:Button ID="btnDelete" Text="<%$ Resources: , DeleteImage %>" runat="server" OnClick="DeleteImage" />
         <% } %>
         <hr>
         <!-- Text -->
@@ -36,16 +36,16 @@
                 </li>
                 <li class="list-inline-item">
                     <a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= image.usrId %>"" class="white-text">
-                        <i class="icon-location-arrow pr-1"> </i>Author: <%= image.username %>
+                        <i class="icon-location-arrow pr-1"> </i><asp:Literal runat="server" Text="<%$ Resources: , Author%>" />: <%= image.username %>
                     </a>
                 </li>
             </ul>
             <ul class="list-unstyled list-inline font-small">
-                <li class="list-inline-item"><a href="#" class="white-text">EXIF</a></li>
-                <li class="list-inline-item pr-2 white-text"><%= image.f %></li>
-                <li class="list-inline-item pr-2 white-text"><%= image.t %></li>
-                <li class="list-inline-item pr-2 white-text"><%= image.ISO %></li>
-                <li class="list-inline-item pr-2 white-text"><%= image.wb %></li>
+                <li class="list-inline-item">EXIF: </li>
+                <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , diaphragmAperture %>" /> <%= image.f %></li>
+                <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , shutterSpeed %>" /> <%= image.t %></li>
+                <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , iso %>" /> <%= image.ISO %></li>
+                <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , whiteBalance %>" /> <%= image.wb %></li>
             </ul>
         </div>
         <!-- Tags -->
@@ -123,16 +123,21 @@
         </div>
         <!-- Comment Form -->
         <!-- Comment List -->
-        <% foreach (var comment in comments.CommentList) { %>
-            <span><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= comment.usrId %>" class="white-text"> <%= comment.loginName %></a></span>
-            <span> <%= comment.message %></span>
-            <span> <%= comment.postDate %></span>
-            <% if (comment.usrId == userId) { %>
-            <asp:TextBox ID="editCommentText" runat="server" Height="46px" Width="929px"></asp:TextBox>
-            <asp:Button ID="btnEditComment" Text="Edit comment" runat="server" CommandArgument='<%#Eval("comment.comId")%>' OnClick="EditComment" />
-            <asp:Button ID="btnDeleteComment" Text="Delete comment" runat="server" CommandArgument='<%#Eval("comment.comId")%>' OnClick="DeleteComment" />
-            <% } %>
-        <% } %>
+        <br />
+        <asp:TextBox ID="editCommentText" runat="server" Height="46px" Width="929px" Text="<%$ Resources:, Edit %>"></asp:TextBox>
+        <br />
+        <asp:Repeater ID="CommRepeater" runat="server">
+            <ItemTemplate>
+                <ul class="list-unstyled list-inline font-small">
+                    <li class="list-inline-item"><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%# Eval("usrId") %>" class="white-text"> <%# Eval("loginName") %></a></li>
+                    <li class="list-inline-item"><%# Eval("postDate") %></li>
+                    <li class="list-inline-item"><%# Eval("message") %></li>
+                    <li class="list-inline-item"><asp:Button ID="btnEditComment" Text="<%$ Resources: , EditComment %>" runat="server" CommandArgument='<%#Eval("comId")%>' OnClick="EditComment"></asp:Button></li>
+                    <li class="list-inline-item"><asp:Button ID="btnDeleteComment" runat="server" Text="<%$ Resources: , DeleteComment %>" CommandArgument='<%# Eval("comId") %>' OnClick="DeleteComment" /></li>
+                </ul>
+                <hr />
+            </ItemTemplate> 
+        </asp:Repeater>
         <!-- Comment Lits -->
     </div>
     <!-- Card -->
