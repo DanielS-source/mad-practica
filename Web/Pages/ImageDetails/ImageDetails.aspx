@@ -11,9 +11,7 @@
         <div class="card-body">
         <!-- Title -->
         <h4 class="card-title"><%= image.title %></h4>
-        <% if (image.usrId == userId) { %>
-            <asp:Button ID="btnDelete" Text="<%$ Resources: , DeleteImage %>" runat="server" OnClick="DeleteImage" />
-        <% } %>
+        <asp:Button ID="btnDelete" Text="<%$ Resources: , DeleteImage %>" runat="server" OnClick="DeleteImage" />
         <hr>
         <!-- Text -->
         <p class="card-text"><%= image.description %></p>
@@ -132,8 +130,12 @@
                     <li class="list-inline-item"><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%# Eval("usrId") %>" class="white-text"> <%# Eval("loginName") %></a></li>
                     <li class="list-inline-item"><%# Eval("postDate") %></li>
                     <li class="list-inline-item"><%# Eval("message") %></li>
-                    <li class="list-inline-item"><asp:Button ID="btnEditComment" Text="<%$ Resources: , EditComment %>" runat="server" CommandArgument='<%#Eval("comId")%>' OnClick="EditComment"></asp:Button></li>
-                    <li class="list-inline-item"><asp:Button ID="btnDeleteComment" runat="server" Text="<%$ Resources: , DeleteComment %>" CommandArgument='<%# Eval("comId") %>' OnClick="DeleteComment" /></li>
+                    <li class="list-inline-item">
+                        <asp:Button ID="btnEditComment" Visible='<%# DataBinder.Eval(Container.DataItem, "usrId").ToString() == userId.ToString() %>' Text="<%$ Resources: , EditComment %>" runat="server" CommandArgument='<%#Eval("comId")%>' OnClick="EditComment"/>
+                    </li>
+                    <li class="list-inline-item">
+                        <asp:Button ID="btnDeleteComment" Visible='<%# DataBinder.Eval(Container.DataItem, "usrId").ToString() == userId.ToString() %>' runat="server" Text="<%$ Resources: , DeleteComment %>" CommandArgument='<%# Eval("comId") %>' OnClick="DeleteComment" />
+                    </li>
                 </ul>
                 <hr />
             </ItemTemplate> 

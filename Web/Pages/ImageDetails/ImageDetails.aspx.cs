@@ -5,6 +5,7 @@ using Es.Udc.DotNet.PracticaMaD.Model.UserService.Utils;
 using Es.Udc.DotNet.PracticaMaD.Web.Http.Session;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -16,12 +17,13 @@ namespace Web.Pages
         protected SearchImageDTO image;
         protected ImageDTO real_image;
         protected CommentsBlock comments;
-        protected long userId = 1L;
+        protected long userId;
 
         private const int TagPageSize = 4;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.userId = SessionManager.GetUserId(Context);
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
             IImageService imageService = iocManager.Resolve<IImageService>();
             if (Request.QueryString["Image"] != null)
@@ -47,9 +49,15 @@ namespace Web.Pages
                 try //En caso de que haya un usuario logeado, comprobamos que sea el autor
                 {
                     if (image.usrId == SessionManager.GetUserId(Context))
+                    {
                         TagsContainer.Visible = true;
+                        btnDelete.Visible = true;
+                    }
                     else
-                        TagsContainer.Visible = false;
+                    {
+                        TagsContainer.Visible = true;
+                        btnDelete.Visible = true;
+                    }
 
                 }
                 catch(NullReferenceException) //En caso de que no haya un usuario logeado
@@ -74,7 +82,6 @@ namespace Web.Pages
 
             try //En caso de que haya un usuario logeado, comprobamos que sea el autor
             {
-                long userId = 1L;//SessionManager.GetUserId(Context);
                 imageService.AddComment(userId, this.image.imgId, txtComment.Text);
 
             }
@@ -134,6 +141,7 @@ namespace Web.Pages
                 string commentID = ((Button)sender).CommandArgument.ToString();
                 long commId = Convert.ToInt64(commentID);
                 imageService.DeleteComment(commId, userId);
+                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }
         #endregion DeleteComment
@@ -152,6 +160,7 @@ namespace Web.Pages
                 string val = editCommentText.Text;
 
                 imageService.EditComment(commId, val);
+                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }
         #endregion EditComment
