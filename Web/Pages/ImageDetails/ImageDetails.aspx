@@ -24,7 +24,7 @@
                 </li>
                 <li class="list-inline-item pr-2">
                     <a href="#" class="white-text">
-                        <i class="icon-comments pr-1"></i>In progress
+                        <i class="icon-comments pr-1"></i>
                     </a>
                 </li>
                 <li class="list-inline-item pr-2">

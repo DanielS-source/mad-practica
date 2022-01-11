@@ -212,7 +212,6 @@ namespace Web.Pages
                     string commentID = ((Button)sender).CommandArgument.ToString();
                     long commId = Convert.ToInt64(commentID);
                     imageService.DeleteComment(commId, userId);
-                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
                 }
                 catch (NullReferenceException) //En caso de que no haya un usuario logeado
                 {
@@ -236,7 +235,6 @@ namespace Web.Pages
                 string val = editCommentText.Text;
 
                 imageService.EditComment(commId, val);
-                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
             }
         }
         #endregion EditComment
