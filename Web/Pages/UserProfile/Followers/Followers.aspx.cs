@@ -43,6 +43,21 @@ namespace Web.Pages.UserProfile.Followers
                 
             
             this.followers = followersBlock.UserProfiles;
+
+            FollowersDataList.DataSource = this.followers;
+            FollowersDataList.DataBind();
+        }
+
+        protected void FollowsDataList_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+            if (e.Item.ItemType.Equals(ListItemType.Item) || e.Item.ItemType.Equals(ListItemType.AlternatingItem))
+            {
+                UserProfileDetails userProfile = (UserProfileDetails)e.Item.DataItem;
+
+                HyperLink followLink = (HyperLink)e.Item.FindControl("FollowLink");
+                followLink.Text = userProfile.FirstName;
+                followLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/UserProfile/Follows/Follows.aspx?userId=" + userProfile.usrId);
+            }
         }
 
         protected void nextBtn_Click(object sender, EventArgs e)

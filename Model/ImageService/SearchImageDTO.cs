@@ -25,6 +25,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             username = imgUser;
             file = img;
             comments = imgComments;
+            nComments = image.Comments.Count;
         }
 
         public SearchImageDTO(Image image, string imgUser, string imgCategory, byte[] img, List<Comments> imgComments, IList<TagDTO> tags)
@@ -45,6 +46,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
             file = img;
             comments = imgComments;
             Tags = tags;
+            nComments = image.Comments.Count;
         }
 
         public long imgId { get; set; }
@@ -62,6 +64,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Model.ImageService
         public byte[] file { get; set; }
         public string imageSrc { get; set; }
         public List<Comments> comments { get; set; }
+        public long nComments { get; set; }
 
         public IList<TagDTO> Tags { get; private set; }
     }

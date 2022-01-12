@@ -53,15 +53,15 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Tags
 
                 HyperLink autorLink = (HyperLink)e.Item.FindControl("AutorLink");
                 autorLink.Text = "<i class='icon-location-arrow pr-1'> "+ imageDto.LoginName +" </i>";
-                autorLink.NavigateUrl = "~/Pages/UserProfile/Follows/Follows.aspx?userId=" + imageDto.usrId;
+                autorLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/UserProfile/Follows/Follows.aspx?userId=" + imageDto.usrId);
 
                 HyperLink detailsLink = (HyperLink)e.Item.FindControl("DetailsLink");
                 detailsLink.Text = "<i class='icon-ellipsis-horizontal pr-1'> See More </i>";
-                detailsLink.NavigateUrl = "~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId;
+                detailsLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId);
 
                 HyperLink likesLink = (HyperLink)e.Item.FindControl("LikesLink");
                 likesLink.Text = "<i class='icon-thumbs-up pr-1'> "+ imageDto.likes +" </i>";
-                likesLink.NavigateUrl = "~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId; //Links A Likes
+                likesLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId); //Links A Likes
 
                 HtmlGenericControl dateLabel = (HtmlGenericControl)e.Item.FindControl("DateLabel");
                 dateLabel.InnerText = imageDto.dateImg.ToString();

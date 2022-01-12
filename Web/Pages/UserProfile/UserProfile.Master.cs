@@ -39,7 +39,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.UserProfile
                 String url =
                     String.Format("../Follows/Follows.aspx?userId={0}", usrId);
 
-                Response.Redirect(url);
+                Response.Redirect(Response.ApplyAppPathModifier(url));
 
             }
             catch(NullReferenceException)
@@ -53,7 +53,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.UserProfile
         {
             SessionManager.Logout(Context);
 
-            Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
         }
     }
 }

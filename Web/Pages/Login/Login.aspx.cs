@@ -96,7 +96,7 @@ namespace Es.Udc.DotNet.PracticaMaD.Web.Pages.Login
         {
             var Googleurl = "https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=" + googleplus_redirect_url + "&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&client_id=" + googleplus_client_id;
             Session["loginWith"] = "google";
-            Response.Redirect(Googleurl);
+            Response.Redirect(Response.ApplyAppPathModifier(Googleurl));
         }
 
         #endregion Google OAuth

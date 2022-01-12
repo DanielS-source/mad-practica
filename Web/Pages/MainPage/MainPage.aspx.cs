@@ -21,6 +21,9 @@ using System.Text;
 using Web.Google;
 using System.Net.Http;
 using Es.Udc.DotNet.PracticaMaD.Model.UserService;
+using System.Web.UI.HtmlControls;
+
+
 
 namespace Web.Pages
 {
@@ -87,7 +90,7 @@ namespace Web.Pages
                                 {
                                     // This is where you want to add the code if login is successful.
                                     getgoogleplususerdataSer(accessToken);
-                                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                                    Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
                                 }
                             }
 
@@ -97,7 +100,7 @@ namespace Web.Pages
                 catch (Exception)
                 {
                     //throw new Exception(ex.Message, ex);
-                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                    Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
                 }
             }
             //********Fin del Google OAuth********
@@ -129,7 +132,7 @@ namespace Web.Pages
                         try
                         {
                             SessionManager.Login(Context, googleUserName, googlePass, false);
-                            Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
                         }
                         catch (InstanceNotFoundException)
                         {
@@ -235,14 +238,14 @@ namespace Web.Pages
         {
             if (IsValidGroup("Required"))
             {
-
+                CurrentImagePage = 0;
                 getImages();
                 render();
 
             }
         }
 
-        protected void getImages() 
+        protected void getImages()  //LoadImage
         {
             IIoCManager iocManager = (IIoCManager)HttpContext.Current.Application["managerIoC"];
             IImageService imageService = iocManager.Resolve<IImageService>();
@@ -257,7 +260,52 @@ namespace Web.Pages
                 images[i].imageSrc = imgDataURL;
             }
 
+
+            ImagesDataList.DataSource = images;
+            ImagesDataList.DataBind();
+
+
             render();
+        }
+    
+        protected void ImagesDataList_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+            if (e.Item.ItemType.Equals(ListItemType.Item) || e.Item.ItemType.Equals(ListItemType.AlternatingItem))
+            {
+                SearchImageDTO imageDto = (SearchImageDTO)e.Item.DataItem;
+
+                HyperLink autorLink = (HyperLink)e.Item.FindControl("AutorLink");
+                autorLink.Text = "<i class='icon-location-arrow pr-1'> " + imageDto.username + " </i>";
+                autorLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/UserProfile/Follows/Follows.aspx?userId=" + imageDto.usrId);
+
+                HyperLink detailsLink = (HyperLink)e.Item.FindControl("DetailsLink");
+                detailsLink.Text = "<i class='icon-ellipsis-horizontal pr-1'> See More </i>";
+                detailsLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId);
+
+                HyperLink commentsLink = (HyperLink)e.Item.FindControl("CommentsLink");
+                commentsLink.Text = "<i class='icon-comments  pr-1'> " + imageDto.nComments + " </i>";
+                commentsLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId); //Links A Comments
+
+                HyperLink likesLink = (HyperLink)e.Item.FindControl("LikesLink");
+                likesLink.Text = "<i class='icon-thumbs-up pr-1'> " + imageDto.likes + " </i>";
+                likesLink.NavigateUrl = Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + imageDto.imgId); //Links A Likes
+
+                HtmlGenericControl dateLabel = (HtmlGenericControl)e.Item.FindControl("DateLabel");
+                dateLabel.InnerText = imageDto.dateImg.ToString();
+
+                HtmlGenericControl imageTitle = (HtmlGenericControl)e.Item.FindControl("ImageTitle");
+                imageTitle.InnerText = imageDto.title;
+
+                Label imageDescription = (Label)e.Item.FindControl("ImageDescription");
+                imageDescription.Text = imageDto.description;
+
+                System.Web.UI.WebControls.Image imageImagen = (System.Web.UI.WebControls.Image)e.Item.FindControl("ImageImagen");
+
+                string imreBase64Data = Convert.ToBase64String(imageDto.file);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                imageImagen.ImageUrl = imgDataURL;
+
+            }
         }
 
         protected void nextBtn_Click(object sender, EventArgs e)
@@ -328,5 +376,12 @@ namespace Web.Pages
         }
 
         #endregion LikeImage
+
+        protected void ImageLikes_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)(sender);
+            string imageId = btn.CommandArgument;
+            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=")+ imageId);
+        }
     }
 }

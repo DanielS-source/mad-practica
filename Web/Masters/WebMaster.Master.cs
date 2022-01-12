@@ -41,7 +41,7 @@ namespace Web
         {
             SessionManager.Logout(Context);
 
-            Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
         }
 
         protected void UserProfileButton_Click(object sender, EventArgs e)
@@ -55,12 +55,12 @@ namespace Web
                 String url =
                     String.Format("~/Pages/UserProfile/Account/Account.aspx?userId={0}", usrId);
 
-                Response.Redirect(url);
+                Response.Redirect(Response.ApplyAppPathModifier(url));
 
             }
             else 
             {
-                Response.Redirect("~/Pages/Login/Login.aspx");
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/Login/Login.aspx"));
             }
         }
 
@@ -68,11 +68,11 @@ namespace Web
         {
             if (SessionManager.IsUserAuthenticated(Context)) //Usuario autenticado
             {
-                Response.Redirect("~/Pages/UploadImage/UploadImage.aspx");
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/UploadImage/UploadImage.aspx"));
             }
             else
             {
-                Response.Redirect("~/Pages/Login/Login.aspx");
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/Login/Login.aspx"));
             }    
         }
 

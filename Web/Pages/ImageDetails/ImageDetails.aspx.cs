@@ -62,13 +62,14 @@ namespace Web.Pages
                     else
                     {
                         TagsContainer.Visible = true;
-                        btnDelete.Visible = true;
+                        btnDelete.Visible = false;
                     }
 
                 }
                 catch(NullReferenceException) //En caso de que no haya un usuario logeado
                 {
                     TagsContainer.Visible = false;
+                    btnDelete.Visible = false;
                 }
 
                 LoadTags();
@@ -155,7 +156,7 @@ namespace Web.Pages
             }
             catch (NullReferenceException) //En caso de que no haya un usuario logeado
             {
-                Response.Redirect("~/Pages/Login/Login.aspx");
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/Login/Login.aspx"));
             }
         }
 
@@ -180,11 +181,26 @@ namespace Web.Pages
                     imageService.UnlikeImage(userId, image.imgId);
                 }
 
-                Response.Redirect("~/Pages/ImageDetails/ImageDetails.aspx?Image="+image.imgId);
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" +image.imgId));
                 
+            }
+            else
+            {
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/Login/Login.aspx"));
             }
         }
         #endregion LikeImage
+        
+        protected void CommentsLink_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + image.imgId));
+        }
+
+        protected void AuthorLink_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/UserProfile/Follows/Follows.aspx?userId=" + image.usrId));
+        }
+
 
         #region DeleteImage
         protected void DeleteImage(object sender, EventArgs e)
@@ -195,7 +211,7 @@ namespace Web.Pages
                 IImageService imageService = iocManager.Resolve<IImageService>();
 
                 imageService.DeleteImage(image.imgId);
-                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
             }
         }
         #endregion DeleteImage
@@ -212,11 +228,11 @@ namespace Web.Pages
                     string commentID = ((Button)sender).CommandArgument.ToString();
                     long commId = Convert.ToInt64(commentID);
                     imageService.DeleteComment(commId, userId);
-                    Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                    Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
                 }
                 catch (NullReferenceException) //En caso de que no haya un usuario logeado
                 {
-                    Response.Redirect("~/Pages/Login/Login.aspx");
+                    Response.Redirect(Response.ApplyAppPathModifier("~/Pages/Login/Login.aspx"));
                 }
             }
         }
@@ -236,7 +252,7 @@ namespace Web.Pages
                 string val = editCommentText.Text;
 
                 imageService.EditComment(commId, val);
-                Response.Redirect("~/Pages/MainPage/MainPage.aspx");
+                Response.Redirect(Response.ApplyAppPathModifier("~/Pages/MainPage/MainPage.aspx"));
             }
         }
         #endregion EditComment
@@ -420,7 +436,7 @@ namespace Web.Pages
             SessionManager.UpdateImage(Context, (long)ViewState["image"], (string)ViewState["pathImage"], CurrentTags);
             //Refresh
             LoadTags();
-            Response.Redirect("~/Pages/ImageDetails/ImageDetails.aspx?Image="+ ViewState["image"]);
+            Response.Redirect(Response.ApplyAppPathModifier("~/Pages/ImageDetails/ImageDetails.aspx?Image=" + ViewState["image"]));
         }
 
         protected void PreviousTagLinkButton_Click(object sender, EventArgs e)

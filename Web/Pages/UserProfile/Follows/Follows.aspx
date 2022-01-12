@@ -60,35 +60,38 @@
     <br />
     <hr />
     <div class="row d-flex justify-content-center">
-        <% foreach (var image in images)
-            { %>
-        <!-- Card -->
-        <div class="card" style="margin-top:15px;">
-            <!-- Card image -->
-            <div class="view overlay">
-                <img class="card-img-top" src="<%= image.imageSrc %>" alt="Image">
-            </div>
-            <!-- Card content -->
-            <div class="card-body">
-                <!-- Title -->
-                <h4 class="card-title"><%= image.title %></h4>
-                <hr>
-                <!-- Text -->
-                <p class="card-text"><%= image.description %></p>
-            </div>
-            <!-- Card footer -->
-            <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
-                <ul class="list-unstyled list-inline font-small">
-                    <li class="list-inline-item pr-2 white-text"><i class="icon-calendar pr-1"></i><%= image.dateImg %></li>
-                    <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-comments pr-1"></i>In progress</a></li>
-                    <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="icon-thumbs-up pr-1"></i><%= image.likes %></a></li>
-                    <li class="list-inline-item"><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= image.usrId %>" class="white-text"><i class="icon-location-arrow pr-1"></i>Author: <%= image.username %></a></li>
-                    <li class="list-inline-item"><a href="/Pages/ImageDetails/ImageDetails.aspx?Image=<%= image.imgId %>" class="white-text"><i class="icon-ellipsis-horizontal pr-1"></i>See More</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- Card -->
-        <% } %>
+           <asp:DataList ID="ImagesDataList" ItemType="Es.Udc.DotNet.PracticaMaD.Model.ImageService.SearchImageDTO" OnItemDataBound="ImagesDataList_ItemDataBound" runat="server">
+                    <ItemTemplate>
+                        <!-- Card -->
+                        <div class="card">
+                          <!-- Card image -->
+                          <div class="view overlay">
+                              <asp:Image ID="ImageImagen" CssClass="card-img" runat="server" AlternateText="ImagenTag" />
+                          </div>
+                          <!-- Card content -->
+                          <div class="card-body">
+                            <!-- Title -->
+                            <h4 CssClass="card-title" id="ImageTitle" runat="server"></h4>
+                            <hr>
+                              <!-- Text -->
+                            <asp:Label CssClass="card-text" ID="ImageDescription" runat="server"></asp:Label>
+                          </div>
+                          <!-- Card footer -->
+                          <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+                            <ItemTemplate class="list-unstyled list-inline font-small">
+                              <i class="icon-calendar pr-1"></i>
+                              <li class="list-inline-item pr-2 white-text"  ID="DateLabel" runat="server"></li>
+                              <li class="list-inline-item pr-2"><asp:HyperLink CssClass="white-text" ID="CommentsLink" runat="server"></asp:HyperLink></li>
+                              <li class="list-inline-item pr-2"><asp:HyperLink CssClass="white-text" ID="LikesLink" runat="server"></asp:HyperLink></li>
+                              <li class="list-inline-item"><asp:HyperLink CssClass="white-text" ID="AutorLink" runat="server"></asp:HyperLink></li>
+                              <li class="list-inline-item"><asp:HyperLink CssClass="white-text" ID="DetailsLink" runat="server"></asp:HyperLink></li>
+                            </ItemTemplate>
+                          </div>
+                          <hr />
+                        </div>
+                        <br />
+                    </ItemTemplate>
+                </asp:DataList>
     </div>
 
 </asp:Content>

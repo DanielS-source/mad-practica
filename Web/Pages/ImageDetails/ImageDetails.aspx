@@ -11,7 +11,7 @@
         <div class="card-body">
         <!-- Title -->
         <h4 class="card-title"><%= image.title %></h4>
-        <asp:Button ID="btnDelete" Text="<%$ Resources: , DeleteImage %>" runat="server" OnClick="DeleteImage" />
+        <asp:Button ID="btnDelete" Text="<%$ Resources: , DeleteImage %>" runat="server" OnClick="DeleteImage" CssClass="btn btn-primary"/>
         <hr>
         <!-- Text -->
         <p class="card-text"><%= image.description %></p>
@@ -23,9 +23,9 @@
                     <i class="icon-calendar pr-1"></i><%= image.dateImg %>
                 </li>
                 <li class="list-inline-item pr-2">
-                    <a href="#" class="white-text">
-                        <i class="icon-comments pr-1"></i>In progress
-                    </a>
+                    <asp:LinkButton ID="CommentsButton" runat="server" OnClick="CommentsLink_Click">
+                        <i class="icon-comments pr-1"></i><%= image.nComments %>
+                    </asp:LinkButton>
                 </li>
                 <li class="list-inline-item pr-2">
                     <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LikeImage">
@@ -33,13 +33,15 @@
                     </asp:LinkButton>
                 </li>
                 <li class="list-inline-item">
-                    <a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%= image.usrId %>"" class="white-text">
-                        <i class="icon-location-arrow pr-1"> </i><asp:Literal runat="server" Text="<%$ Resources: , Author%>" />: <%= image.username %>
-                    </a>
+                    <asp:LinkButton ID="AuthorButton" runat="server" OnClick="AuthorLink_Click">
+                        <i class="icon-location-arrow pr-1"></i><asp:Literal runat="server" Text="<%$ Resources: , Author%>" />: <%= image.username %>
+                    </asp:LinkButton>
                 </li>
             </ul>
+            <br />
+            <hr />
             <ul class="list-unstyled list-inline font-small">
-                <li class="list-inline-item">EXIF: </li>
+                <li class="list-inline-item"><p class="font-weight-bold">EXIF:</p></li>
                 <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , diaphragmAperture %>" /> <%= image.f %></li>
                 <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , shutterSpeed %>" /> <%= image.t %></li>
                 <li class="list-inline-item pr-2 white-text"><asp:Literal runat="server" Text="<%$ Resources: , iso %>" /> <%= image.ISO %></li>
@@ -113,53 +115,57 @@
         <!-- End Tags -->
 
         <!-- Comment Form -->
-        <div>
-            <span>Comments<br />
-            </span>
-        &nbsp;<asp:TextBox ID="txtComment" runat="server" Height="46px" Width="929px"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" Height="43px" OnClick="Button1_Click" style="margin-top: 0px" Text="Button" Width="190px" />
-        </div>
-        <!-- Comment Form -->
-        <!-- Comment List -->
-        <br />
-        <asp:TextBox ID="editCommentText" runat="server" Height="46px" Width="929px" Text="<%$ Resources:, Edit %>"></asp:TextBox>
-        <br />
-        <asp:Repeater ID="CommRepeater" runat="server">
-            <ItemTemplate>
-                <ul class="list-unstyled list-inline font-small">
-                    <li class="list-inline-item"><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%# Eval("usrId") %>" class="white-text"> <%# Eval("loginName") %></a></li>
-                    <li class="list-inline-item"><%# Eval("postDate") %></li>
-                    <li class="list-inline-item"><%# Eval("message") %></li>
-                    <li class="list-inline-item">
-                        <asp:Button ID="btnEditComment" Visible='<%# DataBinder.Eval(Container.DataItem, "usrId").ToString() == userId.ToString() %>' Text="<%$ Resources: , EditComment %>" runat="server" CommandArgument='<%#Eval("comId")%>' OnClick="EditComment"/>
-                    </li>
-                    <li class="list-inline-item">
-                        <asp:Button ID="btnDeleteComment" Visible='<%# DataBinder.Eval(Container.DataItem, "usrId").ToString() == userId.ToString() %>' runat="server" Text="<%$ Resources: , DeleteComment %>" CommandArgument='<%# Eval("comId") %>' OnClick="DeleteComment" />
-                    </li>
-                </ul>
-                <hr />
-            </ItemTemplate> 
-        </asp:Repeater>
-        <!-- Comment Lits -->
-    </div>
-
-        <div class="custom-container d-flex justify-content-center" >
-        <div class="form-row">
-            <div class="col col-6">
-                <asp:LinkButton ID="previousBtn" runat="server" CssClass="btn btn-secondary" OnClick="previousBtn_Click" CausesValidation="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                        <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                    </svg>
-                </asp:LinkButton>
+        <div class="d-flex flex-column" style="padding:20px;">
+            <div>
+                <span style="font-style:oblique">Comments<br /></span>
+            &nbsp;<asp:TextBox ID="txtComment" runat="server" CssClass="form-control "></asp:TextBox>
+                <br />
+                <asp:Button ID="Button1" runat="server" Height="43px" OnClick="Button1_Click" Text="<%$ Resources: , Button1.Text %>" style="margin-top: 0px" Width="190px" class="btn btn-primary"/>
             </div>
-            <div class="col col-6">
-                <asp:LinkButton ID="nextBtn" runat="server" CssClass="btn btn-secondary" OnClick="nextBtn_Click" CausesValidation="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                    </svg>
-                </asp:LinkButton>
+            <!-- Comment Form -->
+            <!-- Comment List -->
+            <br />
+            <asp:TextBox ID="editCommentText" runat="server"  Text="<%$ Resources:, Edit %>" CssClass="form-control"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Repeater ID="CommRepeater" runat="server">
+                <ItemTemplate>
+                    <ul class="list-unstyled list-inline font-small">
+                        <li class="list-inline-item"><a href="/Pages/UserProfile/Follows/Follows.aspx?userId=<%# Eval("usrId") %>" class="white-text"> <%# Eval("loginName") %></a></li>
+                        <li class="list-inline-item"><%# Eval("postDate") %></li>
+                        <li class="list-inline-item"><%# Eval("message") %></li>
+                        <li class="list-inline-item">
+                            <asp:Button ID="btnEditComment" Visible='<%# DataBinder.Eval(Container.DataItem, "usrId").ToString() == userId.ToString() %>' Text="<%$ Resources: , EditComment %>" runat="server" CommandArgument='<%#Eval("comId")%>' OnClick="EditComment" CssClass="btn btn-primary"/>
+                        </li>
+                        <li class="list-inline-item">
+                            <asp:Button ID="btnDeleteComment" Visible='<%# DataBinder.Eval(Container.DataItem, "usrId").ToString() == userId.ToString() %>' runat="server" Text="<%$ Resources: , DeleteComment %>" CommandArgument='<%# Eval("comId") %>' OnClick="DeleteComment"  CssClass="btn btn-primary"/>
+                        </li>
+                    </ul>
+                    <hr />
+                </ItemTemplate> 
+            </asp:Repeater>
+            <!-- Comment List -->
+        </div>
+            <br />
+            <div class="custom-container d-flex justify-content-center" >
+            <div class="form-row">
+                <div class="col col-6">
+                    <asp:LinkButton ID="previousBtn" runat="server" CssClass="btn btn-secondary" OnClick="previousBtn_Click" CausesValidation="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                            <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                        </svg>
+                    </asp:LinkButton>
+                </div>
+                <div class="col col-6">
+                    <asp:LinkButton ID="nextBtn" runat="server" CssClass="btn btn-secondary" OnClick="nextBtn_Click" CausesValidation="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                    </asp:LinkButton>
+                </div>
             </div>
         </div>
+        <br />
     </div>
     <!-- Card -->
 </asp:Content>

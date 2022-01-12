@@ -159,4 +159,7 @@
   <data name="whiteBalance" xml:space="preserve">
     <value>White Balance</value>
   </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Add Comment</value>
+  </data>
 </root>
